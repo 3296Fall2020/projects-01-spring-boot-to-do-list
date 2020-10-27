@@ -9,7 +9,7 @@ For my proposal, I decided to create a standalone project of a To-Do list for Gr
 Simple and easy-to-use, the To-Do list also shows urgent items, and ranks items by priority, further facilitating ease of schedule management. I came up with this idea because in a course like Software Design, where assignments are more team-focused, having some method of coordinating tasks would not only be convenient for a group, but also having a more dedicated to-do list would make it easier to find the tasks that the group should do, as opposed to a list of items in a group chat or some other communication medium.
 
 ### Use Case Diagram
-![Individual Proposal](https://user-images.githubusercontent.com/54553870/94352580-e0845380-0034-11eb-9897-a160077bb051.png)
+![Individual Proposal](images/use_case.png)
 
 ## How this Project meets the Goals of this Course
 This project adheres to the educational goals of CIS-3296: Software Design through giving an opportunity for students to gain experience with Java-based Frameworks for developing standalone, production-ready spring applications. While the REST API that Spring Boot employs is not using XML-RPC, the REST API provides the ability to build an HTTP API. The Spring-based backend will access a To-Do List stored in a MySQL database (or some other database) that is returned to a web page invoking the server. Since this project will be created from scratch, the team responsible for the creation of this project will employ Test-Driven Development to properly develop the To-Do List server. These goals are important in the context of Software Design since it offers a perspective in developing a fully functional software application from the ground up, utilizing many different concepts discussed in this course to do so. 
@@ -35,3 +35,6 @@ As this is a standalone project, I created a preliminary project folder containi
 - Java IDE compatible with Spring Boot (e.g. IntelliJ, Eclipse)
 - Postman (for making HTTP Requests for testing)
 - An IDE for developing web pages (e.g. NetBeans, Visual Studio Code)
+
+## Releases
+- 
