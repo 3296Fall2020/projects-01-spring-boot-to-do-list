@@ -5,7 +5,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          Hello World! This is a project that will use Spring Boot.
+          Hello World! This is a project that will use Spring Boot. More coming soon!
         </p>
         <a
           className="App-link"
