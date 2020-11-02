@@ -1,7 +1,13 @@
-# projects-01-spring-boot-to-do-list
-projects-01-spring-boot-to-do-list created by GitHub Classroom
+# The Spring Boot To-Do List: Making Project Organization Spring to Life
 
-# Jason Duong
+## Project Overview
+The Spring-Boot To Do List is a group project management system that allows for project managers to delegate tasks and responsibilities to their group members, and track their progress. Our Spring-Boot To Do List offers a quick, concise, and easy-to-use interface that allows users to gather and exchange information about their groups' responsibilities. Additionally, through our virtual task organization/delegation platform, each group member has different roles assigned to them by project managers, that associates certain groups with a given task should no specific user be assigned a task. Through employing this system, users can manage their groups' tasks and their groups' members productivity in a clean, efficient manner.
+
+## Vision Statement
+For teams working on a group project, who need a scheme to coordinate responsibilities and communicate tasks to be accomplished, the Spring Boot To-Do List is a web-based group project coordination platform that project managers of small teams can use to delegate tasks to their members, who can set the completion statuses of their specific tasks, delegate priority status to urgent responsibilities, and leave feedback regarding the different tasks to enable communication about setbacks and suggestions. Unlike other Project Management services such as Trello or Jira, our product provides a simple and user-friendly interface that even those who may not have as much experience with digital devices can use without issue.
+
+## Personas
+
 
 ## Project Description
 For my proposal, I decided to create a standalone project of a To-Do list for Group Project Management, utilizing Spring Boot to develop the backend, displaying a list of things that need to be completed through a web page. Project Managers can create and manage their groups, as well as manage individuals apart of their projects, who can make changes to their shared To-Do Lists, coordinating objectives through the website. 
@@ -35,6 +41,12 @@ As this is a standalone project, I created a preliminary project folder containi
 - Java IDE compatible with Spring Boot (e.g. IntelliJ, Eclipse)
 - Postman (for making HTTP Requests for testing)
 - An IDE for developing web pages (e.g. NetBeans, Visual Studio Code)
+
+## Addendum - Required Resources
+- The Spring Boot To-Do List's frontend component will utilize the React framework
+- AWS (Amazon Web Services) will be used for hosting the application
+  - An Amazon RDS (Relational Database Service) instance will be created via Amazon Aurora
+- Omitting requirement of using MySQL Server, instead utilizing MySQL Workbench through connecting to the Amazon Aurora RDS instance
 
 ## Releases
 - 
