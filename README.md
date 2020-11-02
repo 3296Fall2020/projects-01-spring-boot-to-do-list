@@ -85,5 +85,5 @@ For the frontend of the app I created a separate frontend folder, and then initi
 - Omitting requirement of using MySQL Server, instead utilizing MySQL Workbench through connecting to the Amazon Aurora RDS instance
 
 ## References
-- [Trello Backlog List](https://trello.com/b/Qy9eTECb/spring-boot-todo)
-- 
+- [Trello Backlog List](https://trello.com/b/Qy9eTECb/spring-boot-todo-backlog)
+- [Trello Technical List](https://trello.com/b/Z5Kv0DSh/spring-boot-to-do-technical)
