@@ -54,15 +54,23 @@ The main components involved in this project are Spring Boot, MySQL, and Postman
 The program involves using a web page as a client program to manage their To-Do Lists, located in a database. Users can create their own group and invite others to their group, to access a To-Do List for a group project. Additionally, users can manage the to-do lists in the groups they are in, adding items, modifying items, and checking off items from their lists. These operations are sent to the Spring Boot server as an HTTP Request, which will invoke a MySQL database to make the changes specified by the client. The Spring Server will be responsible for returning these updated entries to the web page. 
 
 ## Project
-As this is a standalone project, I created a preliminary project folder containing a very basic version of the project's implementation. I made sure to add some Spring Boot setup for those unfamiliar with creating Spring Boot projects, as well as a preliminary connection to a local MySQL database (should probably be changed once it goes public; this was mainly for testing purposes).
+As this is a standalone project, I created a preliminary project folder containing a very basic version of the project's implementation. I made sure to add some Spring Boot setup for those unfamiliar with creating Spring Boot projects, as well as a preliminary connection to a local MySQL database (should probably be changed once it goes public; this was mainly for testing purposes). 
+
+For the frontend of the app I created a separate frontend folder, and then initialized a react app within the folder.
 
 ## Building
 - Install Spring Boot compatibility into your Java IDE. I used Eclipse for my IDE. 
 - Clone the repository, and open it in the IDE.
 - Open the pom.xml file in the Project, which will install the dependencies required to run the Project.
+- For the frontend, make sure to download node.js and npm to your local machine.
+- If you do not have these packages installed you can download them from https://nodejs.org/en/
+- After cloning the repository to your local machine you want to cd into the frontend folder.
+- Then run npm install to get all the necessary packages installed.
 
 ## Running
-- Select "Run As → Spring Boot App" to run the Spring Boot Application. For different IDEs, this may show something different.
+- For the backend, select "Run As → Spring Boot App" to run the Spring Boot Application. For different IDEs, this may show something different.
+- For the frontend, type npm start in the terminal while in the frontend folder. This should start running the react project in the browser. (on port 3000).
+
 
 ## Required Resources
 - MySQL Server (and maybe MySQL Workbench) (I used version 5.7)
