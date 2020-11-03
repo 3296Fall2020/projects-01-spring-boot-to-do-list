@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+// Model, this item represents the object representation of a To Do List Item
 @Entity
 public class TDListItem {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
