@@ -1,8 +1,16 @@
 .userValidation {
+    position: fixed;
+    left:0;
+    top:0;
     color: #fff;
-    background: #63738a;
+    background: #EFA08E;
     font-family: 'Roboto', sans-serif;
-            height: 100vh;
+    height: 100vh;
+    width: 100%;
+}
+
+.userValidation h1{
+    padding-top: 20px;
 }
 
 .form-control{
@@ -27,21 +35,7 @@
     position: relative;
     text-align: center;
 }
-.signup-form h2:before, .signup-form h2:after{
-    content: "";
-    height: 2px;
-    width: 30%;
-    background: #d4d4d4;
-    position: absolute;
-    top: 50%;
-    z-index: 2;
-}	
-.signup-form h2:before{
-    left: 0;
-}
-.signup-form h2:after{
-    right: 0;
-}  
+
 .signup-form form{
     color: #999;
     border-radius: 3px;
@@ -66,10 +60,4 @@
 .signup-form a:hover{
     text-decoration: none;
 }
-.signup-form form a{
-    color: #5cb85c;
-    text-decoration: none;
-}	
-.signup-form form a:hover{
-    text-decoration: underline;
-}  
+
