@@ -15,6 +15,10 @@ public class UserService {
 	@Autowired
 	private UserRepository repo;
 	
+	public Optional<User> getUserById (long id) {
+		return repo.findById(id);
+	}
+	
 	public Optional<User> getUserByEmail (String email) {
 		return repo.findUserByEmail(email);
 	}
@@ -23,15 +27,32 @@ public class UserService {
 		return repo.findAll();
 	}
 	
-	public User createUser (String email, String password) {
+	public User createUser (String first, String last, String email, String password) {
 		User user = new User();
 		
+		user.setFirst_name(first);
+		user.setLast_name(last);
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setRegistration_date(new Date());
+		user.setLoginStatus(false);
 		
 		repo.save(user);
 		
 		return user;
+	}
+	
+	public User updateUser () {
+		return null;
+	}
+	
+	public void deleteUser () {
+		
+	}
+	
+	public void changeLoginStatus (User user) {
+		user.setLoginStatus(!user.isLoginStatus());
+		
+		repo.save(user);
 	}
 }
