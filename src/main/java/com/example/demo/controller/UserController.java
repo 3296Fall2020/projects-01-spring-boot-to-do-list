@@ -36,7 +36,7 @@ public class UserController {
 		return service.getAllUsers();
 	}
 	
-	@GetMapping(path="getUser/{id}")
+	@GetMapping(path="/getUser/{id}")
 	public ResponseEntity<User> getUser (@PathVariable("id") Long id) {
 		Optional<User> user = service.getUserById(id);
 		

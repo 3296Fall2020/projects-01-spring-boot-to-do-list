@@ -13,36 +13,28 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 // Model, this item represents the object representation of a To Do List Item
 @Entity
 public class TDListItem {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long item_id;
 	
-	@NotBlank
+	@NotBlank(message = "Please provide a name for your Task")
 	private String task_name;
 	
-	@NotBlank
 	private String description;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM dd HH:mm:ss yyyy")
 	private Date deadline;
 	
 	public TDListItem() {
-		super();
-	}
-
-	public TDListItem(Long id, @NotBlank String task_name, @NotBlank String description, Date deadline) {
-		super();
-		this.id = id;
-		this.task_name = task_name;
-		this.description = description;
-		this.deadline = deadline;
+		
 	}
 
 	public Long getId() {
-		return id;
+		return item_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long item_id) {
+		this.item_id = item_id;
 	}
 
 	public String getTask_name() {

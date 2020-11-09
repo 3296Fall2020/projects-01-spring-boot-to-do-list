@@ -14,12 +14,10 @@ import com.example.demo.repository.UserRepository;
 public class UserService {
 	@Autowired
 	private UserRepository repo;
-
-	private static boolean hasText(String str) {
-		if (str != null && !str.isBlank()) {
-			return true;
-		}
-		return false;
+	private StringHelper helper;
+	
+	public UserService () {
+		this.helper = new StringHelper();
 	}
 
 	public Optional<User> getUserById(long id) {
@@ -50,13 +48,13 @@ public class UserService {
 	public User updateUser (Long id, String first, String last, String password) {
 		User user = repo.getOne(id);
 		
-		if (hasText(first)) {
+		if (helper.hasText(first)) {
 			user.setFirst_name(first);
 		}
-		if (hasText(last)) {
+		if (helper.hasText(last)) {
 			user.setLast_name(last);
 		}
-		if (hasText(password)) {
+		if (helper.hasText(password)) {
 			user.setPassword(password);
 		}
 		
