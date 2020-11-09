@@ -84,10 +84,7 @@ public class UserController {
 			User access = user.get();
 			
 			if (access.getPassword().equals(password)) {
-				if (access.isLoginStatus()) { // If the user is already logged in
-					return ResponseEntity.noContent().build();
-				}
-				service.changeLoginStatus(access);
+				service.changeLoginStatus(access, true);
 				return ResponseEntity.ok(user.get());
 			}
 			return ResponseEntity.badRequest().build(); // If the user's password doesn't match what is on the database
@@ -103,7 +100,7 @@ public class UserController {
 			User access = user.get();
 			
 			if (access.isLoginStatus()) {
-				service.changeLoginStatus(access);
+				service.changeLoginStatus(access, false);
 				return ResponseEntity.accepted().build();
 			}
 			return ResponseEntity.badRequest().build();

@@ -69,8 +69,8 @@ public class UserService {
 		}
 	}
 
-	public void changeLoginStatus(User user) {
-		user.setLoginStatus(!user.isLoginStatus());
+	public void changeLoginStatus(User user, boolean status) {
+		user.setLoginStatus(status);
 
 		repo.save(user);
 	}
