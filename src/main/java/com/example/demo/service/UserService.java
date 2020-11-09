@@ -14,45 +14,66 @@ import com.example.demo.repository.UserRepository;
 public class UserService {
 	@Autowired
 	private UserRepository repo;
-	
-	public Optional<User> getUserById (long id) {
+
+	private static boolean hasText(String str) {
+		if (str != null && !str.isBlank()) {
+			return true;
+		}
+		return false;
+	}
+
+	public Optional<User> getUserById(long id) {
 		return repo.findById(id);
 	}
-	
-	public Optional<User> getUserByEmail (String email) {
+
+	public Optional<User> getUserByEmail(String email) {
 		return repo.findUserByEmail(email);
 	}
-	
-	public List<User> getAllUsers () {
+
+	public List<User> getAllUsers() {
 		return repo.findAll();
 	}
-	
-	public User createUser (String first, String last, String email, String password) {
+
+	public User createUser(String first, String last, String email, String password) {
 		User user = new User();
-		
+
 		user.setFirst_name(first);
 		user.setLast_name(last);
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setRegistration_date(new Date());
 		user.setLoginStatus(false);
-		
-		repo.save(user);
-		
-		return user;
+
+		return repo.save(user);
 	}
-	
-	public User updateUser () {
-		return null;
-	}
-	
-	public void deleteUser () {
+
+	public User updateUser (Long id, String first, String last, String password) {
+		User user = repo.getOne(id);
 		
+		if (hasText(first)) {
+			user.setFirst_name(first);
+		}
+		if (hasText(last)) {
+			user.setLast_name(last);
+		}
+		if (hasText(password)) {
+			user.setPassword(password);
+		}
+		
+		return repo.save(user);
 	}
-	
-	public void changeLoginStatus (User user) {
+
+	public void deleteUser(Long id) {
+		Optional<User> user = repo.findById(id);
+		
+		if (user.isPresent()) {
+			repo.deleteById(id);
+		}
+	}
+
+	public void changeLoginStatus(User user) {
 		user.setLoginStatus(!user.isLoginStatus());
-		
+
 		repo.save(user);
 	}
 }

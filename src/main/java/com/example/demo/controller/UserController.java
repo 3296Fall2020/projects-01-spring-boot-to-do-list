@@ -8,9 +8,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,30 +46,33 @@ public class UserController {
 	}
 	
 	@PostMapping(path="/add")
-	public ResponseEntity<User> addNewUser (@Valid @RequestParam String first_name, @Valid @RequestParam String last_name, 
-			@Valid @RequestParam String email, @Valid @RequestParam String password) {
+	public ResponseEntity<User> addNewUser (@Valid @RequestBody User user) {
 		
-		User user = service.createUser(first_name, last_name, email, password); // Creates a user object and save it to the database
+		User newUser = service.createUser(user.getFirst_name(), user.getLast_name(), user.getEmail(), user.getPassword()); // Creates a user object and save it to the database
 		
-		if (user == null) {
+		if (newUser == null) {
 			/* Just a fallback function if somehow the creation process fails, since if the client passes 
 			 * an invalid parameter (blank, null, etc.), the User object would throw a validation constraint error */
 			
 			return ResponseEntity.notFound().build(); 
 		} else {
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("getUser/{id}").buildAndExpand(user.getId()).toUri();
-			return ResponseEntity.created(uri).body(user);
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("getUser/{id}").buildAndExpand(newUser.getId()).toUri();
+			return ResponseEntity.created(uri).body(newUser);
 		}
 	}
 	
-	@GetMapping(path="/update")
-	public ResponseEntity<User> updateUser () {
-		return ResponseEntity.notFound().build();
+	@PutMapping(path="/update/{id}")
+	public ResponseEntity<User> updateUser (@PathVariable("id") Long id, @RequestBody User user) {
+		User updatedUser = service.updateUser(id, user.getFirst_name(), user.getLast_name(), user.getPassword());
+		
+		return ResponseEntity.ok(updatedUser);
 	}
 	
-	@GetMapping(path="/delete")
-	public ResponseEntity<User> deleteUser () {
-		return ResponseEntity.notFound().build();
+	@DeleteMapping(path="/delete/{id}")
+	public ResponseEntity<User> deleteUser (@PathVariable("id") Long id) {
+		service.deleteUser(id);
+		
+		return ResponseEntity.accepted().build();
 	}
 	
 	@GetMapping(path="/login")

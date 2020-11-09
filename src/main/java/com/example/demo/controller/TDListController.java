@@ -25,8 +25,8 @@ public class TDListController {
 	
 	// e.g. http://localhost:8080/createitem
 	@PostMapping("/createitem")
-	public TDListItem createItem (@Valid @RequestBody TDListItem item) {
-		return repository.save(item);
+	public TDListItem createItem (@Valid @RequestBody TDListItem task) {
+		return repository.save(task);
 	}
 	
 	// e.g. http://localhost:8080/getitem/1
@@ -37,20 +37,20 @@ public class TDListController {
 	
 	// e.g. http://localhost:8080/adduser
 	@PostMapping("adduser")
-	public TDListItem addUser(@Valid @RequestBody TDListItem User){
-		return repository.save(user);
+	public TDListItem addUser(@Valid @RequestBody TDListItem task){
+		return repository.save(task);
 	}
 	
 	// e.g. http://localhost:8080/updateitem/1
 	@PostMapping("updateitem/{id}")
 	public TDListItem updateItem(@PathVariable(value = "id") Long itemId) throws TDListItemNotFoundException{
-		return repository.update(item);
+		return null;
 	}
 	
 	// e.g. http://localhost:8080/removeitem/1
 	@DeleteMapping("removeitem/{id}")
 	public TDListItem removeItem(@PathVariable(value = "id") Long itemId) throws TDListItemNotFoundException{
-		return repository.delete(item);
+		return null;
 	}
 	
 	// Still need to implement post requests (Update items), and delete requests (Delete a given item)
