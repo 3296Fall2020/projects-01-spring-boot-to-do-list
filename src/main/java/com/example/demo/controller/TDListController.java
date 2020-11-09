@@ -35,5 +35,23 @@ public class TDListController {
 		return repository.findById(itemId).orElseThrow(() -> new TDListItemNotFoundException(itemId));
 	}
 	
+	// e.g. http://localhost:8080/adduser
+	@PostMapping("adduser")
+	public TDListItem addUser(@Valid @RequestBody TDListItem User){
+		return repository.save(user);
+	}
+	
+	// e.g. http://localhost:8080/updateitem/1
+	@PostMapping("updateitem/{id}")
+	public TDListItem updateItem(@PathVariable(value = "id") Long itemId) throws TDListItemNotFoundException{
+		return repository.update(item);
+	}
+	
+	// e.g. http://localhost:8080/removeitem/1
+	@DeleteMapping("removeitem/{id}")
+	public TDListItem removeItem(@PathVariable(value = "id") Long itemId) throws TDListItemNotFoundException{
+		return repository.delete(item);
+	}
+	
 	// Still need to implement post requests (Update items), and delete requests (Delete a given item)
 }
