@@ -2,15 +2,33 @@ import "./userValidationStyle.css";
 import { useState } from "react";
 import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
+import React, {useContext} from "react";
 
+function handleErrors(response) {
+    if (!response.ok) {
+        console.log("invalid call to api");
+        alert('User could not be added');
+    }
+    return response;
+}
 
 function makeRequest(firstName, lastName, email, password, history) {
-    let data = {"firstName": firstName, "lastName": lastName, "email": email, "password": password};
+    let data = {"first_name": firstName, "last_name": lastName, "email": email, "password": password};
     console.log(data);
-    history.push('/signIn');
-    //get url from spring boot
-    //make request to server to check if allowed to be added to db and then posted to db
 
+    let url = 'http://localhost:8080/user/add';
+    fetch(url, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(data)
+    }).then(handleErrors)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                history.push('/signIn');
+            });
 }
 
 export default function SignUp() {

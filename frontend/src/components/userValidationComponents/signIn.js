@@ -7,10 +7,24 @@ import {useHistory} from 'react-router-dom';
 function makeRequest(email, password, history) {
     let data = {"email": email, "password": password};
     console.log(data);
-    history.push('/toDoList');
-    //get url from spring boot
-    //make request to server to check if valid user sending over data json object
-}
+    console.log('checking server');
+
+    fetch('http://localhost:8080/user/login?email=' + email + "&password=" + password)
+        .then((response) => {
+            if (response.status === 204) {
+                console.log("successful log in");
+                history.push({
+                    pathname: '/toDoList',
+                    state: {'email': email, 'password': password}
+                });
+            } else {
+                console.log(response.status);
+                alert("incorrect information please try again");
+            }
+        }).catch((exception) => {
+            console.log(exception);
+        }); 
+    };
 
 
 
