@@ -2,7 +2,6 @@ import "./userValidationStyle.css";
 import { useState } from "react";
 import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
-import React, {useContext} from "react";
 
 function handleErrors(response) {
     if (!response.ok) {
@@ -48,12 +47,6 @@ export default function SignUp() {
         else {
             makeRequest(firstName, lastName, email, password1, history);
         }
-        //resetting content in input boxes
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setPassword1("");
-        setPassword2("");
     };
 
 
