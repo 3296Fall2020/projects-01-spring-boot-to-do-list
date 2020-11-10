@@ -1,23 +1,24 @@
 import './App.css';
+import SignIn from './components/userValidationComponents/signIn';
+import SignUp from './components/userValidationComponents/signUp';
+import Home from './components/homePage/homePage';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import ToDoList from './components/todoList';
 
 function App() {
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <p>
-          Hello World! This is a project that will use Spring Boot. More coming soon!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+      <Route exact path='/' component = {Home} />
+        <Route path='/signIn' component = {SignIn} />
+        <Route path='/signUp' component = {SignUp} />
+        <Route path='/todoList' component = {ToDoList} />
+      </Switch>
     </div>
+    </Router>
   );
 }
+
 
 export default App;
