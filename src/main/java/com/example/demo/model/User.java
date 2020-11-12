@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,13 +17,10 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@JsonIdentityInfo(
-	generator = ObjectIdGenerators.PropertyGenerator.class,
-	property = "id"
-)
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,11 +44,12 @@ public class User {
 	
 	private boolean login_status;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 		name = "user_list",
 		joinColumns = @JoinColumn(name = "users_id"),
 		inverseJoinColumns = @JoinColumn(name = "lists_id"))
+	@JsonManagedReference
 	Set<Lists> userLists = new HashSet<>();
 	
 	public User () {

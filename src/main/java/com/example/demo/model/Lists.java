@@ -4,11 +4,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Lists {
@@ -19,7 +22,8 @@ public class Lists {
 	@NotBlank(message = "List name should be provided")
 	private String list_name;
 	
-	@ManyToMany(mappedBy = "userLists")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "userLists")
+	@JsonBackReference
 	Set<User> listUsers = new HashSet<>();
 	
 	public Lists() {
