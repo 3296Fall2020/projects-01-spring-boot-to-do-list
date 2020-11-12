@@ -3,10 +3,12 @@ package com.example.demo.service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.model.Lists;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
@@ -14,6 +16,7 @@ import com.example.demo.repository.UserRepository;
 public class UserService {
 	@Autowired
 	private UserRepository repo;
+	
 	private StringHelper helper;
 	
 	public UserService () {
@@ -73,5 +76,17 @@ public class UserService {
 		user.setLoginStatus(status);
 
 		repo.save(user);
+	}
+	
+	public Set<Lists> getUserLists (String email) {
+		Optional<User> user = repo.findUserByEmail(email);
+		
+		if (user.isPresent()) {
+			User item = user.get();
+			Set<Lists> userLists = item.getUserLists();
+			return userLists;
+		}
+		
+		return null;
 	}
 }

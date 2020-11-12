@@ -7,29 +7,29 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.model.TDListItem;
-import com.example.demo.repository.TDListItemRepository;
+import com.example.demo.model.ListItem;
+import com.example.demo.repository.ListItemRepository;
 
 @Component
 public class ListItemService {
 	@Autowired
-	private TDListItemRepository repo;
+	private ListItemRepository repo;
 	private StringHelper helper;
 	
 	public ListItemService () {
 		this.helper = new StringHelper();
 	}
 	
-	public Optional<TDListItem> getItemById (long id) {
+	public Optional<ListItem> getItemById (long id) {
 		return repo.findById(id);
 	}
 	
-	public List<TDListItem> getAllItems() {
+	public List<ListItem> getAllItems() {
 		return repo.findAll();
 	}
 	
-	public TDListItem createItem (String task, String desc, Date deadline) {
-		TDListItem item = new TDListItem();
+	public ListItem createItem (String task, String desc, Date deadline) {
+		ListItem item = new ListItem();
 		
 		item.setTask_name(task);
 		item.setDescription(desc);
@@ -38,8 +38,8 @@ public class ListItemService {
 		return repo.save(item);
 	}
 	
-	public TDListItem updateItem (Long id, String task, String desc, Date deadline) {
-		TDListItem item = repo.getOne(id);
+	public ListItem updateItem (Long id, String task, String desc, Date deadline) {
+		ListItem item = repo.getOne(id);
 		
 		if (helper.hasText(task)) {
 			item.setTask_name(task);
@@ -55,7 +55,7 @@ public class ListItemService {
 	}
 	
 	public void deleteItem(Long id) {
-		Optional<TDListItem> item = repo.findById(id);
+		Optional<ListItem> item = repo.findById(id);
 		
 		if (item.isPresent()) {
 			repo.deleteById(id);

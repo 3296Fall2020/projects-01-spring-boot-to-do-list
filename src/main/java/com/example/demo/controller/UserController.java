@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.model.Lists;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 
@@ -45,6 +47,11 @@ public class UserController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	@GetMapping(path="/getLists")
+	public Set<Lists> getUserGroups (@RequestParam String email) {
+		return service.getUserLists(email);
 	}
 	
 	@PostMapping(path="/add")
