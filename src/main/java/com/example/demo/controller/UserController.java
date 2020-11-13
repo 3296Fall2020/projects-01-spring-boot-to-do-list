@@ -23,6 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.model.Lists;
 import com.example.demo.model.User;
+import com.example.demo.model.UserLists;
 import com.example.demo.service.UserService;
 
 @RestController
@@ -38,8 +39,19 @@ public class UserController {
 		return service.getAllUsers();
 	}
 	
-	@GetMapping(path="/getUser/{id}")
-	public ResponseEntity<User> getUser (@PathVariable("id") Long id) {
+	@GetMapping(path="/getUserEmail")
+	public ResponseEntity<User> getUser (@RequestParam String email) {
+		Optional<User> user = service.getUserByEmail(email);
+		
+		if (user.isPresent()) {
+			return ResponseEntity.ok(user.get());
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@GetMapping(path="/getUserById/{id}")
+	public ResponseEntity<User> getUserById (@PathVariable("id") Long id) {
 		Optional<User> user = service.getUserById(id);
 		
 		if (user.isPresent()) {
@@ -50,7 +62,7 @@ public class UserController {
 	}
 	
 	@GetMapping(path="/getLists")
-	public Set<Lists> getUserGroups (@RequestParam String email) {
+	public List<Lists> getUserGroups (@RequestParam String email) {
 		return service.getUserLists(email);
 	}
 	
@@ -65,7 +77,7 @@ public class UserController {
 			
 			return ResponseEntity.notFound().build(); 
 		} else {
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("getUser/{id}").buildAndExpand(newUser.getId()).toUri();
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/getUserById/{id}").buildAndExpand(newUser.getId()).toUri();
 			return ResponseEntity.created(uri).body(newUser);
 		}
 	}

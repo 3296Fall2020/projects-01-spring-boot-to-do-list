@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -21,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,13 +47,15 @@ public class User {
 	
 	private boolean login_status;
 	
+	/*
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 		name = "user_list",
 		joinColumns = @JoinColumn(name = "users_id"),
 		inverseJoinColumns = @JoinColumn(name = "lists_id"))
-	@JsonManagedReference
-	Set<Lists> userLists = new HashSet<>();
+	@JsonManagedReference */
+	@OneToMany(mappedBy = "user")
+	Set<UserLists> userLists; /* = new HashSet<>(); */
 	
 	public User () {
 		
@@ -112,11 +117,11 @@ public class User {
 		this.login_status = login_status;
 	}
 	
-	public Set<Lists> getUserLists() {
+	public Set<UserLists> getUserLists() {
 		return userLists;
 	}
 
-	public void setUserLists(Set<Lists> userLists) {
+	public void setUserLists(Set<UserLists> userLists) {
 		this.userLists = userLists;
 	}
 

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -10,12 +11,17 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.model.Lists;
 import com.example.demo.model.User;
+import com.example.demo.model.UserLists;
+import com.example.demo.repository.UserListsRepository;
 import com.example.demo.repository.UserRepository;
 
 @Component
 public class UserService {
 	@Autowired
 	private UserRepository repo;
+	
+	@Autowired
+	private UserListsRepository listRepo;
 	
 	private StringHelper helper;
 	
@@ -78,13 +84,20 @@ public class UserService {
 		repo.save(user);
 	}
 	
-	public Set<Lists> getUserLists (String email) {
+	public List<Lists> getUserLists (String email) {
 		Optional<User> user = repo.findUserByEmail(email);
 		
 		if (user.isPresent()) {
 			User item = user.get();
-			Set<Lists> userLists = item.getUserLists();
-			return userLists;
+			Set<UserLists> userLists = listRepo.findByUserId(item.getId());
+			
+			List<Lists> items = new ArrayList<>(); 
+			
+			for (UserLists list : userLists) {
+				items.add(list.getLists());
+			}
+			
+			return items;
 		}
 		
 		return null;
