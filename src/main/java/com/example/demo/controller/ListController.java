@@ -88,7 +88,11 @@ public class ListController {
 	public ResponseEntity<Lists> updateList (@PathVariable("id") Long id, @RequestBody Lists list) {
 		Lists updatedList = service.updateList(id, list.getList_name());
 		
-		return ResponseEntity.ok(updatedList);
+		if (updatedList != null) {
+			return ResponseEntity.ok(updatedList);
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 	
 	/* DELETE methods; Delete a list, and remove users from a list */

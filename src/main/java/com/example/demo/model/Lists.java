@@ -10,8 +10,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "lists")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class Lists {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,9 +27,6 @@ public class Lists {
 	@NotBlank(message = "List name should be provided")
 	private String list_name;
 	
-	/*
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "userLists")
-	@JsonBackReference */
 	@OneToMany(mappedBy = "lists")
 	Set<UserLists> listUsers; /* = new HashSet<>(); */
 	

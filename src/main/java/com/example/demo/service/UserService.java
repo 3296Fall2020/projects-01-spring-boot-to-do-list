@@ -30,11 +30,11 @@ public class UserService {
 	}
 
 	public Optional<User> getUserById(Long id) {
-		return helper.getUserById(id);
+		return repo.findById(id);
 	}
 
 	public Optional<User> getUserByEmail(String email) {
-		return helper.getUserByEmail(email);
+		return repo.findUserByEmail(email);
 	}
 
 	public List<User> getAllUsers() {
@@ -42,7 +42,7 @@ public class UserService {
 	}
 	
 	public List<Lists> getUserLists (String email) {
-		Optional<User> foundUser = helper.getUserByEmail(email); //repo.findUserByEmail(email);
+		Optional<User> foundUser = repo.findUserByEmail(email);
 		
 		if (foundUser.isPresent()) {
 			User item = foundUser.get();
@@ -74,19 +74,25 @@ public class UserService {
 	}
 
 	public User updateUser (Long id, String first, String last, String password) {
-		User user = repo.getOne(id);
+		Optional<User> user = repo.findById(id);
 		
-		if (helper.hasText(first)) {
-			user.setFirst_name(first);
-		}
-		if (helper.hasText(last)) {
-			user.setLast_name(last);
-		}
-		if (helper.hasText(password)) {
-			user.setPassword(password);
+		if (user.isPresent()) {
+			User item = user.get();
+			
+			if (helper.hasText(first)) {
+				item.setFirst_name(first);
+			}
+			if (helper.hasText(last)) {
+				item.setLast_name(last);
+			}
+			if (helper.hasText(password)) {
+				item.setPassword(password);
+			}
+			
+			return repo.save(item);
 		}
 		
-		return repo.save(user);
+		return null;
 	}
 
 	public void deleteUser(Long id) {

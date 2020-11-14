@@ -1,17 +1,12 @@
 package com.example.demo.model;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -19,11 +14,11 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "user")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,13 +42,6 @@ public class User {
 	
 	private boolean login_status;
 	
-	/*
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(
-		name = "user_list",
-		joinColumns = @JoinColumn(name = "users_id"),
-		inverseJoinColumns = @JoinColumn(name = "lists_id"))
-	@JsonManagedReference */
 	@OneToMany(mappedBy = "user")
 	Set<UserLists> userLists; /* = new HashSet<>(); */
 	
