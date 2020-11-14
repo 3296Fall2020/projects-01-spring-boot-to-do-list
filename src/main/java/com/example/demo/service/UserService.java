@@ -23,24 +23,43 @@ public class UserService {
 	@Autowired
 	private UserListsRepository listRepo;
 	
-	private StringHelper helper;
+	private HelperService helper;
 	
 	public UserService () {
-		this.helper = new StringHelper();
+		this.helper = new HelperService();
 	}
 
-	public Optional<User> getUserById(long id) {
-		return repo.findById(id);
+	public Optional<User> getUserById(Long id) {
+		return helper.getUserById(id);
 	}
 
 	public Optional<User> getUserByEmail(String email) {
-		return repo.findUserByEmail(email);
+		return helper.getUserByEmail(email);
 	}
 
 	public List<User> getAllUsers() {
 		return repo.findAll();
 	}
-
+	
+	public List<Lists> getUserLists (String email) {
+		Optional<User> foundUser = helper.getUserByEmail(email); //repo.findUserByEmail(email);
+		
+		if (foundUser.isPresent()) {
+			User item = foundUser.get();
+			Set<UserLists> userLists = listRepo.findByUserId(item.getId());
+			
+			List<Lists> items = new ArrayList<>(); 
+			
+			for (UserLists list : userLists) {
+				items.add(list.getLists());
+			}
+			
+			return items;
+		}
+		
+		return null;
+	}
+	
 	public User createUser(String first, String last, String email, String password) {
 		User user = new User();
 
@@ -82,24 +101,5 @@ public class UserService {
 		user.setLoginStatus(status);
 
 		repo.save(user);
-	}
-	
-	public List<Lists> getUserLists (String email) {
-		Optional<User> user = repo.findUserByEmail(email);
-		
-		if (user.isPresent()) {
-			User item = user.get();
-			Set<UserLists> userLists = listRepo.findByUserId(item.getId());
-			
-			List<Lists> items = new ArrayList<>(); 
-			
-			for (UserLists list : userLists) {
-				items.add(list.getLists());
-			}
-			
-			return items;
-		}
-		
-		return null;
 	}
 }

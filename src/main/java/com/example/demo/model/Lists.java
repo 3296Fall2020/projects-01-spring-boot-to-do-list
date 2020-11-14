@@ -30,11 +30,11 @@ public class Lists {
 		
 	}
 
-	public Long getList_id() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setList_id(Long list_id) {
+	public void setId(Long list_id) {
 		this.id = list_id;
 	}
 

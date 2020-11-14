@@ -33,7 +33,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
-
+	
+	/* GET methods; Get all Users, Obtain user by email or by id, and get the lists associated with a specific user */
+	
 	@GetMapping(path="/all")
 	public List<User> getAllUsers () {
 		return service.getAllUsers();
@@ -61,14 +63,16 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping(path="/getLists")
-	public List<Lists> getUserGroups (@RequestParam String email) {
+	// Obtain lists associated with a specified user
+	@GetMapping(path="/getUserLists")
+	public List<Lists> getUserLists (@RequestParam String email) {
 		return service.getUserLists(email);
 	}
 	
+	/* POST methods; Create a new user */
+	
 	@PostMapping(path="/add")
 	public ResponseEntity<User> addNewUser (@Valid @RequestBody User user) {
-		
 		User newUser = service.createUser(user.getFirst_name(), user.getLast_name(), user.getEmail(), user.getPassword()); // Creates a user object and save it to the database
 		
 		if (newUser == null) {
@@ -81,6 +85,8 @@ public class UserController {
 			return ResponseEntity.created(uri).body(newUser);
 		}
 	}
+
+	/* PUT methods; Updates a given user */
 	
 	@PutMapping(path="/update/{id}")
 	public ResponseEntity<User> updateUser (@PathVariable("id") Long id, @RequestBody User user) {
@@ -88,6 +94,8 @@ public class UserController {
 		
 		return ResponseEntity.ok(updatedUser);
 	}
+
+	/* DELETE methods; Deletes a user from the database */
 	
 	@DeleteMapping(path="/delete/{id}")
 	public ResponseEntity<User> deleteUser (@PathVariable("id") Long id) {
@@ -95,6 +103,8 @@ public class UserController {
 		
 		return ResponseEntity.accepted().build();
 	}
+
+	/* Login/Logout Handling */
 	
 	@GetMapping(path="/login")
 	public ResponseEntity<User> authorizeUser (@Valid @RequestParam String email, @Valid @RequestParam String password) {

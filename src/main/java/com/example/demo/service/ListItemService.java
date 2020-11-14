@@ -14,10 +14,10 @@ import com.example.demo.repository.ListItemRepository;
 public class ListItemService {
 	@Autowired
 	private ListItemRepository repo;
-	private StringHelper helper;
+	private HelperService helper;
 	
 	public ListItemService () {
-		this.helper = new StringHelper();
+		this.helper = new HelperService();
 	}
 	
 	public Optional<ListItem> getItemById (long id) {
