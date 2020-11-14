@@ -31,8 +31,8 @@ public class UserListsService {
 	}
 	
 	private UserLists findUserListLink (Long user_id, Long list_id) {
-		Optional<User> foundUser = helper.getUserById(user_id);
-		Optional<Lists> foundList = helper.getListById(list_id);
+		Optional<User> foundUser = userRepo.findById(user_id);
+		Optional<Lists> foundList = listRepo.findById(list_id);
 		
 		if (foundUser.isPresent() && foundList.isPresent()) {
 			Optional<UserLists> foundCombo = jointRepo.findByCompositeKey(user_id, list_id);
@@ -67,18 +67,14 @@ public class UserListsService {
 		return null; // Very unlikely you will end up here
 	}
 	
-	public void deleteList (Long id) {
-		
-	}
-	
 	public Lists addUserToList (Long user_id, Long list_id) {
 		UserLists combo = findUserListLink(user_id, list_id);
 		
 		if (combo == null) {
 			combo = new UserLists();
 			
-			Optional<User> linkedUser = helper.getUserById(user_id);
-			Optional<Lists> linkedList = helper.getListById(list_id);
+			Optional<User> linkedUser = userRepo.findById(user_id);
+			Optional<Lists> linkedList = listRepo.findById(list_id);
 			
 			if (linkedUser.isPresent() && linkedList.isPresent()) {
 				User user = linkedUser.get();
@@ -93,6 +89,10 @@ public class UserListsService {
 		}
 		
 		return null;
+	}
+	
+	public void deleteList (Long id) {
+		
 	}
 	
 	public void removeUserFromList (Long user_id, Long list_id) {

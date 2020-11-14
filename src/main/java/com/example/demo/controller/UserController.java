@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -23,7 +22,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.model.Lists;
 import com.example.demo.model.User;
-import com.example.demo.model.UserLists;
 import com.example.demo.service.UserService;
 
 @RestController
@@ -92,7 +90,11 @@ public class UserController {
 	public ResponseEntity<User> updateUser (@PathVariable("id") Long id, @RequestBody User user) {
 		User updatedUser = service.updateUser(id, user.getFirst_name(), user.getLast_name(), user.getPassword());
 		
-		return ResponseEntity.ok(updatedUser);
+		if (updatedUser != null) {
+			return ResponseEntity.ok(updatedUser);
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	/* DELETE methods; Deletes a user from the database */

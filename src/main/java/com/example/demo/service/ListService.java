@@ -29,7 +29,7 @@ public class ListService {
 	}
 	
 	public Optional<Lists> getListById (Long id) {
-		return helper.getListById(id);
+		return repo.findById(id);
 	}
 	
 	public List<Lists> getAllLists() {
@@ -37,7 +37,7 @@ public class ListService {
 	}
 	
 	public List<User> getListUsers (Long id) {
-		Optional<Lists> foundList = helper.getListById(id);
+		Optional<Lists> foundList = repo.findById(id);
 		
 		if (foundList.isPresent()) {
 			Lists item = foundList.get();
@@ -56,13 +56,19 @@ public class ListService {
 	}
 	
 	public Lists updateList (Long id, String name) {
-		Lists list = repo.getOne(id);
+		Optional<Lists> list = repo.findById(id);
 		
-		if (helper.hasText(name)) {
-			list.setList_name(name);
+		if (list.isPresent()) {
+			Lists item = list.get();
+			
+			if (helper.hasText(name)) {
+				item.setList_name(name);
+			}
+			
+			return repo.save(item);
 		}
 		
-		return repo.save(list);
+		return null;
 	}
 	
 	

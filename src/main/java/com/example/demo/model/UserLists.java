@@ -12,9 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "user_list")
+@Table(name = "user_lists")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "user")
 public class UserLists {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
