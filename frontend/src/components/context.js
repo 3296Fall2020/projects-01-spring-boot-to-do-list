@@ -26,11 +26,10 @@ const ContextProvider = (props) => {
 
     const fetchLists = () => {
         console.log('fetch list');
-        fetch('http://localhost:8080/user/get_lists?email=' + user.email)
+        fetch('http://localhost:8080/user/getUserLists?email=' + user.email)
         .then(res => res.json())
         .then(data => {
-            setLists(data);
-            setFilterResults(data);
+                console.log(data);
         })
         .catch(err => {
             // unable to get notes

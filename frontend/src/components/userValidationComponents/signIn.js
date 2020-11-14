@@ -11,8 +11,8 @@ function makeRequest(email, password, history) {
 
     fetch('http://localhost:8080/user/login?email=' + email + "&password=" + password)
         .then((response) => {
+            console.log(response.json);
             if (response.status === 200) {
-                console.log(response);
                 history.push({
                     pathname: '/toDoList',
                     state: {'email': email, 'password': password }
