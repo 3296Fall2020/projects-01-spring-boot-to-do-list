@@ -83,4 +83,20 @@ public class ListItemController {
 		
 		return ResponseEntity.accepted().build();
 	}
+	
+	// e.g. http://localhost:8080/checkofffinished/1
+	@PostMapping("checkofffinished/{id}")
+	public ResponseEntity<ListItem> checkOffItem (@PathVariable("id") Long id, @RequestBody ListItem item) {
+		ListItem finishedItem = service.checkOffFinishedItem(id);
+		
+		return ResponseEntity.ok(finishedItem);
+	}
+	
+	// e.g. http://localhost:8080/uncheck/1
+	@PostMapping("uncheck/{id}")
+	public ResponseEntity<ListItem> uncheckItem (@PathVariable("id") Long id, @RequestBody ListItem item) {
+		ListItem unfinishedItem = service.removeItemCheck(id);
+		
+		return ResponseEntity.ok(unfinishedItem);
+	}
 }
