@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -42,7 +44,8 @@ public class User {
 	
 	private boolean login_status;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@JsonIgnore
 	Set<UserLists> userLists; /* = new HashSet<>(); */
 	
 	public User () {

@@ -73,7 +73,11 @@ public class ListItemController {
 	public ResponseEntity<ListItem> updateItem (@PathVariable("id") Long id, @RequestBody ListItem item) {
 		ListItem updatedItem = service.updateItem(id, item.getTask_name(), item.getDescription(), item.getDeadline());
 		
-		return ResponseEntity.ok(updatedItem);
+		if (updatedItem != null) {
+			return ResponseEntity.ok(updatedItem);
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	// e.g. http://localhost:8080/removeitem/1
@@ -84,19 +88,27 @@ public class ListItemController {
 		return ResponseEntity.accepted().build();
 	}
 	
-	// e.g. http://localhost:8080/checkofffinished/1
-	@PostMapping("checkofffinished/{id}")
+	// e.g. http://localhost:8080/checkFinished/1
+	@PostMapping("checkFinished/{id}")
 	public ResponseEntity<ListItem> checkOffItem (@PathVariable("id") Long id, @RequestBody ListItem item) {
-		ListItem finishedItem = service.checkOffFinishedItem(id);
+		ListItem finishedItem = service.configureCompletion(id, true);
 		
-		return ResponseEntity.ok(finishedItem);
+		if (finishedItem != null) {
+			return ResponseEntity.ok(finishedItem);
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 	
 	// e.g. http://localhost:8080/uncheck/1
 	@PostMapping("uncheck/{id}")
 	public ResponseEntity<ListItem> uncheckItem (@PathVariable("id") Long id, @RequestBody ListItem item) {
-		ListItem unfinishedItem = service.removeItemCheck(id);
+		ListItem unfinishedItem = service.configureCompletion(id, false);
 		
-		return ResponseEntity.ok(unfinishedItem);
+		if (unfinishedItem != null) {
+			return ResponseEntity.ok(unfinishedItem);
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 }
