@@ -3,6 +3,7 @@ package com.example.demo.model;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -27,7 +29,8 @@ public class Lists {
 	@NotBlank(message = "List name should be provided")
 	private String list_name;
 	
-	@OneToMany(mappedBy = "lists")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "lists")
+	@JsonIgnore
 	Set<UserLists> listUsers; /* = new HashSet<>(); */
 	
 	public Lists() {
