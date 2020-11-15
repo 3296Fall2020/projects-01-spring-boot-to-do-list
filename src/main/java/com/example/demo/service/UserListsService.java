@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,17 +27,8 @@ public class UserListsService {
 	@Autowired
 	private UserListsRepository jointRepo;
 	
-	private HelperService helper;
-	
-	public UserListsService () {
-		this.helper = new HelperService();
-	}
-	
 	private UserLists findUserListLink (Long user_id, Long list_id) {
-		Optional<User> foundUser = userRepo.findById(user_id);
-		Optional<Lists> foundList = listRepo.findById(list_id);
-		
-		if (foundUser.isPresent() && foundList.isPresent()) {
+		if (userRepo.existsById(user_id) && listRepo.existsById(list_id)) {
 			Optional<UserLists> foundCombo = jointRepo.findByCompositeKey(user_id, list_id);
 			
 			if (foundCombo.isPresent()) {
@@ -73,15 +67,12 @@ public class UserListsService {
 		if (combo == null) {
 			combo = new UserLists();
 			
-			Optional<User> linkedUser = userRepo.findById(user_id);
-			Optional<Lists> linkedList = listRepo.findById(list_id);
+			Optional<User> user = userRepo.findById(user_id);
+			Optional<Lists> list = listRepo.findById(list_id);
 			
-			if (linkedUser.isPresent() && linkedList.isPresent()) {
-				User user = linkedUser.get();
-				Lists list = linkedList.get();
-				
-				combo.setUser(user);
-				combo.setLists(list);
+			if (user.isPresent() && list.isPresent()) {
+				combo.setUser(user.get());
+				combo.setLists(list.get());
 				combo.setLink_date(new Date());
 				
 				return jointRepo.save(combo).getLists();
@@ -91,11 +82,43 @@ public class UserListsService {
 		return null;
 	}
 	
-	public void deleteList (Long id) {
+	public void deleteUser(Long id) {
+		List<Long> unshared = jointRepo.findUnsharedLists(id);
 		
+		Set<UserLists> toDelete = jointRepo.findByUserId(id);
+		
+		if (!toDelete.isEmpty()) {
+			jointRepo.deleteInBatch(toDelete);
+		}
+		
+		jointRepo.deleteListSeries(unshared);
+		
+		userRepo.deleteById(id);
+	}
+	
+	public void deleteList (Long id) {
+		Set<UserLists> toDelete = jointRepo.findByListId(id);
+		
+		if (!toDelete.isEmpty()) {
+			jointRepo.deleteInBatch(toDelete);
+		}
+		
+		listRepo.deleteById(id);
 	}
 	
 	public void removeUserFromList (Long user_id, Long list_id) {
+		UserLists combo = findUserListLink(user_id, list_id);
 		
+		if (combo == null) {
+			return;
+		}
+		
+		jointRepo.delete(combo);
+		
+		Set<UserLists> remaining = jointRepo.findByListId(list_id);
+		
+		if (remaining.isEmpty()) {
+			listRepo.deleteById(list_id);
+		}
 	}
 }

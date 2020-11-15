@@ -95,14 +95,6 @@ public class UserService {
 		return null;
 	}
 
-	public void deleteUser(Long id) {
-		Optional<User> user = repo.findById(id);
-		
-		if (user.isPresent()) {
-			repo.deleteById(id);
-		}
-	}
-
 	public void changeLoginStatus(User user, boolean status) {
 		user.setLoginStatus(status);
 
