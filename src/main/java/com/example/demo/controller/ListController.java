@@ -98,13 +98,17 @@ public class ListController {
 	/* DELETE methods; Delete a list, and remove users from a list */
 	
 	@DeleteMapping(path = "/deleteList/{id}")
-	public ResponseEntity<Lists> deleteList () {
-		return null;
+	public ResponseEntity<Lists> deleteList (@PathVariable("id") Long id) {
+		userService.deleteList(id);
+		
+		return ResponseEntity.accepted().build();
 	}
 	
-	@DeleteMapping(path = "remove")
-	public ResponseEntity<Lists> removeUserFromList (@RequestParam Long list_id, @RequestParam Long user_id) {
-		return null;
+	@DeleteMapping(path = "/remove")
+	public ResponseEntity<Lists> removeUserFromList (@RequestParam Long user_id, @RequestParam Long list_id) {
+		userService.removeUserFromList(user_id, list_id);
+		
+		return ResponseEntity.accepted().build();
 	}
 	
 }

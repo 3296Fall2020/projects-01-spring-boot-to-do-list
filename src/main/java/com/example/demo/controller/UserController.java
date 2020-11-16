@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.model.Lists;
 import com.example.demo.model.User;
+import com.example.demo.service.UserListsService;
 import com.example.demo.service.UserService;
 
 @RestController
@@ -31,6 +32,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private UserListsService listService;
 	
 	/* GET methods; Get all Users, Obtain user by email or by id, and get the lists associated with a specific user */
 	
@@ -101,7 +105,7 @@ public class UserController {
 	
 	@DeleteMapping(path="/delete/{id}")
 	public ResponseEntity<User> deleteUser (@PathVariable("id") Long id) {
-		service.deleteUser(id);
+		listService.deleteUser(id);
 		
 		return ResponseEntity.accepted().build();
 	}
