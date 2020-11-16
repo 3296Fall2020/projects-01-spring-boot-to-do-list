@@ -46,7 +46,6 @@ const ContextProvider = (props) => {
             })
     };
 
-
     const fetchList = (id) => {
         fetch('http://localhost:8080/list/getListById/' + id)
             .then(res => res.json())
@@ -80,7 +79,6 @@ const ContextProvider = (props) => {
         );
         setFilterResults(results);
     };
-
 
     return (
         <Context.Provider value={[user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList]}>

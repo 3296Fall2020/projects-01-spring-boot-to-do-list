@@ -11,7 +11,7 @@ export default function AddList({ show, close }) {
         evt.preventDefault();
         console.log("adding list: " + listName);
         console.log("adding user: " + user.email + " and list to user_list table");
-        let url = 'http://localhost:8080/add?email=' + user.email + '&name=' + listName;
+        let url = 'http://localhost:8080/list/add?email=' + user.email + '&name=' + listName;
         fetch(url, {
             method: 'POST',
             headers: new Headers({
@@ -25,7 +25,6 @@ export default function AddList({ show, close }) {
             console.log(exception);
         })
     }
-
 
 
 return (

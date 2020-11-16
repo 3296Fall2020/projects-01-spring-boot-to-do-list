@@ -11,7 +11,7 @@ export default function ListContent() {
     const [showDeleteList, setShowDeleteList] = useState(false);
     const [showAddUser, setShowAddUser] = useState(false);
 
-
+    
     const removeUser = (user) => {
         let url = 'http://localhost:8080/list/remove?user_id=' + user.id + '&list_id=' + list.id;
         fetch(url, {
