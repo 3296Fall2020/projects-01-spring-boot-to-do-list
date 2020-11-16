@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext} from 'react';
 import {Form} from 'react-bootstrap';
 import { Context } from '../context';
 import "./sidePanel.css";
@@ -6,8 +6,6 @@ import "./sidePanel.css";
 function ListFilter({filter}) {
 
     const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists] = useContext(Context);
-
-    const inputEl = useRef(null);
 
     const handleOnChange = (e) => {
         console.log(e.target.value)

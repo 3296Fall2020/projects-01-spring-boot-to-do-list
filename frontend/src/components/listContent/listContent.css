@@ -31,3 +31,21 @@
     margin-left:10px;
     cursor: pointer;
 }
+
+.update_list_form{
+    display: inline;
+}
+
+.delete_list_popup{
+    background-color: #fff;
+    width:80%;
+    max-width:800px;
+    margin: 4rem auto;
+}
+
+.add_user_list_popup{
+    background-color: #fff;
+    width:80%;
+    max-width:800px;
+    margin: 4rem auto;
+}

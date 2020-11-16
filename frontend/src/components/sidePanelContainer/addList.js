@@ -12,6 +12,7 @@ export default function AddList({ show, close }) {
         console.log("adding list: " + listName);
         console.log("adding user: " + user.email + " and list to user_list table");
         setListName("");
+        close(false);
     };
 
     return (

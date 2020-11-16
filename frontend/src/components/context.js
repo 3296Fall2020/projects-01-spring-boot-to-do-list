@@ -30,11 +30,24 @@ const ContextProvider = (props) => {
             .then(res => res.json())
             .then(data => {
                 setLists(data)
-                setFilterResults(data)}
+                setFilterResults(data)
+                setList(data[0])
+                fetchListUsers(data[0])}
             ).catch((exception) => {
                 console.log(exception);
             });
     };
+
+    const fetchList = (id) => {
+        fetch('http://localhost:8080/list/getListById/' + id)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            setList(data);
+        }).catch((exception) => {
+            console.log(exception);
+        })
+    }
 
     const fetchListUsers = (list) => {
         fetch('http://localhost:8080/list/getListUsers/' + list.id)
@@ -60,10 +73,10 @@ const ContextProvider = (props) => {
 
 
     return (
-        <Context.Provider value={[user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers]}>
+        <Context.Provider value={[user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList]}>
             {props.children}
         </Context.Provider>
-    );
+    )
 };
 
 export { Context, ContextProvider };
