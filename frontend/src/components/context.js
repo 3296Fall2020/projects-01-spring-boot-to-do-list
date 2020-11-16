@@ -57,6 +57,7 @@ const ContextProvider = (props) => {
             })
     }
 
+
     const fetchListUsers = (list) => {
         fetch('http://localhost:8080/list/getListUsers/' + list.id)
             .then(res => res.json())
