@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 
-const Context = React.createContext([{}, () => { }]);
+const Context = React.createContext([{}, () => {}])
 
 const ContextProvider = (props) => {
     const [lists, setLists] = useState([]);

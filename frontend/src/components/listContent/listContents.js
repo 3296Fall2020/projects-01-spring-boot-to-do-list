@@ -7,7 +7,7 @@ import './listContent.css'
 export default function ListContent() {
     const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList] = useContext(Context);
     const [update, setUpdate] = useState(false);
-    const [updateName, setUpdateName] = useState(list.list_name);
+    const [updateName, setUpdateName] = useState("");
     const [showDeleteList, setShowDeleteList] = useState(false);
     const [showAddUser, setShowAddUser] = useState(false);
 
@@ -40,7 +40,7 @@ export default function ListContent() {
             body: JSON.stringify(data)
         }).then((response) => {
             fetchList(list.id);
-            setUpdateName(list.list_name);
+            setUpdateName("");
             setUpdate(false);
         }).catch((exception) => {
             console.log(exception);
@@ -61,7 +61,8 @@ export default function ListContent() {
                 <button className="update_list_button" onClick={() => setUpdate(true)}>Update list</button>
                 <span className="list_header" style={{ display: update ? "none" : "block" }}>{list.list_name}</span>
                 <form className="update_list_form" onSubmit={updateList} style={{ display: update ? "block" : "none" }}>
-                    <input value={updateName} onChange={e => setUpdateName(e.target.value)} className="form-control" placeholder="list name" required="required" ></input>
+                    <button type="button" onClick={() => { setUpdate(false); setUpdateName("") }}>&times;</button>
+                    <input value={updateName} onChange={e => setUpdateName(e.target.value)} className="form-control" placeholder="New List Name" required="required" ></input>
                 </form>
                 <button className="delete_list_button" onClick={handleDeleteListModal}>Delete List</button>
                 <div className="members">
