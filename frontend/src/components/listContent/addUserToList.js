@@ -11,6 +11,9 @@ export default function AddListUser({ show, close }) {
         console.log(list.id);
         console.log(email);
         close(false);
+        //get user by email
+        //use id to send to add user to list function
+
         /*
         let url = 'http://localhost:8080/list/deleteList/' + list.id;
         fetch(url, {
@@ -37,7 +40,7 @@ export default function AddListUser({ show, close }) {
                 <div className="form-group">
                         <input type="email" value={email} onChange={e => setEmail(e.target.value)}  className="form-control" placeholder="Email" required="required" />
                 </div>
-                <button type="submit" >Delete</button>
+                <button type="submit" >Add User</button>
             </form>
         </div>
     )

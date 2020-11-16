@@ -29,6 +29,7 @@ const ContextProvider = (props) => {
         fetch('http://localhost:8080/user/getUserLists?email=' + user.email)
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 setLists(data)
                 setFilterResults(data)
                 setList(data[0])

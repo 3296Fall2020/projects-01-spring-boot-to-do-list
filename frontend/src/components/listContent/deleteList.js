@@ -10,7 +10,6 @@ export default function DeleteList({ show, close }) {
         evt.preventDefault();
         console.log(list.id);
         close(false);
-        /*
         let url = 'http://localhost:8080/list/deleteList/' + list.id;
         fetch(url, {
             method: 'DELETE',
@@ -24,7 +23,6 @@ export default function DeleteList({ show, close }) {
             .catch((exception) => {
                 console.log(exception);
             });
-            */
     }
 
 
