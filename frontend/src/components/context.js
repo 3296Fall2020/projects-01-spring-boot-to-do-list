@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 
-const Context = React.createContext([{}, () => {}])
+const Context = React.createContext([])
 
 const ContextProvider = (props) => {
     const [lists, setLists] = useState([]);
@@ -24,41 +24,50 @@ const ContextProvider = (props) => {
         fetchLists();
     }, [location]);
 
-
     const fetchLists = () => {
         fetch('http://localhost:8080/user/getUserLists?email=' + user.email)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setLists(data)
-                setFilterResults(data)
-                setList(data[0])
-                fetchListUsers(data[0])}
-            ).catch((exception) => {
-                console.log(exception);
-            });
+            .then(response => {
+                return response.text()
+            })
+            .then((data) => {
+                console.log("fetching lists data from server");
+                console.log(data);
+                if (data) {
+                    let newData = JSON.parse(data);
+                    console.log(newData);
+                    setLists(newData)
+                    setFilterResults(newData)
+                    setList(newData[0])
+                    fetchListUsers(newData[0])
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     };
+
 
     const fetchList = (id) => {
         fetch('http://localhost:8080/list/getListById/' + id)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setList(data);
-        }).catch((exception) => {
-            console.log(exception);
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setList(data);
+            }).catch((exception) => {
+                console.log(exception);
+            })
     }
 
     const fetchListUsers = (list) => {
         fetch('http://localhost:8080/list/getListUsers/' + list.id)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            setListUsers(data)})
-        .catch((exception) => {
-            console.log(exception);
-        }); 
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setListUsers(data)
+            })
+            .catch((exception) => {
+                console.log(exception);
+            });
     }
 
     const [filterResults, setFilterResults] = useState([]);
