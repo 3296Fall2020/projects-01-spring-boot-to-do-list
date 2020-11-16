@@ -40,6 +40,7 @@ export default function ListContent() {
             body: JSON.stringify(data)
         }).then((response) => {
             fetchLists();
+            fetchList(list.id);
             setUpdateName("");
             setUpdate(false);
         }).catch((exception) => {
@@ -83,7 +84,7 @@ export default function ListContent() {
     } else {
         return (
             <div className="list_content">
-                <h1>No Lists Available</h1>
+                <h1>No Lists Selected</h1>
             </div>
         );
     }
