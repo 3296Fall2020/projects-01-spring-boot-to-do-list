@@ -1,0 +1,35 @@
+.side_panel{
+    flex-grow: 1;
+    text-align:center;
+    justify-content: flex-start;
+    border-right: solid thick black;
+    background-color: #EFA08E;
+}
+
+.list_name {
+    border: black thin solid;
+    cursor: pointer;
+}
+
+.list_container {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    position: relative;
+    overflow-y: auto;
+    height: 80%;
+}
+
+.add_list_button{
+    margin: 1em;
+    cursor: pointer;
+}
+
+.sign_out_button{
+    display:fixed;
+    bottom: 0;
+    cursor: pointer;
+}
+
+.add_list_form{
+    margin: 1rem;
+}

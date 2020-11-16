@@ -1,0 +1,33 @@
+.list_content{
+    flex-grow: 4;
+    text-align:center;
+    margin: 0;
+    height: 100vh;
+    background-color: #D8CFC2;
+}
+
+.list_header{
+    font-size: 40px;
+    font-weight: bold;
+    color:black;
+    margin-left:1rem;
+    margin-right: 1rem;
+}
+
+.members{
+    margin-top: 1rem;
+    border-top:solid thin black;
+    border-bottom: solid thin black;
+    padding: 10px;
+}
+
+.list_member{
+    margin: 1rem;
+    padding:5px;
+    background-color: blueviolet;
+}
+
+.remove_user_button{
+    margin-left:10px;
+    cursor: pointer;
+}

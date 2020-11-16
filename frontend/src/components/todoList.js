@@ -1,5 +1,8 @@
 import React from 'react';
 import { ContextProvider } from "./context"
+import ListContent from './listContent/listContents';
+import SidePanel from './sidePanelContainer/sidePanel'
+import './todoList.css'
 
 
 
@@ -8,10 +11,10 @@ export default function ToDoList() {
 
 
   return (
-    <div className="content-container">
+    <div className="container">
       <ContextProvider>
-        <div>
-        </div>
+        <SidePanel/>
+        <ListContent/>
       </ContextProvider>
     </div>
   );
