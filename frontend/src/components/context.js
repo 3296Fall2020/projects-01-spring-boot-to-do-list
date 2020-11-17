@@ -36,11 +36,6 @@ const ContextProvider = (props) => {
                 console.log(newData);
                 setLists(newData);
                 setFilterResults(newData);
-                if( typeof list.list_name === "undefined"){
-                    console.log("setting list in fetch list (first render)");
-                    setList(newData[0]);
-                    fetchListUsers(newData[0])
-                }
             })
             .catch((error) => {
                 console.log(error)
