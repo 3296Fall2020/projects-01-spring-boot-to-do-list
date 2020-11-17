@@ -18,6 +18,7 @@ export default function DeleteList({ show, close }) {
             })
         }).then((response) => {
             fetchLists();
+            setList({"list_id": list.id, "list_name": null})
             close(false);
         })
             .catch((exception) => {

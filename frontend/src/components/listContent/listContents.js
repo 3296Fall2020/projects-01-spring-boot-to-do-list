@@ -20,7 +20,8 @@ export default function ListContent() {
                 'Content-Type': 'application/json'
             })
         }).then((response) => {
-            fetchListUsers(list);
+            fetchLists();
+            setList({"list_id": list.id, "list_name": null})
         })
             .catch((exception) => {
                 console.log(exception);
@@ -41,7 +42,6 @@ export default function ListContent() {
         }).then((response) => {
             fetchLists();
             fetchList(list.id);
-            setUpdateName("");
             setUpdate(false);
         }).catch((exception) => {
             console.log(exception);
@@ -84,7 +84,7 @@ export default function ListContent() {
     } else {
         return (
             <div className="list_content">
-                <h1>Welcome {user.first_name} No List Selected</h1>
+                <h1>Welcome {user.first_name}! You have no list selected</h1>
             </div>
         );
     }
