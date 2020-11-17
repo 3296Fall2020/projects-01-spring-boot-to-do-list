@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 // Model, this item represents the object representation of a To Do List Item
 @Entity
-public class TDListItem {
+public class ListItem {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long item_id;
@@ -25,7 +25,11 @@ public class TDListItem {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM dd HH:mm:ss yyyy")
 	private Date deadline;
 	
-	public TDListItem() {
+	private String owner;
+	
+	private boolean completion;
+	
+	public ListItem() {
 		
 	}
 
@@ -59,6 +63,22 @@ public class TDListItem {
 
 	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public boolean isCompletion() {
+		return completion;
+	}
+
+	public void setCompletion(boolean completion) {
+		this.completion = completion;
 	}
 	
 	

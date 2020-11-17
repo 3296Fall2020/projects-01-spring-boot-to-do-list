@@ -10,15 +10,16 @@ function makeRequest(email, password, history) {
     console.log('checking server');
 
     fetch('http://localhost:8080/user/login?email=' + email + "&password=" + password)
-        .then((response) => {
-            if (response.status === 200) {
-                console.log(response);
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data) {
                 history.push({
                     pathname: '/toDoList',
-                    state: {'email': email, 'password': password }
+                    state: {'user': data}
                 });
             } else {
-                console.log(response.status);
+                console.log(data);
                 alert("incorrect information please try again");
             }
         }).catch((exception) => {
@@ -36,7 +37,6 @@ export default function SignIn() {
     const handleSubmit = evt => {
         evt.preventDefault();
         makeRequest(email, password, history);
-        //resetting content in input boxes
         setEmail("");
         setPassword("");
     };

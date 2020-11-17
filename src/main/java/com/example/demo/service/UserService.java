@@ -1,26 +1,35 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.model.Lists;
 import com.example.demo.model.User;
+import com.example.demo.model.UserLists;
+import com.example.demo.repository.UserListsRepository;
 import com.example.demo.repository.UserRepository;
 
 @Component
 public class UserService {
 	@Autowired
 	private UserRepository repo;
-	private StringHelper helper;
+	
+	@Autowired
+	private UserListsRepository listRepo;
+	
+	private HelperService helper;
 	
 	public UserService () {
-		this.helper = new StringHelper();
+		this.helper = new HelperService();
 	}
 
-	public Optional<User> getUserById(long id) {
+	public Optional<User> getUserById(Long id) {
 		return repo.findById(id);
 	}
 
@@ -31,7 +40,26 @@ public class UserService {
 	public List<User> getAllUsers() {
 		return repo.findAll();
 	}
-
+	
+	public List<Lists> getUserLists (String email) {
+		Optional<User> foundUser = repo.findUserByEmail(email);
+		
+		if (foundUser.isPresent()) {
+			User item = foundUser.get();
+			Set<UserLists> userLists = listRepo.findByUserId(item.getId());
+			
+			List<Lists> items = new ArrayList<>(); 
+			
+			for (UserLists list : userLists) {
+				items.add(list.getLists());
+			}
+			
+			return items;
+		}
+		
+		return null;
+	}
+	
 	public User createUser(String first, String last, String email, String password) {
 		User user = new User();
 
@@ -46,27 +74,25 @@ public class UserService {
 	}
 
 	public User updateUser (Long id, String first, String last, String password) {
-		User user = repo.getOne(id);
-		
-		if (helper.hasText(first)) {
-			user.setFirst_name(first);
-		}
-		if (helper.hasText(last)) {
-			user.setLast_name(last);
-		}
-		if (helper.hasText(password)) {
-			user.setPassword(password);
-		}
-		
-		return repo.save(user);
-	}
-
-	public void deleteUser(Long id) {
 		Optional<User> user = repo.findById(id);
 		
 		if (user.isPresent()) {
-			repo.deleteById(id);
+			User item = user.get();
+			
+			if (helper.hasText(first)) {
+				item.setFirst_name(first);
+			}
+			if (helper.hasText(last)) {
+				item.setLast_name(last);
+			}
+			if (helper.hasText(password)) {
+				item.setPassword(password);
+			}
+			
+			return repo.save(item);
 		}
+		
+		return null;
 	}
 
 	public void changeLoginStatus(User user, boolean status) {

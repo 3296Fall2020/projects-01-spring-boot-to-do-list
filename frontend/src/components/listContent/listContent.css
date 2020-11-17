@@ -1,0 +1,161 @@
+.list_content{
+    position: relative;
+    flex-grow: 4;
+    text-align:center;
+    margin: 0;
+    height: 100vh;
+    background-color: #EFEFEF
+}
+
+.list_header{
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    font-size: 40px;
+    font-weight: bold;
+    color:black;
+    margin-left:1rem;
+    margin-right: 1rem;
+}
+
+
+.update_list_button{
+    position: absolute;
+    top: 40px;
+    left: 5%;
+    background-color: #CCCCCC;
+    padding: 10px;
+    cursor: pointer;
+    z-index:10;
+ }
+ 
+ .delete_list_button{
+    position: absolute;
+    top: 40px;
+    left: 90%;
+    background-color: #CCCCCC;
+    padding: 10px;
+    cursor: pointer;
+ }
+
+.members{
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    height: 40px;
+    border-top:solid thin black;
+    border-bottom: solid thin black;
+    padding: 10px;
+}
+
+.list_member{
+    margin: 1rem;
+    padding:5px;
+    background-color: #F1C9B1;
+    border: thin solid black;
+}
+
+.add_user_button{
+    position: absolute;
+    left: 85%;
+    background-color: #CCCCCC;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.remove_user_button{
+    margin-left:10px;
+    cursor: pointer;
+}
+
+.update_list_form{
+    display: inline;
+}
+
+
+.update_list_close_button{
+    cursor: pointer;
+    font-size: 40px;
+    margin-right: 1rem;
+}
+
+.update_list_form{
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    font-size: 40px;
+    font-weight: bold;
+    color:black;
+    margin-left:1rem;
+    margin-right: 1rem;
+}
+
+.update_list_form input {
+    height: 40px;
+    width: 60%;
+    background-color: transparent;
+    font-size: 30px;
+    color: black;
+}
+
+
+.add_user_list_popup{
+    position: absolute;
+    left: 10%;
+    top: 150px;
+    height: 150px;
+    background-color: #fff;
+    width:80%;
+    max-width:800px;
+    margin: 4rem auto;
+    border: thick solid black;
+}
+
+.add_user_list_popup input{
+    position: absolute;
+    left: 30%;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.add_user_close{
+    position: absolute;
+    margin-right: 5px;
+    top: 0px;
+    right: 0px;
+    padding: 5px;
+    
+}
+
+.add_user_submit{
+    position: absolute;
+    left: 50%;
+    margin-top: 50px;
+    padding: 5px;
+}
+
+.delete_list_popup{
+    position: absolute;
+    left: 10%;
+    top: 150px;
+    height: 100px;
+    background-color: #fff;
+    width:80%;
+    max-width:800px;
+    margin: 4rem auto;
+    border: thick solid black;
+}
+
+.delete_list_close{
+    position: absolute;
+    margin-right: 5px;
+    top: 0px;
+    right: 0px;
+    padding: 5px;
+}
+
+.delete_list_submit{
+    position: absolute;
+    left: 50%;
+    padding: 5px;
+}

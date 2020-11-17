@@ -8,7 +8,7 @@ import ToDoList from './components/todoList';
 function App() {
   return (
     <Router>
-    <div className="App">
+    <div id="App">
       <Switch>
       <Route exact path='/' component = {Home} />
         <Route path='/signIn' component = {SignIn} />

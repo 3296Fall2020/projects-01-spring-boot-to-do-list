@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.model.Lists;
 import com.example.demo.model.User;
+import com.example.demo.service.UserListsService;
 import com.example.demo.service.UserService;
 
 @RestController
@@ -30,14 +32,30 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
-
+	
+	@Autowired
+	private UserListsService listService;
+	
+	/* GET methods; Get all Users, Obtain user by email or by id, and get the lists associated with a specific user */
+	
 	@GetMapping(path="/all")
 	public List<User> getAllUsers () {
 		return service.getAllUsers();
 	}
 	
-	@GetMapping(path="/getUser/{id}")
-	public ResponseEntity<User> getUser (@PathVariable("id") Long id) {
+	@GetMapping(path="/getUserEmail")
+	public ResponseEntity<User> getUser (@RequestParam String email) {
+		Optional<User> user = service.getUserByEmail(email);
+		
+		if (user.isPresent()) {
+			return ResponseEntity.ok(user.get());
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@GetMapping(path="/getUserById/{id}")
+	public ResponseEntity<User> getUserById (@PathVariable("id") Long id) {
 		Optional<User> user = service.getUserById(id);
 		
 		if (user.isPresent()) {
@@ -47,9 +65,16 @@ public class UserController {
 		}
 	}
 	
+	// Obtain lists associated with a specified user
+	@GetMapping(path="/getUserLists")
+	public List<Lists> getUserLists (@RequestParam String email) {
+		return service.getUserLists(email);
+	}
+	
+	/* POST methods; Create a new user */
+	
 	@PostMapping(path="/add")
 	public ResponseEntity<User> addNewUser (@Valid @RequestBody User user) {
-		
 		User newUser = service.createUser(user.getFirst_name(), user.getLast_name(), user.getEmail(), user.getPassword()); // Creates a user object and save it to the database
 		
 		if (newUser == null) {
@@ -58,24 +83,34 @@ public class UserController {
 			
 			return ResponseEntity.notFound().build(); 
 		} else {
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("getUser/{id}").buildAndExpand(newUser.getId()).toUri();
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/getUserById/{id}").buildAndExpand(newUser.getId()).toUri();
 			return ResponseEntity.created(uri).body(newUser);
 		}
 	}
+
+	/* PUT methods; Updates a given user */
 	
 	@PutMapping(path="/update/{id}")
 	public ResponseEntity<User> updateUser (@PathVariable("id") Long id, @RequestBody User user) {
 		User updatedUser = service.updateUser(id, user.getFirst_name(), user.getLast_name(), user.getPassword());
 		
-		return ResponseEntity.ok(updatedUser);
+		if (updatedUser != null) {
+			return ResponseEntity.ok(updatedUser);
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
+
+	/* DELETE methods; Deletes a user from the database */
 	
 	@DeleteMapping(path="/delete/{id}")
 	public ResponseEntity<User> deleteUser (@PathVariable("id") Long id) {
-		service.deleteUser(id);
+		listService.deleteUser(id);
 		
 		return ResponseEntity.accepted().build();
 	}
+
+	/* Login/Logout Handling */
 	
 	@GetMapping(path="/login")
 	public ResponseEntity<User> authorizeUser (@Valid @RequestParam String email, @Valid @RequestParam String password) {
