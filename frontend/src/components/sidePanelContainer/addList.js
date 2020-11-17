@@ -28,11 +28,11 @@ export default function AddList({ show, close }) {
 
 
 return (
-    <div className="add_list_form" style={{ display: show ? "block" : "none" }}>
+    <div className="add_list_popup"  style={{ display: show ? "block" : "none" }}>
         <form onSubmit={addList}>
-            <button id="close" type="button" onClick={() => { close(false) }}>&times;</button>
-            <input type="text" value={listName} onChange={e => setListName(e.target.value)} className="form-control" placeholder="new list" required="required" />
-            <button type="submit" >Add</button>
+            <button classNamw="add_list_close" type="button" onClick={() => { close(false) }}>&times;</button>
+            <input type="text" value={listName} onChange={e => setListName(e.target.value)} id="addListInput" className="form_control" placeholder="add new list here" required="required" />
+            <button className="add_list" type="submit" >Add</button>
         </form>
     </div>
 );

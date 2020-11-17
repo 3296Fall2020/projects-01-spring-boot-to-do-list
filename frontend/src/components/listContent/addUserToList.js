@@ -43,12 +43,12 @@ export default function AddListUser({ show, close }) {
     return (
         <div className="add_user_list_popup" style={{ display: show ? "block" : "none" }}>
             <form onSubmit={getUser}>
-                <h3>Add email of new member</h3>
-                <button id="close" type="button" onClick={() => { close(false) }}>&times;</button>
+                <h3>Enter email of member you want to add</h3>
+                <button className="add_user_close" type="button" onClick={() => { close(false) }}>&times;</button>
                 <div className="form-group">
                     <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="form-control" placeholder="Email" required="required" />
                 </div>
-                <button type="submit" >Add User</button>
+                <button className="add_user_submit" type="submit" >Add User</button>
             </form>
         </div>
     )

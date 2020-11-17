@@ -10,6 +10,7 @@ export default function ListContainer(){
         fetchListUsers(list);
     }
 
+    if (filterResults.length > 0) {
     return(
         <div className="list_container" id='scrollbar' >
         {filterResults.map((list) => {
@@ -21,4 +22,12 @@ export default function ListContainer(){
         })}
         </div>
     )
+    } else {
+        return(
+            <div className="list_container">
+                <span>¯\_(ツ)_/¯</span>
+                <p>No lists could be found</p>
+            </div>
+        );
+    }
 }

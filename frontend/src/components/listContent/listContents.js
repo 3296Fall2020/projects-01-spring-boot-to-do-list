@@ -62,7 +62,7 @@ export default function ListContent() {
                 <button className="update_list_button" onClick={() => {setUpdate(true); setUpdateName(list.list_name)}}>Update list</button>
                 <span className="list_header" style={{ display: update ? "none" : "block" }}>{list.list_name}</span>
                 <form className="update_list_form" onSubmit={updateList} style={{ display: update ? "block" : "none" }}>
-                    <button type="button" onClick={() => { setUpdate(false) }}>&times;</button>
+                    <span className="update_list_close_button" onClick={() => { setUpdate(false) }}>&times;</span>
                     <input value={updateName} onChange={e => setUpdateName(e.target.value)} className="form-control" placeholder="New List Name" required="required" ></input>
                 </form>
                 <button className="delete_list_button" onClick={handleDeleteListModal}>Delete List</button>

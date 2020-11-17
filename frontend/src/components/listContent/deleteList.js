@@ -30,9 +30,9 @@ export default function DeleteList({ show, close }) {
     return (
         <div className="delete_list_popup" style={{ display: show ? "block" : "none" }}>
             <form onSubmit={deleteList}>
-                <button id="close" type="button" onClick={() => { close(false) }}>&times;</button>
-                <div>Are you sure you want to delete list {list.list_name}?</div>
-                <button type="submit" >Delete</button>
+                <button className="delete_list_close" type="button" onClick={() => { close(false) }}>&times;</button>
+                <h3>Are you sure you want to delete list {list.list_name}?</h3>
+                <button className="delete_list_submit" type="submit" >Delete</button>
             </form>
         </div>
     )
