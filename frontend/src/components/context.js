@@ -25,18 +25,21 @@ const ContextProvider = (props) => {
     }, [location]);
 
     const fetchLists = () => {
-        fetch('http://localhost:8080/user/getUserLists?email=' + user.email)
+        let url = 'http://localhost:8080/user/getUserLists?email=' + location.state.user.email;
+        fetch(url)
             .then(response => {
                 return response.text()
             })
             .then((data) => {
-                console.log("fetching lists data from server");
-                console.log(data);
-                if (data) {
-                    let newData = JSON.parse(data);
-                    console.log(newData);
-                    setLists(newData)
-                    setFilterResults(newData)
+                console.log("fetching lists data from server from endpoint " + url);
+                let newData = JSON.parse(data);
+                console.log(newData);
+                setLists(newData);
+                setFilterResults(newData);
+                if( typeof list.list_name === "undefined"){
+                    console.log("setting list in fetch list (first render)");
+                    setList(newData[0]);
+                    fetchListUsers(newData[0])
                 }
             })
             .catch((error) => {
