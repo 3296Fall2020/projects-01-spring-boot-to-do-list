@@ -12,8 +12,8 @@ export default function ListContent() {
     const [showAddUser, setShowAddUser] = useState(false);
 
 
-    const removeUser = (user) => {
-        let url = 'http://localhost:8080/list/remove?user_id=' + user.id + '&list_id=' + list.id;
+    const removeUser = (listUser) => {
+        let url = 'http://localhost:8080/list/remove?user_id=' + listUser.id + '&list_id=' + list.id;
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({
@@ -21,7 +21,10 @@ export default function ListContent() {
             })
         }).then((response) => {
             fetchLists();
-            setList({"list_id": list.id, "list_name": null})
+            fetchListUsers(list);
+            if(listUser.id === user.id){
+                setList({"list_id": list.id, "list_name": null})
+            }
         })
             .catch((exception) => {
                 console.log(exception);
