@@ -111,4 +111,18 @@ public class ListItemController {
 			return ResponseEntity.badRequest().build();
 		}
 	}
+	
+	// e.g. http://localhost:8080/checkDeadline/1
+	@PostMapping("checkDeadline/{id}")
+	public ResponseEntity<ListItem> itemDeadline (@PathVariable("id") Long id, @RequestBody ListItem item) {
+		ListItem item = getItem(id);
+		if (item != null){
+			return ResponseEntity.notFound().build();
+		} else if (item.deadline = -1){//returns -1 if no deadline is set
+			return ResponseEntity.badRequest().build()
+		} else{
+			return ResponseEntity.ok(item);
+		}
+		
+	}
 }
