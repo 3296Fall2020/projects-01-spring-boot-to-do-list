@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,9 +45,18 @@ public class User {
 	
 	private boolean login_status;
 	
+	// Mapped By references the property name in the object making the join column call
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	@JsonIgnore
-	Set<UserLists> userLists; /* = new HashSet<>(); */
+	private Set<UserLists> userLists; /* = new HashSet<>(); */
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+	@JsonBackReference
+	private Set<ListItem> userItems;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "commenter")
+	@JsonBackReference
+	private Set<Comment> comments;
 	
 	public User () {
 		
@@ -84,12 +94,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public String getUser_password() {
 		return user_password;
 	}
 
-	public void setPassword(String password) {
-		this.user_password = password;
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
 	}
 
 	public Date getRegistration_date() {
@@ -114,6 +124,22 @@ public class User {
 
 	public void setUserLists(Set<UserLists> userLists) {
 		this.userLists = userLists;
+	}
+	
+	public Set<ListItem> getUserItems() {
+		return userItems;
+	}
+
+	public void setUserItems(Set<ListItem> userItems) {
+		this.userItems = userItems;
+	}
+	
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 
 	public String toString () {

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -31,7 +32,11 @@ public class Lists {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "lists")
 	@JsonIgnore
-	Set<UserLists> listUsers; /* = new HashSet<>(); */
+	private Set<UserLists> listUsers; /* = new HashSet<>(); */
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "list_container")
+	@JsonManagedReference
+	private Set<ListItem> items;
 	
 	public Lists() {
 		
@@ -59,6 +64,14 @@ public class Lists {
 
 	public void setListUsers(Set<UserLists> listUsers) {
 		this.listUsers = listUsers;
+	}
+
+	public Set<ListItem> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<ListItem> items) {
+		this.items = items;
 	}
 	
 	

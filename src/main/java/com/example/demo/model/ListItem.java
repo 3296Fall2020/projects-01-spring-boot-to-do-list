@@ -1,44 +1,72 @@
 package com.example.demo.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 // Model, this item represents the object representation of a To Do List Item
 @Entity
+@Table(name = "list_item")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ListItem {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long item_id;
+	private Long id;
 	
 	@NotBlank(message = "Please provide a name for your Task")
 	private String task_name;
 	
 	private String description;
 	
+	@Future(message = "Seems weird for the deadline to be set to a date that already passed")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM dd HH:mm:ss yyyy")
 	private Date deadline;
 	
-	private String owner;
+	@ManyToOne
+	@JoinColumn(name = "owner")
+	@JsonManagedReference
+	private User owner;
 	
-	private boolean completion;
+	@ManyToOne
+	@JoinColumn(name = "completion")
+	private Completion completion;
+	
+	@ManyToOne
+	@JoinColumn(name = "list_container")
+	@JsonBackReference
+	private Lists list_container;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "commented_item")
+	@JsonManagedReference
+	private Set<Comment> comments;
 	
 	public ListItem() {
 		
 	}
 
 	public Long getId() {
-		return item_id;
+		return id;
 	}
 
-	public void setId(Long item_id) {
-		this.item_id = item_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTask_name() {
@@ -65,22 +93,37 @@ public class ListItem {
 		this.deadline = deadline;
 	}
 
-	public String getOwner() {
+	public User getOwner() {
 		return owner;
 	}
 
-	public void setOwner(String owner) {
+	public void setOwner(User owner) {
 		this.owner = owner;
 	}
 
-	public boolean isCompletion() {
+	public Lists getList_container() {
+		return list_container;
+	}
+
+	public void setList_container(Lists list_container) {
+		this.list_container = list_container;
+	}
+
+	public Completion getCompletion() {
 		return completion;
 	}
 
-	public void setCompletion(boolean completion) {
+	public void setCompletion(Completion completion) {
 		this.completion = completion;
 	}
-	
-	
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+
 	
 }
