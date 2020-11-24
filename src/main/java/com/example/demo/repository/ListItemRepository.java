@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.ListItem;
@@ -23,5 +24,10 @@ public interface ListItemRepository extends JpaRepository<ListItem, Long>{
 	@Modifying
 	@Transactional
 	@Query(value = "UPDATE sys.list_item SET owner = null WHERE owner = ?1", nativeQuery = true)
-	Set<ListItem> removeAllUserOwnership(Long user_id);
+	void removeAllUserOwnership(Long user_id);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM sys.list_item WHERE owner IN (:id_list)", nativeQuery = true)
+	void deleteAllByListSeries (@Param("id_list") List<Long> id_list);
 }

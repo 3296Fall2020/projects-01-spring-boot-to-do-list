@@ -45,13 +45,17 @@ public class UserListsService {
 	
 	/* Delete unshared lists, and remove all of a specific user's involvement with their lists */
 	private void removeUserAssociation (Long id) {
-		List<Long> unshared = jointRepo.findUnsharedLists(id);
+		List<Long> unshared = jointRepo.findUnsharedLists(id); // Find the lists that are *exclusive* to the user
 		
-		Set<UserLists> toDelete = jointRepo.findByUserId(id);
+		Set<UserLists> toDelete = jointRepo.findByUserId(id); // Find all associations that the user is a part of
 		
+		// Delete all of the user's associations with lists
 		if (!toDelete.isEmpty()) {
 			jointRepo.deleteInBatch(toDelete);
 		}
+		
+		// Handle list items before deleting the lists
+		itemRepo.deleteAllByListSeries(unshared);
 		
 		jointRepo.deleteListSeries(unshared);
 	}
