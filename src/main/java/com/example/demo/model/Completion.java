@@ -57,6 +57,4 @@ public class Completion {
 	public void setItems(Set<ListItem> items) {
 		this.items = items;
 	}
-	
-	
 }

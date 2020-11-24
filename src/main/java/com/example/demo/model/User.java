@@ -13,10 +13,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -51,12 +51,8 @@ public class User {
 	private Set<UserLists> userLists; /* = new HashSet<>(); */
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
-	@JsonBackReference
+	@JsonManagedReference(value = "delegation")
 	private Set<ListItem> userItems;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "commenter")
-	@JsonBackReference
-	private Set<Comment> comments;
 	
 	public User () {
 		
@@ -134,15 +130,7 @@ public class User {
 		this.userItems = userItems;
 	}
 	
-	public Set<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
-
 	public String toString () {
-		return "User " + id + ", with email address " + email;
+		return "User " + first_name + " " + last_name + ", with email address " + email;
 	}	
 }

@@ -35,7 +35,7 @@ public class Lists {
 	private Set<UserLists> listUsers; /* = new HashSet<>(); */
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "list_container")
-	@JsonManagedReference
+	@JsonManagedReference(value = "series")
 	private Set<ListItem> items;
 	
 	public Lists() {

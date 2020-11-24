@@ -113,12 +113,12 @@ public class UserController {
 	/* Login/Logout Handling */
 	
 	@GetMapping(path="/login")
-	public ResponseEntity<User> authorizeUser (@Valid @RequestParam String email, @Valid @RequestParam String password) {
+	public ResponseEntity<User> authorizeUser (@Valid @RequestParam String email, @Valid @RequestParam String user_password) {
 		Optional<User> user = service.getUserByEmail(email);
 		if (user.isPresent()) {
 			User access = user.get();
 			
-			if (access.getUser_password().equals(password)) {
+			if (access.getUser_password().equals(user_password)) {
 				service.changeLoginStatus(access, true);
 				return ResponseEntity.ok(user.get());
 			}

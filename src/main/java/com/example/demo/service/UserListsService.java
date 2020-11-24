@@ -4,17 +4,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.model.Comment;
 import com.example.demo.model.ListItem;
 import com.example.demo.model.Lists;
 import com.example.demo.model.User;
 import com.example.demo.model.UserLists;
-import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.ListItemRepository;
 import com.example.demo.repository.ListRepository;
 import com.example.demo.repository.UserListsRepository;
@@ -33,9 +30,6 @@ public class UserListsService {
 	
 	@Autowired
 	private ListItemRepository itemRepo;
-	
-	@Autowired
-	private CommentRepository commentRepo;
 	
 	private UserLists findUserListLink (Long user_id, Long list_id) {
 		if (userRepo.existsById(user_id) && listRepo.existsById(list_id)) {
@@ -78,17 +72,9 @@ public class UserListsService {
 	/* Mass delete all the items in a list */
 	private void removeAllItemsFromList(Long list_id) {
 		Set<ListItem> listItems = itemRepo.findItemsByList(list_id);
-		List<ListItem> convertedListItems = listItems.stream().collect(Collectors.toList());
 		
-		List<Long> listItemIds = convertedListItems.stream().map(ListItem::getId).collect(Collectors.toList());
-		commentRepo.deleteCommentsByList(listItemIds);
-	}
-	
-	private void removeUserComments (Long id) {
-		Set<Comment> comments = commentRepo.findUserComments(id);
-		
-		if (!comments.isEmpty()) {
-			commentRepo.deleteInBatch(comments);
+		if (!listItems.isEmpty()) {
+			itemRepo.deleteInBatch(listItems);
 		}
 	}
 	
@@ -136,9 +122,8 @@ public class UserListsService {
 	}
 	
 	public void deleteUser(Long id) {
-		removeUserAssociation(id);
 		removeItemOwnership(id);
-		removeUserComments(id);
+		removeUserAssociation(id);
 		
 		userRepo.deleteById(id);
 	}

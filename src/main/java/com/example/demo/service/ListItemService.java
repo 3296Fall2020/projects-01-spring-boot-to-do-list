@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -10,12 +9,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.model.Comment;
 import com.example.demo.model.Completion;
 import com.example.demo.model.ListItem;
 import com.example.demo.model.Lists;
 import com.example.demo.model.User;
-import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.CompletionRepository;
 import com.example.demo.repository.ListItemRepository;
 import com.example.demo.repository.ListRepository;
@@ -31,9 +28,6 @@ public class ListItemService {
 	
 	@Autowired
 	private UserRepository userRepo;
-	
-	@Autowired
-	private CommentRepository commentRepo;
 	
 	@Autowired
 	private ListRepository listRepo;
@@ -86,6 +80,8 @@ public class ListItemService {
 	public ListItem updateTaskText(Long id, String task, String desc, Date deadline) {
 		Optional<ListItem> item = repo.findById(id);
 		
+		System.out.println(deadline);
+		
 		if (item.isPresent()) {
 			ListItem toUpdate = item.get();
 			
@@ -95,9 +91,11 @@ public class ListItemService {
 			if (helper.hasText(desc)) {
 				toUpdate.setDescription(desc);
 			}
-			if (deadline == null) {
+			if (deadline != null) {
 				toUpdate.setDeadline(deadline);
 			}
+			
+			System.out.println(item.toString());
 			
 			return repo.save(toUpdate);
 		}
@@ -153,71 +151,7 @@ public class ListItemService {
 	
 	public void deleteItem(Long id) {
 		if (repo.existsById(id)) {
-			List<Long> ids = new ArrayList<>();
-			ids.add(id);
-			commentRepo.deleteCommentsByList(ids);
 			repo.deleteById(id);
-		}
-	}
-	
-	/* Methods for obtaining a given comment, obtaining all of the comments of a given item, and comment management
-	 * such as creating a comment, editing a comment, and deleting a comment.
-	 */
-	
-	public List<Comment> getAllComments () {
-		return commentRepo.findAll();
-	}
-	
-	public Optional<Comment> getComment (Long id) {
-		return commentRepo.findById(id);
-	}
-	
-	public List<Comment> getItemComments (Long item_id) {
-		return commentRepo.findCommentsByItem(item_id).stream().collect(Collectors.toList());
-	}
-	
-	public Comment addComment (Long item_id, Long user_id, String description) {
-		if (helper.hasText(description)) {
-			Optional<ListItem> resultTask = repo.findById(item_id);
-			Optional<User> resultUser = userRepo.findById(user_id);
-			
-			if (resultTask.isPresent() && resultUser.isPresent()) {
-				Comment comment = new Comment();
-				
-				comment.setDescription(description);
-				comment.setCommenter(resultUser.get());
-				comment.setCommented_item(resultTask.get());
-				
-				Date date = new Date();
-				comment.setComment_date(date);
-				comment.setEdit_date(date);
-				
-				return commentRepo.save(comment);
-			}
-		}
-		
-		return null;
-	}
-	
-	public Comment editComment (Long id, String edited) {
-		if (helper.hasText(edited)) {
-			Optional<Comment> resultComment = commentRepo.findById(id);
-			
-			if (resultComment.isPresent()) {
-				Comment comment = resultComment.get();
-				
-				comment.setDescription(edited);
-				comment.setEdit_date(new Date());
-				return commentRepo.save(comment);
-			}
-		}
-		
-		return null;
-	}
-	
-	public void deleteComment (Long id) {
-		if (commentRepo.existsById(id)) {
-			commentRepo.deleteById(id);
 		}
 	}
 }

@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.demo.model.Comment;
 import com.example.demo.model.ListItem;
 import com.example.demo.service.ListItemService;
 
@@ -135,7 +134,7 @@ public class ListItemController {
 	
 	// e.g. http://localhost:8080/changeStatus
 	@PutMapping("/changeStatus")
-	public ResponseEntity<ListItem> changeStatus (@RequestParam Long item_id, @RequestParam Long status, @RequestBody ListItem item) {
+	public ResponseEntity<ListItem> changeStatus (@RequestParam Long item_id, @RequestParam Long status) {
 		ListItem finishedItem = service.configureCompletion(item_id, status);
 		
 		if (finishedItem != null) {
@@ -151,72 +150,6 @@ public class ListItemController {
 	@DeleteMapping("/removeItem/{id}")
 	public ResponseEntity<ListItem> removeItem(@PathVariable("id") Long id) {
 		service.deleteItem(id);
-		
-		return ResponseEntity.accepted().build();
-	}
-	
-	/* ~~~~~~~~~~~~~~~~ Comment-related Operations ~~~~~~~~~~~~~~~~ */
-	
-	/* GET methods; Get a specific comment and get all of the comments for a specific item */
-	
-	@GetMapping("/allComments")
-	public List<Comment> allComments () {
-		return service.getAllComments();
-	}
-	
-	// e.g. http://localhost:8080/getComment/1
-	@GetMapping("/getComment/{id}")
-	public ResponseEntity<Comment> getComment (@PathVariable("id") Long id) {
-		Optional<Comment> comment = service.getComment(id);
-		
-		if (comment.isPresent()) {
-			return ResponseEntity.ok(comment.get());
-		} else {
-			return ResponseEntity.notFound().build();
-		}
-	}
-	
-	// e.g. http://localhost:8080/getItemComments/1
-	@GetMapping("/getItemComments/{id}")
-	public List<Comment> getItemComments (@PathVariable("id") Long id) {
-		return service.getItemComments(id);
-	}
-	
-	/* POST method; Add a new comment to a given list item */
-	
-	// e.g. http://localhost:8080/makeComment
-	@PostMapping(path="/makeComment")
-	public ResponseEntity<Comment> writeComment (@RequestParam Long item_id, @RequestParam Long user_id, @Valid @RequestBody Comment item) {
-		Comment comment = service.addComment(item_id, user_id, item.getDescription());
-		
-		if (comment == null) {
-			return ResponseEntity.notFound().build(); 
-		} else {
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/getComment/{id}").buildAndExpand(comment.getId()).toUri();
-			return ResponseEntity.created(uri).body(comment);
-		}
-	}
-	
-	/* PUT method; Edit a given comment */
-	
-	// e.g. http://localhost:8080/editComment/1
-	@PutMapping("/editComment/{id}")
-	public ResponseEntity<Comment> editComment (@PathVariable("id") Long id, @RequestBody Comment comment) {
-		Comment newComment = service.editComment(id, comment.getDescription());
-		
-		if (newComment != null) {
-			return ResponseEntity.ok(newComment);
-		} else {
-			return ResponseEntity.badRequest().build();
-		}
-	}
-	
-	/* DELETE method; Delete a given comment */
-	
-	// e.g. http://localhost:8080/deleteComment/1
-	@DeleteMapping("/deleteComment/{id}")
-	public ResponseEntity<Comment> deleteComment (@PathVariable("id") Long id) {
-		service.deleteComment(id);
 		
 		return ResponseEntity.accepted().build();
 	}

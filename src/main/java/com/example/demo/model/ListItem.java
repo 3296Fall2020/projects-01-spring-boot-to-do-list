@@ -1,16 +1,13 @@
 package com.example.demo.model;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
@@ -18,7 +15,6 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 // Model, this item represents the object representation of a To Do List Item
@@ -41,7 +37,7 @@ public class ListItem {
 	
 	@ManyToOne
 	@JoinColumn(name = "owner")
-	@JsonManagedReference
+	@JsonBackReference(value = "delegation")
 	private User owner;
 	
 	@ManyToOne
@@ -50,12 +46,8 @@ public class ListItem {
 	
 	@ManyToOne
 	@JoinColumn(name = "list_container")
-	@JsonBackReference
+	@JsonBackReference(value = "series")
 	private Lists list_container;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "commented_item")
-	@JsonManagedReference
-	private Set<Comment> comments;
 	
 	public ListItem() {
 		
@@ -116,14 +108,9 @@ public class ListItem {
 	public void setCompletion(Completion completion) {
 		this.completion = completion;
 	}
-
-	public Set<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
-
 	
+	@Override
+	public String toString () {
+		return "Item " + task_name + ", with a deadline at " + deadline + " and delegated to " + owner.getEmail();
+	}
 }
