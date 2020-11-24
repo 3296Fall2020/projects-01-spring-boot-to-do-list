@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.model.ListItem;
+import com.example.demo.model.User;
 import com.example.demo.service.ListItemService;
 
 // Rest Controller, this portion takes in HTTP Requests made with a given URL, and then returns items depending on what request was made
@@ -57,6 +58,21 @@ public class ListItemController {
 		
 		if (item.isPresent()) {
 			return ResponseEntity.ok(item.get());
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	// e.g. http://localhost:8080/getOwner/1
+	@GetMapping("/getOwner/{id}")
+	public ResponseEntity<User> getItemOwner (@PathVariable("id") Long id) {
+		Optional<ListItem> item = service.getItemById(id);
+		
+		if (item.isPresent()) {
+			User user = item.get().getOwner();
+			user.setUserItems(null);
+			
+			return ResponseEntity.ok(user);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
