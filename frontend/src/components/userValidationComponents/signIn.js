@@ -9,7 +9,7 @@ function makeRequest(email, password, history) {
     console.log(data);
     console.log('checking server');
 
-    fetch('http://localhost:8080/user/login?email=' + email + "&password=" + password)
+    fetch('http://localhost:8080/user/login?email=' + email + "&user_password=" + password)
         .then(res => res.json())
         .then(data => {
             console.log(data);

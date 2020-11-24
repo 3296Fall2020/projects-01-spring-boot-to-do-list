@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../context'
 import DeleteList from './deleteList'
 import AddListUser from './addUserToList'
+import ListItems from '../itemContent/listItems'
 import './listContent.css'
 
 export default function ListContent() {
@@ -82,6 +83,7 @@ export default function ListContent() {
                 </div>
                 <DeleteList show={showDeleteList} close={handleDeleteListModal} />
                 <AddListUser show={showAddUser} close={handleAddUserModal} />
+                <ListItems/>
             </div>
         );
     } else {
