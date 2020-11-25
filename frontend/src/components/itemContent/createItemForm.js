@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './itemForm.css'
 
 
-export default function CreateItemForm({show, close, users}) {
+export default function CreateItemForm({show, close, users, fetch}) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [deadline, setDeadline] = useState("");
@@ -13,6 +13,7 @@ export default function CreateItemForm({show, close, users}) {
         const item = {task_name: name, description: description, deadline: deadline};
         //call to create api
         e.preventDefault();
+        //call to fetch
         close(false);
     }
 

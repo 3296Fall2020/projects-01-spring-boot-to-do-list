@@ -46,6 +46,8 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
     const handleDelete = () => {
         console.log(item.id);
         //delete item
+        //call to fetch
+        close(false);
     }
 
     const handleSubmit = (e) => {
@@ -54,6 +56,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
         //update item
         //send to updateOwnerFunction
         //send to updateStatusFunction
+        //call to fetch
         close(false);
     }
 
