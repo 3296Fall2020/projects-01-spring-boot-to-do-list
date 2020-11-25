@@ -34,11 +34,11 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
     return (
         <div className="item_form_popup" style={{ display: show ? "block" : "none" }}>
             <form onSubmit={handleSubmit}>
-                <h2 className="form_title">Create New Item</h2>
+                <h2 className="form_title">Create New Task</h2>
                 <button className="item_form_close" type="button" onClick={() => { close(false) }}>&times;</button>
                 <div className="form-group">
                     <input type="text" value={name} onChange={e => setName(e.target.value)} className="form_name" placeholder="Name" required="required" />
-                </div>
+                </div>cd
                 <div className="form-group">
                     <textarea type="text" value={description} onChange={e => setDescription(e.target.value)} rows="15" cols="30" className="form_description" placeholder="Description" />
                 </div>

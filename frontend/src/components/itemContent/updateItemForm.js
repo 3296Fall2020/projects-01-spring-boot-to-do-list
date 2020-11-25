@@ -43,6 +43,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
         }
     }
 
+    //needs fixing
     const handleDelete = (e) => {
         e.preventDefault();
         console.log(item.id);
@@ -61,6 +62,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
             });
     }
 
+    //needs fixing
     const handleUpdate = (e) => {
         e.preventDefault();
         const data = { task_name: item.task_name, description: item.description, deadline: item.deadline };
@@ -76,17 +78,15 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
             .then(data => {
                 console.log(data);
                 updateStatus();
-                //updateOwner();
+                //updateOwner(); 
                 fetchList();
                 close(false);
-                //updateOwner();
             }).catch((exception) => {
                 console.log(exception);
             });
-        //send to updateStatusFunction
-        //call to fetch
     }
 
+    // needs fixing
     const updateOwner = () => {
         let url = "";
         if (owner > -1) {
@@ -128,6 +128,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
     return (
         <div className="item_form_popup" style={{ display: show ? "block" : "none" }}>
             <form>
+                <h2 className="form_title">Task</h2>
                 <button className="item_form_close" type="button" onClick={() => { close(false) }}>&times;</button>
                 <div className="form-group">
                     <input type="text" value={item.task_name} onChange={e => setItem({ ...item, task_name: e.target.value })} className="form_name" placeholder="Name" required="required" />
