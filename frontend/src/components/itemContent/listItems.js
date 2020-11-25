@@ -81,7 +81,7 @@ export default function ListItems() {
                         )
                     })}
                     <UpdateItemForm show={showUpdateForm} close={handleShowUpdateForm} item={item} users={listUsers} setItem={setItem} fetch={fetchListItems} />
-                    <CreateItemForm show={showCreateForm} close={handleShowCreateForm} />
+                    <CreateItemForm show={showCreateForm} close={handleShowCreateForm} users={listUsers} />
                 </div>
             </div>
         )
@@ -93,7 +93,7 @@ export default function ListItems() {
                     <span>¯\_(ツ)_/¯</span>
                     <p>No items could be found</p>
                 </div>
-                <CreateItemForm show={showCreateForm} close={handleShowCreateForm} />
+                <CreateItemForm show={showCreateForm} close={handleShowCreateForm} users={listUsers} />
             </div>
         );
     }

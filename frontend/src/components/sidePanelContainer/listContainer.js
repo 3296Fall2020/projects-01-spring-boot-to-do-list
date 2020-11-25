@@ -18,8 +18,8 @@ export default function ListContainer(){
                 <div className="list_name" key={list.id} onClick={() => handleClick(list)}>
                 <h3 key={list.id} id={list.id}>{list.list_name}</h3>
               </div>
-            )
-        })}
+           )
+        })} 
         </div>
     )
     } else {

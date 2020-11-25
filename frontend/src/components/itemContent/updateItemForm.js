@@ -4,6 +4,7 @@ import { Context } from '../context'
 
 export default function UpdateItemForm({ show, close, item, setItem, users, fetch }) {
     const [status, setStatus] = useState(1);
+    const [owner, setOwner] = useState("");
 
     useEffect(() => {
         if (item.task_name == null) {
@@ -15,8 +16,24 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
         if (item.deadline == null) {
             setItem({ ...item, deadline: "" })
         }
+        //getItemOwner();
         getStatus();
     }, [item]);
+
+    const getItemOwner = () => {
+        if(item.id == null){
+            setOwner("");
+        }else{
+            fetch('http://localhost:8080/item/getOwner/' + item.id)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setOwner(data);
+            }).catch((exception) => {
+                console.log(exception);
+            })
+        }
+    }
 
     const getStatus = () => {
         if(item.completion == undefined){
@@ -26,9 +43,17 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
         }
     }
 
+    const handleDelete = () => {
+        console.log(item.id);
+        //delete item
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(item);
+        //update item
+        //send to updateOwnerFunction
+        //send to updateStatusFunction
         close(false);
     }
 
@@ -44,6 +69,16 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
                 </div>
                 <div className="form-group">
                     <input type="date" value={item.deadline} onChange={e => setItem({ ...item, deadline: e.target.value })} className="form_deadline" placeholder="Date" />
+                </div>
+                <div className="form-group">
+                    <select type="text" value={owner} className="form_owner" onChange={e => setOwner(e.target.value)}>
+                    <option value={0}>Unassigned</option>
+                    {users.map((user) => {
+                        return(
+                        <option value={user.id}>{user.first_name}</option>
+                        )
+                    })} 
+                    </select>
                 </div>
                 <div className="form-group">
                     <select type="text" value={status} className="form_completion_status" onChange={e => setStatus(e.target.value)}>
