@@ -10,6 +10,7 @@ export default function ListItems() {
     const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList] = useContext(Context);
     const [listItems, setListItems] = useState([]);
     const [item, setItem] = useState({});
+    const [itemOwner, setItemOwner] = useState(-1);
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [showUpdateForm, setShowUpdateForm] = useState(false);
 
@@ -32,10 +33,27 @@ export default function ListItems() {
         setShowCreateForm(!showCreateForm);
     }
 
-    const itemClick = (item) => {
-        setItem(item)
-        handleShowUpdateForm();
+    const itemClick = (clickedItem) => {
+        setItem(clickedItem);
+        getItemOwner(clickedItem);
     }
+
+    const getItemOwner = (clickedItem) => {
+        fetch('http://localhost:8080/item/getOwner/' + clickedItem.id)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.status === 500) {
+                    setItemOwner(-1);
+                } else {
+                    setItemOwner(data.id);
+                }
+                handleShowUpdateForm();
+            }).catch((exception) => {
+                console.log(exception);
+            })
+    }
+
 
     const handleShowUpdateForm = () => {
         setShowUpdateForm(!showUpdateForm);
@@ -80,7 +98,7 @@ export default function ListItems() {
                             </div>
                         )
                     })}
-                    <UpdateItemForm show={showUpdateForm} close={handleShowUpdateForm} item={item} users={listUsers} setItem={setItem} fetchList={fetchListItems} />
+                    <UpdateItemForm show={showUpdateForm} close={handleShowUpdateForm} item={item} users={listUsers} setItem={setItem} owner={itemOwner} setOwner={setItemOwner} fetchList={fetchListItems} />
                     <CreateItemForm list={list} show={showCreateForm} close={handleShowCreateForm} users={listUsers} fetchList={fetchListItems}/>
                 </div>
             </div>

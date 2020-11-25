@@ -1,6 +1,8 @@
 .list_content{
     position: relative;
-    flex-grow: 4;
+    flex: 4;
+    flex-grow: 0;   
+    flex-basis: 75em;
     text-align:center;
     margin: 0;
     height: 100vh;

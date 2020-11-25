@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react'
 import './itemForm.css'
 import { Context } from '../context'
 
-export default function UpdateItemForm({ show, close, item, setItem, users, fetchList }) {
+export default function UpdateItemForm({ show, close, item, setItem, users, owner, setOwner, fetchList }) {
     const [status, setStatus] = useState(1);
-    const [owner, setOwner] = useState(-1);
 
     useEffect(() => {
-        getItemOwner();
         getStatus();
         if (item.task_name == null) {
             setItem({ ...item, task_name: "" })
@@ -20,20 +18,6 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
         }
     }, [item]);
 
-
-    const getItemOwner = () => {
-        fetch('http://localhost:8080/item/getOwner/' + item.id)
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 500) {
-                    setOwner(-1);
-                } else {
-                    setOwner(data.id);
-                }
-            }).catch((exception) => {
-                console.log(exception);
-            })
-    }
 
     const getStatus = () => {
         if (item.completion !== undefined) {
