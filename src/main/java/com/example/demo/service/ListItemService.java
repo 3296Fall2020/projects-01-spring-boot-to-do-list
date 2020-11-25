@@ -95,8 +95,6 @@ public class ListItemService {
 				toUpdate.setDeadline(deadline);
 			}
 			
-			System.out.println(item.toString());
-			
 			return repo.save(toUpdate);
 		}
 		

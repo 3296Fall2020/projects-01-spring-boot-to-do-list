@@ -22,6 +22,10 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
 
 
     const getItemOwner = () => {
+        if (item.id === undefined) {
+            return;
+        }
+
         fetch('http://localhost:8080/item/getOwner/' + item.id)
             .then(res => res.json())
             .then(data => {
