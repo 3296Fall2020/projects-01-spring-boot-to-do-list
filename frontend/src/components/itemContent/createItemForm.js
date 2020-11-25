@@ -23,12 +23,30 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                fetchList();
+                if(owner > -1){
+                    addOwner(data.id);
+                }
                 close(false);
             }).catch((exception) => {
                 console.log(exception);
             });
 
+    }
+
+    const addOwner = (id) => {
+        let url = 'http://localhost:8080/item/assign?item_id=' + id + '&owner_id=' + owner;
+        fetch(url, {
+            method: 'PUT',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                fetchList();
+            }).catch((exception) => {
+                console.log(exception);
+            });
     }
 
     return (
