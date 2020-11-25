@@ -4,7 +4,7 @@ import { Context } from '../context'
 
 export default function UpdateItemForm({ show, close, item, setItem, users, fetchList }) {
     const [status, setStatus] = useState(1);
-    const [owner, setOwner] = useState("");
+    const [owner, setOwner] = useState(-1);
 
     useEffect(() => {
         getItemOwner();
@@ -18,7 +18,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
         if (item.deadline == null) {
             setItem({ ...item, deadline: "" })
         }
-    }, [show]);
+    }, [item]);
 
 
     const getItemOwner = () => {
@@ -36,10 +36,10 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
     }
 
     const getStatus = () => {
-        if (item.completion == undefined) {
-            setStatus(1);
-        } else {
+        if (item.completion !== undefined) {
             setStatus(item.completion.id);
+        } else {
+            setStatus(1);
         }
     }
 
@@ -51,9 +51,10 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             })
         }).then((response) => {
+            console.log(response);
             fetchList();
             close(false);
         })
@@ -77,7 +78,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                updateStatus();
+                //updateStatus();
                 //updateOwner(); 
                 fetchList();
                 close(false);
@@ -99,8 +100,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
-        })
-            .then(res => res.json())
+        }).then(res => res.json())
             .then(data => {
                 console.log(data);
             }).catch((exception) => {

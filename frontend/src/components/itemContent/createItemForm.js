@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './itemForm.css'
 
 
@@ -6,7 +6,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [deadline, setDeadline] = useState("");
-    const [owner, setOwner] = useState({});
+    const [owner, setOwner] = useState(-1);
 
 
     const handleSubmit = (e) => {
@@ -38,7 +38,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
                 <button className="item_form_close" type="button" onClick={() => { close(false) }}>&times;</button>
                 <div className="form-group">
                     <input type="text" value={name} onChange={e => setName(e.target.value)} className="form_name" placeholder="Name" required="required" />
-                </div>cd
+                </div>
                 <div className="form-group">
                     <textarea type="text" value={description} onChange={e => setDescription(e.target.value)} rows="15" cols="30" className="form_description" placeholder="Description" />
                 </div>
