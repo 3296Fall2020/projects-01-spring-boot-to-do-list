@@ -70,7 +70,19 @@ public class ListItemController {
 		
 		if (item.isPresent()) {
 			User user = item.get().getOwner();
-			user.setUserItems(null);
+			
+			if (user == null) {
+				user = new User();
+				user.setId((long) -1);
+				user.setEmail("nullResult@sbtdl.org");
+				user.setFirst_name("Unassigned");
+				user.setLast_name("Task");
+				user.setUser_password("null");
+				user.setRegistration_date(new Date());
+				user.setLoginStatus(false);
+			} else {
+				user.setUserItems(null);
+			}
 			
 			return ResponseEntity.ok(user);
 		} else {
