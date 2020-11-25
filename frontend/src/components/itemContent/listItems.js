@@ -43,11 +43,7 @@ export default function ListItems() {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if (data.status === 500) {
-                    setItemOwner(-1);
-                } else {
-                    setItemOwner(data.id);
-                }
+                setItemOwner(data.id);
                 handleShowUpdateForm();
             }).catch((exception) => {
                 console.log(exception);

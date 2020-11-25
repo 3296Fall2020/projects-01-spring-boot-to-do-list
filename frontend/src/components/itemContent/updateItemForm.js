@@ -18,28 +18,6 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         }
     }, [item]);
 
-
-<<<<<<< HEAD
-=======
-    const getItemOwner = () => {
-        if (item.id === undefined) {
-            return;
-        }
-
-        fetch('http://localhost:8080/item/getOwner/' + item.id)
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 500) {
-                    setOwner(-1);
-                } else {
-                    setOwner(data.id);
-                }
-            }).catch((exception) => {
-                console.log(exception);
-            })
-    }
-
->>>>>>> 75414a4c5d6d0a9cb9c1194e12f864efad0b67f7
     const getStatus = () => {
         if (item.completion !== undefined) {
             setStatus(item.completion.id);
