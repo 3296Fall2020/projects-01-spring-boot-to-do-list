@@ -15,7 +15,9 @@ export default function ListItems() {
     const [showUpdateForm, setShowUpdateForm] = useState(false);
 
     useEffect(() => {
+        console.log(item);
         setListItems(list.items);
+        setItem({});
     }, [list, listUsers]);
 
     const fetchListItems = () => {
@@ -34,6 +36,15 @@ export default function ListItems() {
     }
 
     const itemClick = (clickedItem) => {
+        if (clickedItem.task_name == null) {
+            clickedItem.task_name = "";
+        }
+        if (clickedItem.description == null) {
+            clickedItem.description = "";
+        }
+        if (clickedItem.deadline == null) {
+            clickedItem.deadline = "";
+        }
         setItem(clickedItem);
         getItemOwner(clickedItem);
     }

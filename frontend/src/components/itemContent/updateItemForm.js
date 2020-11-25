@@ -7,15 +7,6 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
 
     useEffect(() => {
         getStatus();
-        if (item.task_name == null) {
-            setItem({ ...item, task_name: "" })
-        }
-        if (item.description == null) {
-            setItem({ ...item, description: "" })
-        }
-        if (item.deadline == null) {
-            setItem({ ...item, deadline: "" })
-        }
     }, [item]);
 
     const getStatus = () => {
