@@ -12,7 +12,7 @@ function handleErrors(response) {
 }
 
 function makeRequest(firstName, lastName, email, password, history) {
-    let data = {"first_name": firstName, "last_name": lastName, "email": email, "user_password": password};
+    let data = {first_name: firstName, last_name: lastName, email: email, user_password: password};
     console.log(data);
 
     let url = 'http://localhost:8080/user/add';

@@ -80,8 +80,8 @@ export default function ListItems() {
                             </div>
                         )
                     })}
-                    <UpdateItemForm show={showUpdateForm} close={handleShowUpdateForm} item={item} users={listUsers} setItem={setItem} fetch={fetchListItems} />
-                    <CreateItemForm show={showCreateForm} close={handleShowCreateForm} users={listUsers} fetch={fetchListItems}/>
+                    <UpdateItemForm show={showUpdateForm} close={handleShowUpdateForm} item={item} users={listUsers} setItem={setItem} fetchList={fetchListItems} />
+                    <CreateItemForm list={list} show={showCreateForm} close={handleShowCreateForm} users={listUsers} fetchList={fetchListItems}/>
                 </div>
             </div>
         )
@@ -93,7 +93,7 @@ export default function ListItems() {
                     <span>¯\_(ツ)_/¯</span>
                     <p>No items could be found</p>
                 </div>
-                <CreateItemForm show={showCreateForm} close={handleShowCreateForm} users={listUsers} fetch={fetchListItems} />
+                <CreateItemForm list={list} show={showCreateForm} close={handleShowCreateForm} users={listUsers} fetchList={fetchListItems} />
             </div>
         );
     }

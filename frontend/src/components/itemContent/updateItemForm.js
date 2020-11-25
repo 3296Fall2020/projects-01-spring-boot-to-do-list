@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './itemForm.css'
 import { Context } from '../context'
 
-export default function UpdateItemForm({ show, close, item, setItem, users, fetch }) {
+export default function UpdateItemForm({ show, close, item, setItem, users, fetchList }) {
     const [status, setStatus] = useState(1);
     const [owner, setOwner] = useState("");
 
     useEffect(() => {
+        getItemOwner();
+        getStatus();
         if (item.task_name == null) {
             setItem({ ...item, task_name: "" })
         }
@@ -16,53 +18,116 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
         if (item.deadline == null) {
             setItem({ ...item, deadline: "" })
         }
-        //getItemOwner();
-        getStatus();
-    }, [item]);
+    }, [show]);
+
 
     const getItemOwner = () => {
-        if(item.id == null){
-            setOwner("");
-        }else{
-            fetch('http://localhost:8080/item/getOwner/' + item.id)
+        fetch('http://localhost:8080/item/getOwner/' + item.id)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                setOwner(data);
+                if (data.status === 500) {
+                    setOwner(-1);
+                } else {
+                    setOwner(data.id);
+                }
             }).catch((exception) => {
                 console.log(exception);
             })
-        }
     }
 
     const getStatus = () => {
-        if(item.completion == undefined){
+        if (item.completion == undefined) {
             setStatus(1);
-        }else{
+        } else {
             setStatus(item.completion.id);
         }
     }
 
-    const handleDelete = () => {
+    const handleDelete = (e) => {
+        e.preventDefault();
         console.log(item.id);
-        //delete item
-        //call to fetch
-        close(false);
+        let url = 'http://localhost:8080/item/delete/' + item.id;
+        fetch(url, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).then((response) => {
+            fetchList();
+            close(false);
+        })
+            .catch((exception) => {
+                console.log(exception);
+            });
     }
 
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault();
-        console.log(item);
-        //update item
-        //send to updateOwnerFunction
+        const data = { task_name: item.task_name, description: item.description, deadline: item.deadline };
+        console.log(data);
+        let url = 'http://localhost:8080/item/update/' + item.id;
+        fetch(url, {
+            method: 'PUT',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(data)
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                updateStatus();
+                //updateOwner();
+                fetchList();
+                close(false);
+                //updateOwner();
+            }).catch((exception) => {
+                console.log(exception);
+            });
         //send to updateStatusFunction
         //call to fetch
-        close(false);
+    }
+
+    const updateOwner = () => {
+        let url = "";
+        if (owner > -1) {
+            url = 'http://localhost:8080/item/assign?item_id=' + item.id + '&owner_id=' + owner;
+        } else {
+            url = 'http://localhost:8080/item/retract/' + item.id;
+        }
+        fetch(url, {
+            method: 'PUT',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            }).catch((exception) => {
+                console.log(exception);
+            });
+    }
+
+    const updateStatus = () => {
+        let url = 'http://localhost:8080/item/changeStatus?item_id=' + item.id + '&status=' + status;
+        fetch(url, {
+            method: 'PUT',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            }).catch((exception) => {
+                console.log(exception);
+            });
+
     }
 
     return (
         <div className="item_form_popup" style={{ display: show ? "block" : "none" }}>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <button className="item_form_close" type="button" onClick={() => { close(false) }}>&times;</button>
                 <div className="form-group">
                     <input type="text" value={item.task_name} onChange={e => setItem({ ...item, task_name: e.target.value })} className="form_name" placeholder="Name" required="required" />
@@ -75,12 +140,12 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
                 </div>
                 <div className="form-group">
                     <select type="text" value={owner} className="form_owner" onChange={e => setOwner(e.target.value)}>
-                    <option value={0}>Unassigned</option>
-                    {users.map((user) => {
-                        return(
-                        <option value={user.id}>{user.first_name}</option>
-                        )
-                    })} 
+                        <option value={-1}>Unassigned</option>
+                        {users.map((user) => {
+                            return (
+                                <option key={user.id} value={user.id}>{user.first_name}</option>
+                            )
+                        })}
                     </select>
                 </div>
                 <div className="form-group">
@@ -90,8 +155,8 @@ export default function UpdateItemForm({ show, close, item, setItem, users, fetc
                         <option value={3}>Done</option>
                     </select>
                 </div>
-                <button className="item_form_update" type="submit" >Update</button>
-                <button className="item_form_delete">Delete</button>
+                <button className="item_form_update" onClick={handleUpdate} >Update</button>
+                <button className="item_form_delete" onClick={handleDelete}>Delete</button>
             </form>
         </div>
     )

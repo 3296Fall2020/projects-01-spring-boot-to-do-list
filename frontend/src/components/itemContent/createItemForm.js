@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './itemForm.css'
 
 
-export default function CreateItemForm({show, close, users, fetch}) {
+export default function CreateItemForm({ list, show, close, users, fetchList }) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [deadline, setDeadline] = useState("");
@@ -10,11 +10,25 @@ export default function CreateItemForm({show, close, users, fetch}) {
 
 
     const handleSubmit = (e) => {
-        const item = {task_name: name, description: description, deadline: deadline};
-        //call to create api
         e.preventDefault();
-        //call to fetch
-        close(false);
+        //MUST FIX DEADLINE
+        const data = { task_name: name, description: description, deadline: null };
+        let url = 'http://localhost:8080/item/addItem/' + list.id;
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(data)
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                fetchList();
+                close(false);
+            }).catch((exception) => {
+                console.log(exception);
+            });
+
     }
 
     return (
@@ -23,23 +37,23 @@ export default function CreateItemForm({show, close, users, fetch}) {
                 <h2 className="form_title">Create New Item</h2>
                 <button className="item_form_close" type="button" onClick={() => { close(false) }}>&times;</button>
                 <div className="form-group">
-                    <input type="text" value={name} onChange={e => setName(e.target.value )} className="form_name" placeholder="Name" required="required" />
+                    <input type="text" value={name} onChange={e => setName(e.target.value)} className="form_name" placeholder="Name" required="required" />
                 </div>
                 <div className="form-group">
-                    <textarea type="text" value={description} onChange={e => setDescription(e.target.value )} rows="15" cols="30" className="form_description" placeholder="Description" />
+                    <textarea type="text" value={description} onChange={e => setDescription(e.target.value)} rows="15" cols="30" className="form_description" placeholder="Description" />
                 </div>
                 <div className="form-group">
                     <select type="text" value={owner} className="form_owner" onChange={e => setOwner(e.target.value)}>
-                    <option value={0}>Unassigned </option>
-                    {users.map((user) => {
-                        return(
-                        <option value={user.id}>{user.first_name}</option>
-                        )
-                    })} 
+                        <option value={-1}>Unassigned </option>
+                        {users.map((user) => {
+                            return (
+                                <option key={user.id} value={user.id}>{user.first_name}</option>
+                            )
+                        })}
                     </select>
                 </div>
                 <div className="form-group">
-                    <input type="date" value={deadline} onChange={e => setDeadline(e.target.value )} className="form_deadline" placeholder="Date" />
+                    <input type="date" value={deadline} onChange={e => setDeadline(e.target.value)} className="form_deadline" placeholder="Date" />
                 </div>
                 <button className="item_form_create" type="submit" >Create</button>
             </form>
