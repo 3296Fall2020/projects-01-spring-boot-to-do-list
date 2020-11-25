@@ -61,7 +61,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             });
     }
 
-    // needs fixing
+    // needs fixing (probably should make these two separate things)
     const updateOwner = () => {
         let url = "";
         if (owner > -1) {

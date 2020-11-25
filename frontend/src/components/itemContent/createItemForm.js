@@ -25,7 +25,12 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
                 console.log(data);
                 if(owner > -1){
                     addOwner(data.id);
+                }else{
+                    fetchList();
                 }
+                setName("");
+                setDeadline("");
+                setDescription("");
                 close(false);
             }).catch((exception) => {
                 console.log(exception);
@@ -43,6 +48,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
         }).then(res => res.json())
             .then(data => {
                 console.log(data);
+                setOwner(-1);
                 fetchList();
             }).catch((exception) => {
                 console.log(exception);
