@@ -22,7 +22,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         e.preventDefault();
         document.body.style.cursor='wait';
         console.log(item.id);
-        let url = 'http://localhost:8080/item/delete/' + item.id;
+        let url = 'http://localhost:8080/item/removeItem/' + item.id;
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({
@@ -108,14 +108,15 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
                 <h2 className="form_title">Task</h2>
                 <button className="item_form_close" type="button" onClick={() => { close(false) }}>&times;</button>
                 <div className="form-group">
-                    <input type="text" value={item.task_name} onChange={e => setItem({ ...item, task_name: e.target.value })} className="form_name" placeholder="Name" required="required" />
+                    <input type="text" value={item.task_name || ""} onChange={e => setItem({ ...item, task_name: e.target.value })} className="form_name" placeholder="Name" required="required" />
                 </div>
                 <div className="form-group">
-                    <textarea type="text" value={item.description} onChange={e => setItem({ ...item, description: e.target.value })} rows="15" cols="30" className="form_description" placeholder="Description" />
+                    <textarea type="text" value={item.description || ""} onChange={e => setItem({ ...item, description: e.target.value })} rows="15" cols="30" className="form_description" placeholder="Description" />
                 </div>
                 <div className="form-group">
-                    <input type="datetime-local" value={item.deadline} onChange={e => setItem({ ...item, deadline: e.target.value })} className="form_deadline" placeholder="Date" />
+                    <input type="datetime-local" value={item.deadline || new Date()} onChange={e => setItem({ ...item, deadline: e.target.value })} className="form_deadline" placeholder="Date" />
                 </div>
+                <p>Note that selecting a date in the past would set the deadline to 24 hours later from when the request was made.</p>
                 <div className="form-group">
                     <select type="text" value={owner} className="form_owner" onChange={e => setOwner(e.target.value)}>
                         <option value={-1}>Unassigned</option>
