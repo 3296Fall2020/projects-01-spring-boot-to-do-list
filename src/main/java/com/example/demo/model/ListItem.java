@@ -12,8 +12,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -32,7 +33,7 @@ public class ListItem {
 	private String description;
 	
 	@Future(message = "Seems weird for the deadline to be set to a date that already passed")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	@DateTimeFormat(pattern="yyyy.MM.dd HH:mm")
 	private LocalDateTime deadline;
 	
 	@ManyToOne

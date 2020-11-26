@@ -67,7 +67,7 @@ public class ListItemService {
 			
 			item.setTask_name(task);
 			item.setDescription(desc);
-			item.setDeadline(helper.convertToUTC(deadline));			
+			item.setDeadline(deadline);			
 			item.setList_container(parent);
 			item.setCompletion(status.get());
 			
@@ -90,7 +90,7 @@ public class ListItemService {
 				toUpdate.setDescription(desc);
 			}
 			if (deadline != null) {
-				toUpdate.setDeadline(helper.convertToUTC(deadline));
+				toUpdate.setDeadline(deadline);
 			}
 			
 			return repo.save(toUpdate);
