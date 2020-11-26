@@ -11,10 +11,10 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        formatDate();
-        console.log(deadline);
+        // formatDate();
+        console.log(deadline + " after formatting");
         //still need to fix deadline
-        const data = { task_name: name, description: description, deadline: null };
+        const data = { task_name: name, description: description, deadline: deadline };
         let url = 'http://localhost:8080/item/addItem/' + list.id;
         fetch(url, {
             method: 'POST',
@@ -42,9 +42,10 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
     const formatDate = () => {
         let date = new Date(deadline);
         let newDate = date.toString();
-        console.log(newDate);
+        console.log(newDate + " being formatted");
         const dateParts = newDate.split(" ");
         newDate = dateParts[0] + " " + dateParts[1] + " " + dateParts[2] + " " + dateParts[4] + " " + dateParts[3];
+        console.log(newDate);
         setDeadline(newDate);
     }
 

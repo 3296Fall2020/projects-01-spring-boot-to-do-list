@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -57,7 +57,7 @@ public class ListItemService {
 		return null;
 	}
 	
-	public ListItem createItem (Long list_id, String task, String desc, Date deadline) {
+	public ListItem createItem (Long list_id, String task, String desc, LocalDateTime deadline) {
 		Optional<Lists> list = listRepo.findById(list_id);
 		Optional<Completion> status = statusRepo.findById((long) 1); /* Generally will never be null */
 		
@@ -67,7 +67,7 @@ public class ListItemService {
 			
 			item.setTask_name(task);
 			item.setDescription(desc);
-			item.setDeadline(deadline);			
+			item.setDeadline(helper.convertToUTC(deadline));			
 			item.setList_container(parent);
 			item.setCompletion(status.get());
 			
@@ -77,7 +77,7 @@ public class ListItemService {
 		return null;
 	}
 	
-	public ListItem updateTaskText(Long id, String task, String desc, Date deadline) {
+	public ListItem updateTaskText(Long id, String task, String desc, LocalDateTime deadline) {
 		Optional<ListItem> item = repo.findById(id);
 		
 		if (item.isPresent()) {
@@ -90,7 +90,7 @@ public class ListItemService {
 				toUpdate.setDescription(desc);
 			}
 			if (deadline != null) {
-				toUpdate.setDeadline(deadline);
+				toUpdate.setDeadline(helper.convertToUTC(deadline));
 			}
 			
 			return repo.save(toUpdate);

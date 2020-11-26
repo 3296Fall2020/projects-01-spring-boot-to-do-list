@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,8 +32,8 @@ public class ListItem {
 	private String description;
 	
 	@Future(message = "Seems weird for the deadline to be set to a date that already passed")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM dd HH:mm:ss yyyy")
-	private Date deadline;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private LocalDateTime deadline;
 	
 	@ManyToOne
 	@JoinColumn(name = "owner")
@@ -77,11 +77,11 @@ public class ListItem {
 		this.description = description;
 	}
 
-	public Date getDeadline() {
+	public LocalDateTime getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(Date deadline) {
+	public void setDeadline(LocalDateTime deadline) {
 		this.deadline = deadline;
 	}
 

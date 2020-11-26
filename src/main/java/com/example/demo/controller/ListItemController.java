@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.net.URI;
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -96,7 +97,7 @@ public class ListItemController {
 		Optional<ListItem> item = service.getItemById(id);
 		
 		if (item.isPresent()) {
-			Date deadline = item.get().getDeadline();
+			LocalDateTime deadline = item.get().getDeadline();
 			if (deadline == null) {
 				return ResponseEntity.noContent().build();
 			}
