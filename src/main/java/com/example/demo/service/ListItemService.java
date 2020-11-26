@@ -67,7 +67,11 @@ public class ListItemService {
 			
 			item.setTask_name(task);
 			item.setDescription(desc);
-			item.setDeadline(helper.setFutureDate(deadline));
+			
+			if (deadline != null) {
+				item.setDeadline(helper.setFutureDate(deadline));
+			}
+			
 			item.setList_container(parent);
 			item.setCompletion(status.get());
 			

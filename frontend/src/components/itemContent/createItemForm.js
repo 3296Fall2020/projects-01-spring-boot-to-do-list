@@ -85,6 +85,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
                 <div className="form-group">
                     <input type="datetime-local" value={deadline} onChange={e => setDeadline(e.target.value)} className="form_deadline" placeholder="Date" />
                 </div>
+                <span>Note that selecting a date in the past would set the deadline to 24 hours later from when the request was made.</span>
                 <button className="item_form_create" type="submit" >Create</button>
             </form>
         </div>

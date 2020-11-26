@@ -23,6 +23,11 @@ public interface ListItemRepository extends JpaRepository<ListItem, Long>{
 	
 	@Modifying
 	@Transactional
+	@Query(value = "UPDATE sys.list_item SET owner = null WHERE owner = ?1 AND list_container = ?2", nativeQuery = true)
+	void removedUserOwnershipUpdate (Long user_id, Long list_id);
+	
+	@Modifying
+	@Transactional
 	@Query(value = "UPDATE sys.list_item SET owner = null WHERE owner = ?1", nativeQuery = true)
 	void removeAllUserOwnership(Long user_id);
 	
