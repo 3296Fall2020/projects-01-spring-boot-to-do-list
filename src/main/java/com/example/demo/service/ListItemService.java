@@ -80,8 +80,6 @@ public class ListItemService {
 	public ListItem updateTaskText(Long id, String task, String desc, Date deadline) {
 		Optional<ListItem> item = repo.findById(id);
 		
-		System.out.println(deadline);
-		
 		if (item.isPresent()) {
 			ListItem toUpdate = item.get();
 			
@@ -125,8 +123,10 @@ public class ListItemService {
 			
 			if (task.getOwner() != null) {
 				task.setOwner(null);
-				return repo.save(task);
+				repo.save(task);
 			}
+			
+			return task;
 		}
 		
 		return null;
