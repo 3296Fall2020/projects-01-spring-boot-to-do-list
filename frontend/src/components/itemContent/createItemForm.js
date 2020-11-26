@@ -11,7 +11,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = { task_name: name, description: description, deadline: deadline + ' 00:00:00' };
+        const data = { task_name: name, description: description, deadline: deadline };
         console.log(data);
         let url = 'http://localhost:8080/item/addItem/' + list.id;
         fetch(url, {
@@ -76,7 +76,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
                     </select>
                 </div>
                 <div className="form-group">
-                    <input type="date" value={deadline} onChange={e => setDeadline(e.target.value)} className="form_deadline" placeholder="Date" />
+                    <input type="datetime-local" value={deadline} onChange={e => setDeadline(e.target.value)} className="form_deadline" placeholder="Date" />
                 </div>
                 <button className="item_form_create" type="submit" >Create</button>
             </form>

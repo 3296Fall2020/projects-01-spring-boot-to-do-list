@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +31,6 @@ public class ListItem {
 	
 	private String description;
 	
-	@Future(message = "Seems weird for the deadline to be set to a date that already passed")
 	@DateTimeFormat(pattern="yyyy.MM.dd HH:mm")
 	private LocalDateTime deadline;
 	

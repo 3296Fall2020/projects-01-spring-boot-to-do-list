@@ -40,7 +40,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
     //needs fixing
     const handleUpdate = (e) => {
         e.preventDefault();
-        const data = { task_name: item.task_name, description: item.description, deadline: item.deadline + ' 00:00:00' };
+        const data = { task_name: item.task_name, description: item.description, deadline: item.deadline };
         console.log(data);
         let url = 'http://localhost:8080/item/update/' + item.id;
         fetch(url, {
@@ -112,7 +112,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
                     <textarea type="text" value={item.description} onChange={e => setItem({ ...item, description: e.target.value })} rows="15" cols="30" className="form_description" placeholder="Description" />
                 </div>
                 <div className="form-group">
-                    <input type="date" value={item.deadline} onChange={e => setItem({ ...item, deadline: e.target.value })} className="form_deadline" placeholder="Date" />
+                    <input type="datetime-local" value={item.deadline} onChange={e => setItem({ ...item, deadline: e.target.value })} className="form_deadline" placeholder="Date" />
                 </div>
                 <div className="form-group">
                     <select type="text" value={owner} className="form_owner" onChange={e => setOwner(e.target.value)}>
