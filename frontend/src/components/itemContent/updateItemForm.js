@@ -54,10 +54,8 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                updateStatus();
+                document.body.style.cursor='wait';
                 updateOwner(); 
-                fetchList();
-                close(false);
             }).catch((exception) => {
                 console.log(exception);
             });
@@ -79,6 +77,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         }).then(res => res.json())
             .then(data => {
                 console.log(data);
+                updateStatus();
             }).catch((exception) => {
                 console.log(exception);
             });
@@ -94,6 +93,9 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         })
             .then(res => res.json())
             .then(data => {
+                fetchList();
+                document.body.style.cursor='default';
+                close(false);
                 console.log(data);
             }).catch((exception) => {
                 console.log(exception);
