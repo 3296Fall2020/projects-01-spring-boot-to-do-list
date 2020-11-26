@@ -20,16 +20,18 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
     //needs fixing
     const handleDelete = (e) => {
         e.preventDefault();
+        document.body.style.cursor='wait';
         console.log(item.id);
         let url = 'http://localhost:8080/item/delete/' + item.id;
         fetch(url, {
-            method: 'DE sLETE',
+            method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
             })
         }).then((response) => {
             console.log(response);
             fetchList();
+            document.body.style.cursor='default';
             close(false);
         })
             .catch((exception) => {
@@ -37,9 +39,10 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             });
     }
 
-    //needs fixing
+    
     const handleUpdate = (e) => {
         e.preventDefault();
+        document.body.style.cursor='wait';
         const data = { task_name: item.task_name, description: item.description, deadline: item.deadline };
         console.log(data);
         let url = 'http://localhost:8080/item/update/' + item.id;
@@ -52,7 +55,6 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                document.body.style.cursor='wait';
                 updateOwner(); 
             }).catch((exception) => {
                 console.log(exception);

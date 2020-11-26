@@ -23,8 +23,8 @@ export default function ListContent() {
         }).then((response) => {
             fetchLists();
             fetchListUsers(list);
-            if(listUser.id === user.id){
-                setList({"list_id": list.id, "list_name": null})
+            if (listUser.id === user.id) {
+                setList({ "list_id": list.id, "list_name": null })
             }
         })
             .catch((exception) => {
@@ -63,13 +63,15 @@ export default function ListContent() {
     if (list.list_name != null) {
         return (
             <div className="list_content">
-                <button className="update_list_button" onClick={() => {setUpdate(true); setUpdateName(list.list_name)}}>Update list</button>
-                <span className="list_header" style={{ display: update ? "none" : "block" }}>{list.list_name}</span>
-                <form className="update_list_form" onSubmit={updateList} style={{ display: update ? "block" : "none" }}>
-                    <span className="update_list_close_button" onClick={() => { setUpdate(false) }}>&times;</span>
-                    <input value={updateName} onChange={e => setUpdateName(e.target.value)} className="form-control" placeholder="New List Name" required="required" ></input>
-                </form>
-                <button className="delete_list_button" onClick={handleDeleteListModal}>Delete List</button>
+                <div className="header">
+                    <button className="update_list_button" onClick={() => { setUpdate(true); setUpdateName(list.list_name) }}>Update list</button>
+                    <span className="header_name" style={{ display: update ? "none" : "block" }}>{list.list_name}</span>
+                    <form className="update_list_form" onSubmit={updateList} style={{ display: update ? "block" : "none" }}>
+                        <span className="update_list_close_button" onClick={() => { setUpdate(false) }}>&times;</span>
+                        <input value={updateName} onChange={e => setUpdateName(e.target.value)} className="form-control" placeholder="New List Name" required="required" ></input>
+                    </form>
+                    <button className="delete_list_button" onClick={handleDeleteListModal}>Delete List</button>
+                </div>
                 <div className="members">
                     {listUsers.map(user => {
                         return (
@@ -83,7 +85,7 @@ export default function ListContent() {
                 </div>
                 <DeleteList show={showDeleteList} close={handleDeleteListModal} />
                 <AddListUser show={showAddUser} close={handleAddUserModal} />
-                <ListItems/>
+                <ListItems />
             </div>
         );
     } else {

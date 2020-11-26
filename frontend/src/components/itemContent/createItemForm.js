@@ -11,6 +11,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        document.body.style.cursor='wait';
         const data = { task_name: name, description: description, deadline: deadline };
         console.log(data);
         let url = 'http://localhost:8080/item/addItem/' + list.id;
@@ -27,11 +28,12 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
                     addOwner(data.id);
                 }else{
                     fetchList();
+                    document.body.style.cursor='default';
+                    close(false);
+                    setName("");
+                    setDeadline("");
+                    setDescription("");
                 }
-                setName("");
-                setDeadline("");
-                setDescription("");
-                close(false);
             }).catch((exception) => {
                 console.log(exception);
             });
@@ -49,6 +51,11 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
                 console.log(data);
                 setOwner(-1);
                 fetchList();
+                document.body.style.cursor='default';
+                close(false);
+                setName("");
+                setDeadline("");
+                setDescription("");
             }).catch((exception) => {
                 console.log(exception);
             });
