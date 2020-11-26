@@ -1,13 +1,10 @@
 
 .items_list_container{
-    position: absolute;
-    top: 160px;
-    display: flex;
+    padding-top: 160px;
+	display: flex;
 	justify-content: center;
     width: 100%;
     margin: auto 0px auto 0px;
-    overflow: hidden;
-    
 }
 
 .empty_items_list_container{
@@ -18,23 +15,27 @@
 
 
 .to_do_container{
+    display: flex;
 	flex-direction: column;
     flex: 1 1 300px;
-    overflow-y: auto;
-    height: 80%;
 }
 
 .in_progress_container{
+    display: flex;
 	flex-direction: column;
     flex: 1 1 300px;
-    overflow-y: auto;
-    height: 80%;
 }
 
 .done_container{
+    display: flex;
 	flex-direction: column;
     flex: 1 1 300px;
-    overflow-y: auto;
+
+}
+
+.items{
+    overflow-y:scroll; 
+    position:relative;
     height: 80%;
 }
 
@@ -55,5 +56,4 @@
     margin-right: auto;
     width: 60%;
     cursor: pointer;
-
 }

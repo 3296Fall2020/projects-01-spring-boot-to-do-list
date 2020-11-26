@@ -5,8 +5,7 @@
     flex-basis: 75em;
     text-align:center;
     margin: 0;
-    height: 100vh;
-    background-color: #EFEFEF
+    background-color: #EFEFEF;
 }
 
 .header_name{
@@ -16,8 +15,8 @@
     font-size: 40px;
     font-weight: bold;
     color:black;
-    margin-left:1rem;
-    margin-right: 1rem;
+    margin-left:auto;
+    margin-right: auto;
     display:block;
 }
 
@@ -46,6 +45,7 @@
     top: 100px;
     width: 100%;
     height: 40px;
+    overflow-y: auto;
     border-top:solid thin black;
     border-bottom: solid thin black;
     padding: 10px;

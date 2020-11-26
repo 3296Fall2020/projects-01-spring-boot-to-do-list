@@ -1,8 +1,8 @@
 .item_form_popup{
     position: absolute;
     left: 15%;
-    top: 70px;
-    height: 550px;
+    top: 10px;
+    height: 600px;
     background-color: #fff;
     width:80%;
     max-width:800px;

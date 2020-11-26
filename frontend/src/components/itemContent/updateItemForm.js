@@ -17,7 +17,6 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         }
     }
 
-    //needs fixing
     const handleDelete = (e) => {
         e.preventDefault();
         document.body.style.cursor='wait';
@@ -39,7 +38,6 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             });
     }
 
-    
     const handleUpdate = (e) => {
         e.preventDefault();
         document.body.style.cursor='wait';
@@ -116,7 +114,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
                 <div className="form-group">
                     <input type="datetime-local" value={item.deadline || new Date()} onChange={e => setItem({ ...item, deadline: e.target.value })} className="form_deadline" placeholder="Date" />
                 </div>
-                <p>Note that selecting a date in the past would set the deadline to 24 hours later from when the request was made.</p>
+                <span>Note that selecting a date in the past would set the deadline to 24 hours later from when the request was made.</span>
                 <div className="form-group">
                     <select type="text" value={owner} className="form_owner" onChange={e => setOwner(e.target.value)}>
                         <option value={-1}>Unassigned</option>

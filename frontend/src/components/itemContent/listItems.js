@@ -51,7 +51,7 @@ export default function ListItems() {
     const formatDate = (clickedItem) => {
         let date = clickedItem.deadline;
         let newDate = date.split(" ")[0];
-        clickedItem.deadline = newDate; 
+        clickedItem.deadline = newDate;
     }
 
     const handleShowCreateForm = () => {
@@ -80,42 +80,48 @@ export default function ListItems() {
                 <div><button onClick={handleShowCreateForm}>Create</button></div>
                 <div className="to_do_container">
                     <h2 className="column_name">TO DO</h2>
-                    {listItems.filter(function (item) {
-                        return item.completion.id === 1;
-                    }).map(function (item) {
-                        return (
-                            <div key={item.id}>
-                                <Item item={item} click={itemClick} />
-                            </div>
-                        )
-                    })}
+                    <div className="items">
+                        {listItems.filter(function (item) {
+                            return item.completion.id === 1;
+                        }).map(function (item) {
+                            return (
+                                <div key={item.id}>
+                                    <Item item={item} click={itemClick} />
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
                 <div className="in_progress_container">
                     <h2 className="column_name">IN PROGRESS</h2>
-                    {listItems.filter(function (item) {
-                        return item.completion.id === 2;
-                    }).map(function (item) {
-                        return (
-                            <div key={item.id}>
-                                <Item item={item} click={itemClick} />
-                            </div>
-                        )
-                    })}
+                    <div className="items">
+                        {listItems.filter(function (item) {
+                            return item.completion.id === 2;
+                        }).map(function (item) {
+                            return (
+                                <div key={item.id}>
+                                    <Item item={item} click={itemClick} />
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
-                <div className="to_do_container">
+                <div className="done_container">
                     <h2 className="column_name">DONE</h2>
-                    {listItems.filter(function (item) {
-                        return item.completion.id === 3;
-                    }).map(function (item) {
-                        return (
-                            <div key={item.id}>
-                                <Item item={item} click={itemClick} />
-                            </div>
-                        )
-                    })}
-                    <UpdateItemForm show={showUpdateForm} close={handleShowUpdateForm} item={item} users={listUsers} setItem={setItem} owner={itemOwner} setOwner={setItemOwner} fetchList={fetchListItems} />
-                    <CreateItemForm list={list} show={showCreateForm} close={handleShowCreateForm} users={listUsers} fetchList={fetchListItems} />
+                    <div className="items">
+                        {listItems.filter(function (item) {
+                            return item.completion.id === 3;
+                        }).map(function (item) {
+                            return (
+                                <div key={item.id}>
+                                    <Item item={item} click={itemClick} />
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
+                <UpdateItemForm show={showUpdateForm} close={handleShowUpdateForm} item={item} users={listUsers} setItem={setItem} owner={itemOwner} setOwner={setItemOwner} fetchList={fetchListItems} />
+                <CreateItemForm list={list} show={showCreateForm} close={handleShowCreateForm} users={listUsers} fetchList={fetchListItems} />
             </div>
         )
     } else {
