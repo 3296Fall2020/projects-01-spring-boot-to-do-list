@@ -40,6 +40,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
     //needs fixing
     const handleUpdate = (e) => {
         e.preventDefault();
+        console.log(item.deadline);
         const data = { task_name: item.task_name, description: item.description, deadline: item.deadline };
         console.log(data);
         let url = 'http://localhost:8080/item/update/' + item.id;
@@ -52,8 +53,8 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                //updateStatus();
-                //updateOwner(); 
+                updateStatus();
+                updateOwner(); 
                 fetchList();
                 close(false);
             }).catch((exception) => {
