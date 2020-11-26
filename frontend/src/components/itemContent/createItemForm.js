@@ -12,7 +12,9 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
     const handleSubmit = (e) => {
         e.preventDefault();
         formatDate();
-        const data = { task_name: name, description: description, deadline: deadline };
+        console.log(deadline);
+        //still need to fix deadline
+        const data = { task_name: name, description: description, deadline: null };
         let url = 'http://localhost:8080/item/addItem/' + list.id;
         fetch(url, {
             method: 'POST',

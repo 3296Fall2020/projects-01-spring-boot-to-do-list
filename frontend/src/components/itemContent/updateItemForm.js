@@ -6,7 +6,6 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
     const [status, setStatus] = useState(1);
 
     useEffect(() => {
-        console.log(item);
         getStatus();
     }, [item]);
 
@@ -24,7 +23,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         console.log(item.id);
         let url = 'http://localhost:8080/item/delete/' + item.id;
         fetch(url, {
-            method: 'DELETE',
+            method: 'DE sLETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
             })
@@ -38,11 +37,9 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             });
     }
 
-    //needs fixing
     const handleUpdate = (e) => {
         e.preventDefault();
-        console.log(item.deadline);
-        const data = { task_name: item.task_name, description: item.description, deadline: item.deadline };
+        const data = { task_name: item.task_name, description: item.description, deadline: null };
         console.log(data);
         let url = 'http://localhost:8080/item/update/' + item.id;
         fetch(url, {
@@ -61,7 +58,6 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             });
     }
 
-    // needs fixing (probably should make these two separate things)
     const updateOwner = () => {
         let url = "";
         if (owner > -1) {
