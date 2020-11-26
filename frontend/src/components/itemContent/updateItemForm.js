@@ -6,6 +6,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
     const [status, setStatus] = useState(1);
 
     useEffect(() => {
+        console.log(item);
         getStatus();
     }, [item]);
 

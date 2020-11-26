@@ -42,18 +42,33 @@ export default function ListItems() {
         if (clickedItem.description == null) {
             clickedItem.description = "";
         }
-        if (clickedItem.deadline == null) {
-            clickedItem.deadline = "";
+        if (clickedItem.deadline === null || clickedItem.deadline === "") {
+            console.log("no date")
+        } else {
+            formatDate(clickedItem);
         }
         setItem(clickedItem);
         getItemOwner(clickedItem);
     }
 
+    const formatDate = (clickedItem) => {
+        console.log(clickedItem.deadline);
+        const date = new Date(clickedItem.deadline);
+        var d = date.getDate();
+        var m = date.getMonth() + 1;
+        var y = date.getFullYear();
+
+        var dateString = y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+        console.log(dateString);
+        clickedItem.deadline = dateString;
+
+    }
+
+
     const getItemOwner = (clickedItem) => {
         fetch('http://localhost:8080/item/getOwner/' + clickedItem.id)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setItemOwner(data.id);
                 handleShowUpdateForm();
             }).catch((exception) => {
@@ -76,7 +91,7 @@ export default function ListItems() {
                         return item.completion.id === 1;
                     }).map(function (item) {
                         return (
-                            <div key={item.id}> 
+                            <div key={item.id}>
                                 <Item item={item} click={itemClick} />
                             </div>
                         )
@@ -106,7 +121,7 @@ export default function ListItems() {
                         )
                     })}
                     <UpdateItemForm show={showUpdateForm} close={handleShowUpdateForm} item={item} users={listUsers} setItem={setItem} owner={itemOwner} setOwner={setItemOwner} fetchList={fetchListItems} />
-                    <CreateItemForm list={list} show={showCreateForm} close={handleShowCreateForm} users={listUsers} fetchList={fetchListItems}/>
+                    <CreateItemForm list={list} show={showCreateForm} close={handleShowCreateForm} users={listUsers} fetchList={fetchListItems} />
                 </div>
             </div>
         )
