@@ -37,9 +37,10 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             });
     }
 
+    //needs fixing
     const handleUpdate = (e) => {
         e.preventDefault();
-        const data = { task_name: item.task_name, description: item.description, deadline: null };
+        const data = { task_name: item.task_name, description: item.description, deadline: item.deadline + ' 00:00:00' };
         console.log(data);
         let url = 'http://localhost:8080/item/update/' + item.id;
         fetch(url, {

@@ -11,10 +11,8 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // formatDate();
-        console.log(deadline + " after formatting");
-        //still need to fix deadline
-        const data = { task_name: name, description: description, deadline: deadline };
+        const data = { task_name: name, description: description, deadline: deadline + ' 00:00:00' };
+        console.log(data);
         let url = 'http://localhost:8080/item/addItem/' + list.id;
         fetch(url, {
             method: 'POST',
@@ -37,16 +35,6 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
             }).catch((exception) => {
                 console.log(exception);
             });
-    }
-
-    const formatDate = () => {
-        let date = new Date(deadline);
-        let newDate = date.toString();
-        console.log(newDate + " being formatted");
-        const dateParts = newDate.split(" ");
-        newDate = dateParts[0] + " " + dateParts[1] + " " + dateParts[2] + " " + dateParts[4] + " " + dateParts[3];
-        console.log(newDate);
-        setDeadline(newDate);
     }
 
     const addOwner = (id) => {

@@ -31,10 +31,6 @@ export default function ListItems() {
             })
     }
 
-    const handleShowCreateForm = () => {
-        setShowCreateForm(!showCreateForm);
-    }
-
     const itemClick = (clickedItem) => {
         if (clickedItem.task_name == null) {
             clickedItem.task_name = "";
@@ -44,6 +40,7 @@ export default function ListItems() {
         }
         if (clickedItem.deadline === null || clickedItem.deadline === "") {
             console.log("no date")
+            clickedItem.deadline = "";
         } else {
             formatDate(clickedItem);
         }
@@ -52,18 +49,14 @@ export default function ListItems() {
     }
 
     const formatDate = (clickedItem) => {
-        console.log(clickedItem.deadline);
-        const date = new Date(clickedItem.deadline);
-        var d = date.getDate();
-        var m = date.getMonth() + 1;
-        var y = date.getFullYear();
-
-        var dateString = y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
-        console.log(dateString);
-        clickedItem.deadline = dateString;
-
+        let date = clickedItem.deadline;
+        let newDate = date.split(" ")[0];
+        clickedItem.deadline = newDate; 
     }
 
+    const handleShowCreateForm = () => {
+        setShowCreateForm(!showCreateForm);
+    }
 
     const getItemOwner = (clickedItem) => {
         fetch('http://localhost:8080/item/getOwner/' + clickedItem.id)
