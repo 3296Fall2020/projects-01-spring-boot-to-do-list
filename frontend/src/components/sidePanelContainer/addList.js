@@ -9,6 +9,7 @@ export default function AddList({ show, close }) {
 
     const addList = evt => {
         evt.preventDefault();
+        document.body.style.cursor='wait';
         console.log("adding list: " + listName);
         console.log("adding user: " + user.email + " and list to user_list table");
         let url = 'http://localhost:8080/list/add?email=' + user.email + '&name=' + listName;
@@ -20,6 +21,7 @@ export default function AddList({ show, close }) {
         }).then((response) => {
             fetchLists();
             setListName("");
+            document.body.style.cursor='default';
             close(false);
         }).catch((exception) => {
             console.log(exception);

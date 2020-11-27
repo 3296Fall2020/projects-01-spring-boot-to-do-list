@@ -14,6 +14,7 @@ export default function ListContent() {
 
 
     const removeUser = (listUser) => {
+        document.body.style.cursor='wait';
         let url = 'http://localhost:8080/list/remove?user_id=' + listUser.id + '&list_id=' + list.id;
         fetch(url, {
             method: 'DELETE',
@@ -26,6 +27,7 @@ export default function ListContent() {
             if (listUser.id === user.id) {
                 setList({ "list_id": list.id, "list_name": null })
             }
+            document.body.style.cursor='default';
         })
             .catch((exception) => {
                 console.log(exception);
@@ -33,6 +35,7 @@ export default function ListContent() {
     }
 
     const updateList = e => {
+        document.body.style.cursor='wait';
         e.preventDefault();
         console.log(updateName);
         let data = { "list_name": updateName };
@@ -46,6 +49,7 @@ export default function ListContent() {
         }).then((response) => {
             fetchLists();
             fetchList(list.id);
+            document.body.style.cursor='default';
             setUpdate(false);
         }).catch((exception) => {
             console.log(exception);

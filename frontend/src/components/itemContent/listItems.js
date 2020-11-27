@@ -32,6 +32,7 @@ export default function ListItems() {
     }
 
     const itemClick = (clickedItem) => {
+        document.body.style.cursor='wait';
         if (clickedItem.task_name == null) {
             clickedItem.task_name = "";
         }
@@ -71,6 +72,7 @@ export default function ListItems() {
 
 
     const handleShowUpdateForm = () => {
+        document.body.style.cursor='default';
         setShowUpdateForm(!showUpdateForm);
     }
 

@@ -8,6 +8,7 @@ export default function DeleteList({ show, close }) {
 
     const deleteList = evt => {
         evt.preventDefault();
+        document.body.style.cursor='wait';
         console.log(list.id);
         close(false);
         let url = 'http://localhost:8080/list/deleteList/' + list.id;
@@ -18,7 +19,8 @@ export default function DeleteList({ show, close }) {
             })
         }).then((response) => {
             fetchLists();
-            setList({"list_id": list.id, "list_name": null})
+            setList({"list_id": list.id, "list_name": null});
+            document.body.style.cursor='default';
             close(false);
         })
             .catch((exception) => {
