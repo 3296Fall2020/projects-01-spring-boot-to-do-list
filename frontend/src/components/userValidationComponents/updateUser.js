@@ -20,7 +20,7 @@ export default function UpdateUser() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password2 !== user.user_password) {
-            alert(`Error: passwords must be equal`);
+            alert(`Error passwords must be the same`);
             return;
         } else if (password2.trim() === "" || user.first_name.trim() === "" || user.last_name.trim() === "" || user.user_password.trim() === "") {
             alert('Error all input fields must be filled out');
