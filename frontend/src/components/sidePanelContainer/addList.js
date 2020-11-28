@@ -3,7 +3,7 @@ import { Context } from '../context';
 import './sidePanel.css'
 
 export default function AddList({ show, close }) {
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList] = useContext(Context);
+    const {user, fetchLists } = useContext(Context);
     const [listName, setListName] = useState("");
 
 

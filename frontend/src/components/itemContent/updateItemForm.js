@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './itemForm.css'
-import { Context } from '../context'
 
 export default function UpdateItemForm({ show, close, item, setItem, users, owner, setOwner, fetchList }) {
     const [status, setStatus] = useState(1);

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../context'
 import DeleteList from './deleteList'
 import AddListUser from './addUserToList'
@@ -6,7 +6,7 @@ import ListItems from '../itemContent/listItems'
 import './listContent.css'
 
 export default function ListContent() {
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList] = useContext(Context);
+    const {user, list, listUsers, setList, fetchLists, fetchListUsers, fetchList} = useContext(Context);
     const [update, setUpdate] = useState(false);
     const [updateName, setUpdateName] = useState("");
     const [showDeleteList, setShowDeleteList] = useState(false);

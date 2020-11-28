@@ -3,7 +3,7 @@ import {Context} from '../context';
 import "./sidePanel.css";
 
 export default function ListContainer(){
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers] = useContext(Context);
+    const {setList, filterResults, fetchListUsers} = useContext(Context);
 
     const handleClick = (list) => {
         setList(list);

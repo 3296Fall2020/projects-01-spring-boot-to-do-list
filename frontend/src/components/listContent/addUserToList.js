@@ -3,7 +3,7 @@ import { Context } from '../context';
 import './listContent.css'
 
 export default function AddListUser({ show, close }) {
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList] = useContext(Context);
+    const {list, fetchListUsers } = useContext(Context);
     const [email, setEmail] = useState("");
 
     const getUser = evt => {

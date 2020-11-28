@@ -5,7 +5,7 @@ import "./sidePanel.css";
 
 function ListFilter({filter}) {
 
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists] = useContext(Context);
+    const {filterLists} = useContext(Context);
 
     const handleOnChange = (e) => {
         console.log(e.target.value)

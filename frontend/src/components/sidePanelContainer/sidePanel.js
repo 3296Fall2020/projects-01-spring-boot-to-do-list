@@ -8,7 +8,7 @@ import AddList from './addList'
 
 
 export default function SidePanel() {
-    const [user] = useContext(Context)
+    const {user} = useContext(Context)
     const [show , setShow] = useState(false);
     const history = useHistory();
 

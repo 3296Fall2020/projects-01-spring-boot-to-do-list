@@ -3,7 +3,7 @@ import { Context } from '../context';
 import './listContent.css'
 
 export default function DeleteList({ show, close }) {
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList] = useContext(Context);
+    const {list, setList, fetchLists } = useContext(Context);
 
 
     const deleteList = evt => {

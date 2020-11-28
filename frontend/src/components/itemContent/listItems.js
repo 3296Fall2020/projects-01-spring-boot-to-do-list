@@ -7,7 +7,7 @@ import './listItems.css'
 
 
 export default function ListItems() {
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList] = useContext(Context);
+    const {list, listUsers} = useContext(Context);
     const [listItems, setListItems] = useState([]);
     const [item, setItem] = useState({});
     const [itemOwner, setItemOwner] = useState(-1);
@@ -17,7 +17,7 @@ export default function ListItems() {
     useEffect(() => {
         console.log(item);
         setListItems(list.items);
-        setItem({});
+        setItem(list.items[0]);
     }, [list, listUsers]);
 
     const fetchListItems = () => {

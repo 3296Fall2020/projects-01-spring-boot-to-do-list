@@ -78,7 +78,7 @@ const ContextProvider = (props) => {
     };
 
     return (
-        <Context.Provider value={[user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList]}>
+        <Context.Provider value={{user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList}}>
             {props.children}
         </Context.Provider>
     )
