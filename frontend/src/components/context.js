@@ -18,7 +18,6 @@ const ContextProvider = (props) => {
             alert("invalid user");
             history.push('/');
         } else {
-            alert("User is: " + location.state.user.email);
             setUser(location.state.user);
         }
         fetchLists();
