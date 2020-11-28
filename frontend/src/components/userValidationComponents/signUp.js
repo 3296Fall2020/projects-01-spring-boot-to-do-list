@@ -18,12 +18,13 @@ export default function SignUp() {
             return;
         }
         else {
-            makeRequest(firstName, lastName, email, password1, history);
+            makeRequest();
         }
     };
 
-    const makeRequest = (firstName, lastName, email, password, history) => {
-        let data = { first_name: firstName, last_name: lastName, email: email, user_password: password };
+    const makeRequest = () => {
+        document.body.style.cursor = 'wait';
+        let data = { first_name: firstName, last_name: lastName, email: email, user_password: password1 };
         console.log(data);
 
         let url = 'http://localhost:8080/user/add';
@@ -36,6 +37,7 @@ export default function SignUp() {
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
+                document.body.style.cursor = 'default';
                 history.push('/signIn');
             }).catch((exception) => {
                 console.log(exception);

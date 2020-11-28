@@ -12,12 +12,13 @@ export default function SignIn() {
 
     const handleSubmit = evt => {
         evt.preventDefault();
-        makeRequest(email, password);
+        makeRequest();
         setEmail("");
         setPassword("");
     };
 
-    const makeRequest = (email, password) => {
+    const makeRequest = () => {
+        document.body.style.cursor = 'wait';
         let data = {"email": email, "password": password};
         console.log(data);
         console.log('checking server');
@@ -26,6 +27,7 @@ export default function SignIn() {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                document.body.style.cursor = 'default';
                 if (data) {
                     history.push({
                         pathname: '/toDoList',
