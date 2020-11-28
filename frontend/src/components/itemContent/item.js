@@ -7,8 +7,8 @@ export default function Item({item, click}){
     }
 
     return(
-        <div className="item_container" onClick={handleClick}>
-           <h3>{item.task_name}</h3>
+        <div onClick={handleClick}>
+           {item.task_name}
         </div>
     )
 }

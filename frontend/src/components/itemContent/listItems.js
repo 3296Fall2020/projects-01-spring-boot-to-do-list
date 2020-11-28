@@ -87,7 +87,7 @@ export default function ListItems() {
                             return item.completion.id === 1;
                         }).map(function (item) {
                             return (
-                                <div key={item.id}>
+                                <div className="item" key={item.id}>
                                     <Item item={item} click={itemClick} />
                                 </div>
                             )
@@ -101,7 +101,7 @@ export default function ListItems() {
                             return item.completion.id === 2;
                         }).map(function (item) {
                             return (
-                                <div key={item.id}>
+                                <div className="item" key={item.id}>
                                     <Item item={item} click={itemClick} />
                                 </div>
                             )
@@ -115,7 +115,7 @@ export default function ListItems() {
                             return item.completion.id === 3;
                         }).map(function (item) {
                             return (
-                                <div key={item.id}>
+                                <div className="item"  key={item.id}>
                                     <Item item={item} click={itemClick} />
                                 </div>
                             )
