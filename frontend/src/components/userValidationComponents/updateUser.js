@@ -22,7 +22,7 @@ export default function UpdateUser() {
         if (password2 !== user.user_password) {
             alert(`Error: passwords must be equal`);
             return;
-        }else if(password2.trim() === "" || user.first_name.trim() === "" || user.last_name.trim() === "" || user.user_password.trim() === "" || user.email.trim() === ""){
+        } else if (password2.trim() === "" || user.first_name.trim() === "" || user.last_name.trim() === "" || user.user_password.trim() === "") {
             alert('Error all input fields must be filled out');
             return;
         }
@@ -92,18 +92,19 @@ export default function UpdateUser() {
                 <form>
                     <h2>Update Your Information</h2>
                     <div className="form-group">
+                        <span className="input_header">Change First Name:</span>
                         <input type="text" value={user.first_name || ""} onChange={e => setUser({ ...user, first_name: e.target.value })} className="form-control" placeholder="First Name" required="required" />
                     </div>
                     <div className="form-group">
+                        <span className="input_header">Change Last Name:</span>
                         <input type="text" value={user.last_name || ""} onChange={e => setUser({ ...user, last_name: e.target.value })} className="form-control" placeholder="Last Name" required="required" />
                     </div>
                     <div className="form-group">
-                        <input type="email" value={user.email || ""} onChange={e => setUser({ ...user, email: e.target.value })} className="form-control" placeholder="Email" required="required" />
-                    </div>
-                    <div className="form-group">
+                        <span className="input_header">Change Password:</span>
                         <input type="password" value={user.user_password || ""} onChange={e => setUser({ ...user, user_password: e.target.value })} className="form-control" name="password" placeholder="Password" required="required" />
                     </div>
                     <div className="form-group">
+                        <span className="input_header">Confirm New Password:</span>
                         <input type="password" value={password2 || ""} onChange={e => setPassword2(e.target.value)} className="form-control" placeholder="Confirm Password" required="required" />
                     </div>
                     <div className="form-group">

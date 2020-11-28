@@ -69,3 +69,8 @@
 .deleteYes{
     margin: 0.5rem;
 }
+
+.input_header{
+    display: block;
+    margin-bottom: 0.5rem;
+}
