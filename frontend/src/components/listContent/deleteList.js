@@ -10,7 +10,6 @@ export default function DeleteList({ show, close }) {
         evt.preventDefault();
         document.body.style.cursor='wait';
         console.log(list.id);
-        close(false);
         let url = 'http://localhost:8080/list/deleteList/' + list.id;
         fetch(url, {
             method: 'DELETE',
@@ -24,6 +23,7 @@ export default function DeleteList({ show, close }) {
             close(false);
         })
             .catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }

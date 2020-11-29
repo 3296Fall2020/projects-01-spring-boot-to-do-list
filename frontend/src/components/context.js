@@ -24,6 +24,7 @@ const ContextProvider = (props) => {
     }, [location]);
 
     const fetchLists = () => {
+        document.body.style.cursor='wait';
         let url = 'http://localhost:8080/user/getUserLists?email=' + location.state.user.email;
         fetch(url)
             .then(response => {
@@ -35,9 +36,11 @@ const ContextProvider = (props) => {
                 console.log(newData);
                 setLists(newData);
                 setFilterResults(newData);
+                document.body.style.cursor='default';
             })
             .catch((error) => {
                 console.log(error)
+                document.body.style.cursor='default';
             })
     };
 

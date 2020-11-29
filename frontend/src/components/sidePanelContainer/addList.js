@@ -24,6 +24,7 @@ export default function AddList({ show, close }) {
             document.body.style.cursor='default';
             close(false);
         }).catch((exception) => {
+            document.body.style.cursor='default';
             console.log(exception);
         })
     }

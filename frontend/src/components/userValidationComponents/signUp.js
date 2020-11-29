@@ -26,7 +26,6 @@ export default function SignUp() {
         document.body.style.cursor = 'wait';
         let data = { first_name: firstName, last_name: lastName, email: email, user_password: password1 };
         console.log(data);
-
         let url = 'http://localhost:8080/user/add';
         fetch(url, {
             method: 'POST',
@@ -40,6 +39,7 @@ export default function SignUp() {
                 document.body.style.cursor = 'default';
                 history.push('/signIn');
             }).catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }

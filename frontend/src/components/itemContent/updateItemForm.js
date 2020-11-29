@@ -33,6 +33,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             close(false);
         })
             .catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }
@@ -54,6 +55,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
                 console.log(data);
                 updateOwner(); 
             }).catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }
@@ -75,6 +77,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
                 console.log(data);
                 updateStatus();
             }).catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }
@@ -94,6 +97,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
                 close(false);
                 console.log(data);
             }).catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
 

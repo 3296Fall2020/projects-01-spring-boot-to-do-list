@@ -17,6 +17,7 @@ export default function AddListUser({ show, close }) {
                 addUserToList(data.id);
                 setEmail("")
             }).catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     };
@@ -37,6 +38,7 @@ export default function AddListUser({ show, close }) {
             close(false);
         })
             .catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }

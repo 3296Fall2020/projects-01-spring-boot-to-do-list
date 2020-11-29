@@ -17,7 +17,11 @@ export default function ListItems() {
     useEffect(() => {
         console.log(item);
         setListItems(list.items);
-        setItem(list.items[0]);
+        if(list.items.size >= 0){
+            setItem(list.items[0])
+        }else{
+            setItem({});
+        }
     }, [list, listUsers]);
 
     const fetchListItems = () => {

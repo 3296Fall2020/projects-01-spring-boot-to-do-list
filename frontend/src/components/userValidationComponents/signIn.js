@@ -38,6 +38,7 @@ export default function SignIn() {
                     alert("incorrect information please try again");
                 }
             }).catch((exception) => {
+                document.body.style.cursor='default';
                 alert("incorrect information please try again");
             }); 
         };

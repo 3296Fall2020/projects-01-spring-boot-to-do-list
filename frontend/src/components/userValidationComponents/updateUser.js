@@ -53,6 +53,7 @@ export default function UpdateUser() {
                 })
             })
             .catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }
@@ -75,6 +76,7 @@ export default function UpdateUser() {
             history.push({ pathname: '/' });
         })
             .catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }

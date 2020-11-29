@@ -30,6 +30,7 @@ export default function ListContent() {
             document.body.style.cursor='default';
         })
             .catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }
@@ -52,6 +53,7 @@ export default function ListContent() {
             document.body.style.cursor='default';
             setUpdate(false);
         }).catch((exception) => {
+            document.body.style.cursor='default';
             console.log(exception);
         })
     }

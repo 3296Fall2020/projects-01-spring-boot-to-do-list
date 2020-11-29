@@ -35,6 +35,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
                     setDescription("");
                 }
             }).catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }
@@ -57,6 +58,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
                 setDeadline("");
                 setDescription("");
             }).catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }
