@@ -33,6 +33,6 @@ public interface ListItemRepository extends JpaRepository<ListItem, Long>{
 	
 	@Modifying
 	@Transactional
-	@Query(value = "DELETE FROM sys.list_item WHERE owner IN (:id_list)", nativeQuery = true)
+	@Query(value = "DELETE FROM sys.list_item WHERE list_container IN (:id_list)", nativeQuery = true)
 	void deleteAllByListSeries (@Param("id_list") List<Long> id_list);
 }
