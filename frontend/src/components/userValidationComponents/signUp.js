@@ -14,7 +14,7 @@ export default function SignUp() {
     const handleSubmit = evt => {
         evt.preventDefault();
         if (password1 !== password2) {
-            alert(`Error: passwords must be equal`);
+            alert(`Error: passwords must be equal.`);
             return;
         }
         else {
@@ -49,7 +49,7 @@ export default function SignUp() {
             <h1>SPRING BOOT TO DO LIST</h1>
             <div className="form">
                 <form onSubmit={handleSubmit}>
-                    <h2>Register</h2>
+                    <h2>Register:</h2>
                     <div className="form-group">
                         <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)} className="form-control" placeholder="First Name" required="required" />
                     </div>

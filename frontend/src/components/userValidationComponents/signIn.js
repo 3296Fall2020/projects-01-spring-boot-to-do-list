@@ -49,7 +49,7 @@ export default function SignIn() {
             <h1>SPRING BOOT TO DO LIST</h1>
             <div className="form">
                 <form onSubmit={handleSubmit}>
-                    <h2>Sign in</h2>
+                    <h2>Sign In:</h2>
                     <div className="form-group">
                         <input type="email" value={email} onChange={e => setEmail(e.target.value)}  className="form-control" placeholder="Email" required="required" />
                     </div>
