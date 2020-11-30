@@ -23,7 +23,7 @@ export default function ListItems() {
         }else{
             setItem({});
         }
-    }, [list, listUsers]);
+    }, [list]);
 
     const fetchListItems = () => {
         fetch('http://localhost:8080/item/getListItems/' + list.id)
