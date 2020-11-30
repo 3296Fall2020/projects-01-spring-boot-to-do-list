@@ -15,14 +15,15 @@ export default function ListItems() {
     const [showUpdateForm, setShowUpdateForm] = useState(false);
 
     useEffect(() => {
-        console.log(item);
+        console.log(list.items);
         setListItems(list.items);
-        if(list.items.size >= 0){
+        console.log(list.items.length)
+        if(list.items.length > 0){
             setItem(list.items[0])
         }else{
             setItem({});
         }
-    }, [list, listUsers]);
+    }, [list]);
 
     const fetchListItems = () => {
         fetch('http://localhost:8080/item/getListItems/' + list.id)
