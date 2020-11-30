@@ -15,7 +15,7 @@ function ListFilter({filter}) {
     return(
         <Form className="filter-form">
             <Form.Group>
-                <Form.Control onChange={handleOnChange} className='filter_form_input' type="text" placeholder="search for list" />
+                <Form.Control onChange={handleOnChange} className='filter_form_input' type="text" placeholder=" Search for list..." />
             </Form.Group>
         </Form>
     );

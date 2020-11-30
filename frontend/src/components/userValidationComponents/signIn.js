@@ -35,11 +35,11 @@ export default function SignIn() {
                     });
                 } else {
                     console.log(data);
-                    alert("incorrect information please try again");
+                    alert("Incorrect information, please try again.");
                 }
             }).catch((exception) => {
                 document.body.style.cursor='default';
-                alert("incorrect information please try again");
+                alert("Incorrect information, please try again.");
             }); 
         };
     

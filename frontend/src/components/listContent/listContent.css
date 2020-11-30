@@ -2,14 +2,18 @@
     position: relative;
     flex: 4;
     flex-grow: 0;   
-    flex-basis: 75em;
+    flex-basis: 100em;
     text-align:center;
     margin: 0;
+    width: 100%;
     background-color: #EFEFEF;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
 }
+
 
 .header_name{
     position: absolute;
+    font-family: 'Franklin Gothic', sans-serif;
     top: 40px;
     width: 100%;
     font-size: 40px;
@@ -23,6 +27,7 @@
 
 .update_list_button{
     position: absolute;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
     top: 40px;
     left: 5%;
     background-color: #CCCCCC;
@@ -33,6 +38,7 @@
  
  .delete_list_button{
     position: absolute;
+    font-family: 'Franklin Gothic', sans-serif;
     top: 40px;
     left: 90%;
     background-color: #CCCCCC;
@@ -53,7 +59,8 @@
 }
 
 .list_member{
-    margin: 1rem;
+    margin: 2rem;
+    top: 3px;
     padding:5px;
     background-color: #F1C9B1;
     border: thin solid black;
@@ -61,6 +68,7 @@
 
 .add_user_button{
     position: absolute;
+    font-family: 'Franklin Gothic', sans-serif;
     left: 85%;
     background-color: #CCCCCC;
     padding: 10px;

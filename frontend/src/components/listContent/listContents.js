@@ -97,7 +97,7 @@ export default function ListContent() {
     } else {
         return (
             <div className="list_content">
-                <h1>Welcome {user.first_name}! You have no list selected</h1>
+                <h1>Welcome, {user.first_name}! You have no list selected. </h1>
             </div>
         );
     }

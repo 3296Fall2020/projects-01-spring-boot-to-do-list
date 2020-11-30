@@ -34,7 +34,7 @@ return (
     <div className="add_list_popup"  style={{ display: show ? "block" : "none" }}>
         <form onSubmit={addList}>
             <button className="add_list_close" type="button" onClick={() => { close(false) }}>&times;</button>
-            <input type="text" value={listName} onChange={e => setListName(e.target.value)} id="addListInput" className="form_control" placeholder="add new list here" required="required" />
+            <input type="text" value={listName} onChange={e => setListName(e.target.value)} id="addListInput" className="form_control" placeholder=" Add new list here..." required="required" />
             <button className="add_list" type="submit" >Add</button>
         </form>
     </div>
