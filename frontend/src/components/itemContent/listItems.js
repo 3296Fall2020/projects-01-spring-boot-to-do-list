@@ -84,7 +84,7 @@ export default function ListItems() {
     if (listItems.length > 0) {
         return (
             <div className="items_list_container">
-                <div><button onClick={handleShowCreateForm}>Create</button></div>
+                <div><button className="create_item_button" onClick={handleShowCreateForm}>Create New Item</button></div>
                 <div className="to_do_container">
                     <h2 className="column_name">TO DO</h2>
                     <div className="items">
@@ -135,7 +135,7 @@ export default function ListItems() {
         return (
             <div className="items_list_container">
                 <div className="empty_items_list_container">
-                    <div><button onClick={handleShowCreateForm}>Create</button></div>
+                    <div><button className="create_item_button" onClick={handleShowCreateForm}>Create New Item</button></div>
                     <span>¯\_(ツ)_/¯</span>
                     <p>No items could be found</p>
                 </div>
