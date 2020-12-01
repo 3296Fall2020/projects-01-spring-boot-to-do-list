@@ -6,6 +6,42 @@ The Spring-Boot To Do List is a group project management system that allows for 
 ## Vision Statement
 For teams working on a group project, who need a scheme to coordinate responsibilities and communicate tasks to be accomplished in real-time, the Spring Boot To-Do List is a web-based group project coordination platform that project managers of small teams can use to delegate tasks to their members, who can set the completion statuses of their specific tasks, delegate priority status to urgent responsibilities to hold specific individuals accountable for their tasks, and leave feedback regarding the different tasks to enable communication about setbacks and suggestions. Unlike other Project Management services such as Trello or Jira, our product provides a simple and user-friendly interface that even those who may not have as much experience with digital devices can use without issue, so that even those not as experienced with technology to collaborate effectively.
 
+## Project Features
+- User Account Handling 
+  - Register account
+  - Sign in to said account
+  - Sign out
+  - Update Account Information
+  - Deleting Account
+- List Features 
+  - Filter user's lists
+  - Create a new list
+  - Update the list
+  - Deleting a list
+- Collaborative Features for List
+  - Add user to the list
+  - Remove user from a list
+- Item Handling
+  - Creating a new Item
+  - Setting deadlines for the Item
+  - Configuring an Item's completion Status
+  - Delegating (and Removing Ownership of) an Item to a user in the List
+  - Updating the Item
+  - Deleting an Item
+
+## Testing
+During the development of this project, testing had to be done to ensure that issues do not occur with the website, and the server.
+
+### Testing for the Website
+the website manually tested to ensure the interface works properly, and to test out the different features displayed on the webpage to denote proper behavior is executed on the webpage. 
+
+(insert Screenshots)
+
+### Testing for the Server
+For testing the Spring Boot server, we utilized Postman, a Development platform used for testing APIs, to ensure that the endpoints are properly handled. The testing itself was manually conducted to ensure that the REST Controller delivers the proper format for the JSON Objects being tested, that the different edge cases are being accounted for with the different status codes returned, and whether the endpoints that are tested returns the expected results.
+
+![Add List Name Fail](testing_screenshots/addListNameFail.JPG)
+
 ## Personas
 
 ### Developer (Jason)
@@ -35,7 +71,6 @@ John, age 39, is a construction manager in the Pennsylvania area. His latest pro
 The construction of this new dorm will involve many people: architects, electricians, engineers, contractors, and sub-contractors must all work together to build this new dorm. Due to the large number of tasks and people needed to create the final product, John is thinking of using the Spring Boot To Do List as a way to remain organized and communicate throughout the process.
 
 He can use this application to oversee the planning, design, and construction of the dorm from beginning to end. He can create groups, assign tasks to specific people, and prioritize tasks.  With the help of this application, John will be able to stay up to date on the status of the project at any given time and make sure everyone is doing their part. It will also help John control the project's delivery, cost, and quality. With the Spring Boot To Do List’s simple interface and easy to use features, someone like John, with no real technical experience, can still successfully use the application to meet his needs. 
-
 
 ## Project Description
 For my proposal, I decided to create a standalone project of a To-Do list for Group Project Management, utilizing Spring Boot to develop the backend, displaying a list of things that need to be completed through a web page. Project Managers can create and manage their groups, as well as manage individuals apart of their projects, who can make changes to their shared To-Do Lists, coordinating objectives through the website. 
@@ -70,7 +105,6 @@ For the frontend of the app I created a separate frontend folder, and then initi
 ## Running
 - For the backend, select "Run As → Spring Boot App" to run the Spring Boot Application. For different IDEs, this may show something different.
 - For the frontend, type npm start in the terminal while in the frontend folder. This should start running the react project in the browser. (on port 3000).
-
 
 ## Required Resources
 - MySQL Server (and maybe MySQL Workbench) (I used version 5.7)
