@@ -55,6 +55,7 @@ export default function UpdateUser() {
             .catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("user could not be updated, please try again");
             });
     }
 
@@ -78,6 +79,8 @@ export default function UpdateUser() {
             .catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("user could not be deleted, please try again");
+
             });
     }
 
@@ -86,10 +89,18 @@ export default function UpdateUser() {
         setDeleteMessage(!deleteMessage);
     }
 
+    const goBack = () => {
+        history.push({
+            pathname: '/toDoList',
+            state: {'user': user}
+        });
+    }
+
 
     return (
         <div className="userValidation">
             <h1>SPRING BOOT TO DO LIST</h1>
+            <button className="back_button" onClick={goBack}>Back</button>
             <div className="form">
                 <form>
                     <h2>Update Your Information</h2>

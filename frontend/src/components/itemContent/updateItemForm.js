@@ -36,6 +36,8 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             .catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("item could not be deleted, please try again");
+
             });
     }
 
@@ -58,6 +60,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             }).catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("item could not be updated, please try again");
             });
     }
 
@@ -80,6 +83,8 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             }).catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("user could not be assigned to item, please try again");
+
             });
     }
 
@@ -100,6 +105,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
             }).catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("status could not be changed, please try again");
             });
 
     }

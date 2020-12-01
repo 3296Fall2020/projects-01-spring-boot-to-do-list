@@ -19,6 +19,9 @@ export default function AddListUser({ show, close }) {
             }).catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("invalid user, please try again");
+                setEmail("")
+                close(false);
             });
     };
 
@@ -32,6 +35,9 @@ export default function AddListUser({ show, close }) {
                 'Content-Type': 'application/json'
             })
         }).then((response) => {
+            if(response.status == 404){
+                alert("invalid user, please try again");
+            }
             console.log(response);
             fetchListUsers(list);
             document.body.style.cursor='default';
@@ -40,6 +46,7 @@ export default function AddListUser({ show, close }) {
             .catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("user could not be added to list, please try again");
             });
     }
 

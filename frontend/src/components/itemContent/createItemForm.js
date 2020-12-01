@@ -37,6 +37,12 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
             }).catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("item could not be created, please try again");
+                close(false);
+                setName("");
+                setDeadline("");
+                setDescription("");
+
             });
     }
 
@@ -60,6 +66,8 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
             }).catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("user could not be assigned to item, please try again");
+
             });
     }
 

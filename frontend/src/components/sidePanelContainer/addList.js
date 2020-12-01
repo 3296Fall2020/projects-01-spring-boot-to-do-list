@@ -26,6 +26,8 @@ export default function AddList({ show, close }) {
         }).catch((exception) => {
             document.body.style.cursor='default';
             console.log(exception);
+            alert("could not add list, please try again");
+            close(false);
         })
     }
 

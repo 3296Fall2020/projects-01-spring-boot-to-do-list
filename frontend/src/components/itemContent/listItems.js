@@ -33,6 +33,8 @@ export default function ListItems() {
                 console.log(item);
             }).catch((exception) => {
                 console.log(exception);
+                alert("error with getting list items, please try again");
+
             })
     }
 
@@ -72,6 +74,7 @@ export default function ListItems() {
                 handleShowUpdateForm();
             }).catch((exception) => {
                 console.log(exception);
+                alert("error with getting item owner, please try again");
             })
     }
 

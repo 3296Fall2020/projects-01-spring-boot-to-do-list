@@ -32,6 +32,7 @@ export default function ListContent() {
             .catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("could not remove user, please try again");
             });
     }
 
@@ -55,6 +56,8 @@ export default function ListContent() {
         }).catch((exception) => {
             document.body.style.cursor='default';
             console.log(exception);
+            alert("could not update list, please try again");
+            setUpdate(false);
         })
     }
 
