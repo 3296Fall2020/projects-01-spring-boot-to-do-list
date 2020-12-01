@@ -75,7 +75,7 @@ public class UserController {
 	
 	@PostMapping(path="/add")
 	public ResponseEntity<User> addNewUser (@Valid @RequestBody User user) {
-		User newUser = service.createUser(user.getFirst_name(), user.getLast_name(), user.getEmail(), user.getPassword()); // Creates a user object and save it to the database
+		User newUser = service.createUser(user.getFirst_name(), user.getLast_name(), user.getEmail(), user.getUser_password()); // Creates a user object and save it to the database
 		
 		if (newUser == null) {
 			/* Just a fallback function if somehow the creation process fails, since if the client passes 
@@ -92,7 +92,7 @@ public class UserController {
 	
 	@PutMapping(path="/update/{id}")
 	public ResponseEntity<User> updateUser (@PathVariable("id") Long id, @RequestBody User user) {
-		User updatedUser = service.updateUser(id, user.getFirst_name(), user.getLast_name(), user.getPassword());
+		User updatedUser = service.updateUser(id, user.getFirst_name(), user.getLast_name(), user.getUser_password());
 		
 		if (updatedUser != null) {
 			return ResponseEntity.ok(updatedUser);
@@ -113,12 +113,12 @@ public class UserController {
 	/* Login/Logout Handling */
 	
 	@GetMapping(path="/login")
-	public ResponseEntity<User> authorizeUser (@Valid @RequestParam String email, @Valid @RequestParam String password) {
+	public ResponseEntity<User> authorizeUser (@Valid @RequestParam String email, @Valid @RequestParam String user_password) {
 		Optional<User> user = service.getUserByEmail(email);
 		if (user.isPresent()) {
 			User access = user.get();
 			
-			if (access.getPassword().equals(password)) {
+			if (access.getUser_password().equals(user_password)) {
 				service.changeLoginStatus(access, true);
 				return ResponseEntity.ok(user.get());
 			}
@@ -128,7 +128,7 @@ public class UserController {
 	}
 	
 	@GetMapping(path="/logout")
-	public ResponseEntity<User> logout (@RequestParam long id) {
+	public ResponseEntity<User> logout (@RequestParam Long id) {
 		Optional<User> user = service.getUserById(id);
 		
 		if (user.isPresent()) {

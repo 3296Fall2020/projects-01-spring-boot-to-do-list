@@ -4,30 +4,6 @@ import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
 
 
-function makeRequest(email, password, history) {
-    let data = {"email": email, "password": password};
-    console.log(data);
-    console.log('checking server');
-
-    fetch('http://localhost:8080/user/login?email=' + email + "&password=" + password)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if (data) {
-                history.push({
-                    pathname: '/toDoList',
-                    state: {'user': data}
-                });
-            } else {
-                console.log(data);
-                alert("incorrect information please try again");
-            }
-        }).catch((exception) => {
-            console.log(exception);
-        }); 
-    };
-
-
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -36,17 +12,44 @@ export default function SignIn() {
 
     const handleSubmit = evt => {
         evt.preventDefault();
-        makeRequest(email, password, history);
+        makeRequest();
         setEmail("");
         setPassword("");
     };
 
+    const makeRequest = () => {
+        document.body.style.cursor = 'wait';
+        let data = {"email": email, "password": password};
+        console.log(data);
+        console.log('checking server');
+    
+        fetch('http://localhost:8080/user/login?email=' + email + "&user_password=" + password)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                document.body.style.cursor = 'default';
+                if (data) {
+                    history.push({
+                        pathname: '/toDoList',
+                        state: {'user': data}
+                    });
+                } else {
+                    console.log(data);
+                    alert("Incorrect information, please try again.");
+                }
+            }).catch((exception) => {
+                document.body.style.cursor='default';
+                alert("Incorrect information, please try again.");
+            }); 
+        };
+    
+
     return (
         <div className="userValidation">
             <h1>SPRING BOOT TO DO LIST</h1>
-            <div className="signup-form">
+            <div className="form">
                 <form onSubmit={handleSubmit}>
-                    <h2>Sign in</h2>
+                    <h2>Sign In:</h2>
                     <div className="form-group">
                         <input type="email" value={email} onChange={e => setEmail(e.target.value)}  className="form-control" placeholder="Email" required="required" />
                     </div>
@@ -54,7 +57,7 @@ export default function SignIn() {
                         <input type="password" value={password} onChange={e => setPassword(e.target.value)}  className="form-control" placeholder="Password" required="required" />
                     </div>
                     <div className="form-group">
-                        <button type="submit" value="submit" className="btn btn-success btn-lg btn-block">Sign in</button>
+                        <button type="submit" value="submit">Sign in</button>
                     </div>
                 </form>
                 <div className="text-center">Don't have an account? <Link to="/signUp">Sign Up Here!</Link></div>

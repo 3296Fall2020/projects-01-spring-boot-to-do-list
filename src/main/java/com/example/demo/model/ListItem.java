@@ -1,44 +1,63 @@
 package com.example.demo.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 // Model, this item represents the object representation of a To Do List Item
 @Entity
+@Table(name = "list_item")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ListItem {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long item_id;
+	private Long id;
 	
 	@NotBlank(message = "Please provide a name for your Task")
 	private String task_name;
 	
 	private String description;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM dd HH:mm:ss yyyy")
-	private Date deadline;
+	@DateTimeFormat(pattern="yyyy.MM.dd HH:mm")
+	private LocalDateTime deadline;
 	
-	private String owner;
+	@ManyToOne
+	@JoinColumn(name = "owner")
+	@JsonBackReference(value = "delegation")
+	private User owner;
 	
-	private boolean completion;
+	@ManyToOne
+	@JoinColumn(name = "completion")
+	private Completion completion;
+	
+	@ManyToOne
+	@JoinColumn(name = "list_container")
+	@JsonBackReference(value = "series")
+	private Lists list_container;
 	
 	public ListItem() {
 		
 	}
 
 	public Long getId() {
-		return item_id;
+		return id;
 	}
 
-	public void setId(Long item_id) {
-		this.item_id = item_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTask_name() {
@@ -57,30 +76,40 @@ public class ListItem {
 		this.description = description;
 	}
 
-	public Date getDeadline() {
+	public LocalDateTime getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(Date deadline) {
+	public void setDeadline(LocalDateTime deadline) {
 		this.deadline = deadline;
 	}
 
-	public String getOwner() {
+	public User getOwner() {
 		return owner;
 	}
 
-	public void setOwner(String owner) {
+	public void setOwner(User owner) {
 		this.owner = owner;
 	}
 
-	public boolean isCompletion() {
+	public Lists getList_container() {
+		return list_container;
+	}
+
+	public void setList_container(Lists list_container) {
+		this.list_container = list_container;
+	}
+
+	public Completion getCompletion() {
 		return completion;
 	}
 
-	public void setCompletion(boolean completion) {
+	public void setCompletion(Completion completion) {
 		this.completion = completion;
 	}
 	
-	
-	
+	@Override
+	public String toString () {
+		return "Item " + task_name + ", with a deadline at " + deadline + " and delegated to " + owner.getEmail();
+	}
 }

@@ -4,6 +4,7 @@ import SignUp from './components/userValidationComponents/signUp';
 import Home from './components/homePage/homePage';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import ToDoList from './components/todoList';
+import UpdateUser from './components/userValidationComponents/updateUser';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/signIn' component = {SignIn} />
         <Route path='/signUp' component = {SignUp} />
         <Route path='/todoList' component = {ToDoList} />
+        <Route path='/updateUser' component = {UpdateUser} />
       </Switch>
     </div>
     </Router>

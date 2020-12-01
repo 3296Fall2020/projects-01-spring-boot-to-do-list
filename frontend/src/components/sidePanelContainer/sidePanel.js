@@ -8,7 +8,7 @@ import AddList from './addList'
 
 
 export default function SidePanel() {
-    const [user] = useContext(Context)
+    const {user} = useContext(Context)
     const [show , setShow] = useState(false);
     const history = useHistory();
 
@@ -22,6 +22,13 @@ export default function SidePanel() {
         setShow(false);
     }
 
+    const goToUserPage = () => {
+        history.push({
+            pathname: '/updateUser',
+            state: {'user': user}
+        });
+    }
+
     return (
         <div className="side_panel">
             <div>
@@ -30,6 +37,7 @@ export default function SidePanel() {
                 <AddList show={show} close={handleAddListModal}/>
                 <ListFilter />
                 <ListContainer />
+                <button className="update_user_button" onClick={goToUserPage}>Update User Info</button>
                 <button className="sign_out_button" onClick={signOut}>Sign Out</button>
             </div>
         </div>

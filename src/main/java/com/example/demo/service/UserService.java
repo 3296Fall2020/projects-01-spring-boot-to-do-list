@@ -66,7 +66,7 @@ public class UserService {
 		user.setFirst_name(first);
 		user.setLast_name(last);
 		user.setEmail(email);
-		user.setPassword(password);
+		user.setUser_password(password);
 		user.setRegistration_date(new Date());
 		user.setLoginStatus(false);
 
@@ -86,7 +86,7 @@ public class UserService {
 				item.setLast_name(last);
 			}
 			if (helper.hasText(password)) {
-				item.setPassword(password);
+				item.setUser_password(password);
 			}
 			
 			return repo.save(item);

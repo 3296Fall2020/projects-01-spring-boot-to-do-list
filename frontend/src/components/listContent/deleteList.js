@@ -3,13 +3,13 @@ import { Context } from '../context';
 import './listContent.css'
 
 export default function DeleteList({ show, close }) {
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList] = useContext(Context);
+    const {list, setList, fetchLists } = useContext(Context);
 
 
     const deleteList = evt => {
         evt.preventDefault();
+        document.body.style.cursor='wait';
         console.log(list.id);
-        close(false);
         let url = 'http://localhost:8080/list/deleteList/' + list.id;
         fetch(url, {
             method: 'DELETE',
@@ -18,10 +18,12 @@ export default function DeleteList({ show, close }) {
             })
         }).then((response) => {
             fetchLists();
-            setList({"list_id": list.id, "list_name": null})
+            setList({"list_id": list.id, "list_name": null});
+            document.body.style.cursor='default';
             close(false);
         })
             .catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }

@@ -18,13 +18,13 @@ const ContextProvider = (props) => {
             alert("invalid user");
             history.push('/');
         } else {
-            alert("User is: " + location.state.user.email);
             setUser(location.state.user);
         }
         fetchLists();
     }, [location]);
 
     const fetchLists = () => {
+        document.body.style.cursor='wait';
         let url = 'http://localhost:8080/user/getUserLists?email=' + location.state.user.email;
         fetch(url)
             .then(response => {
@@ -36,9 +36,11 @@ const ContextProvider = (props) => {
                 console.log(newData);
                 setLists(newData);
                 setFilterResults(newData);
+                document.body.style.cursor='default';
             })
             .catch((error) => {
                 console.log(error)
+                document.body.style.cursor='default';
             })
     };
 
@@ -78,7 +80,7 @@ const ContextProvider = (props) => {
     };
 
     return (
-        <Context.Provider value={[user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList]}>
+        <Context.Provider value={{user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList}}>
             {props.children}
         </Context.Provider>
     )

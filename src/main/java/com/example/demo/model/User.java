@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -44,9 +45,14 @@ public class User {
 	
 	private boolean login_status;
 	
+	// Mapped By references the property name in the object making the join column call
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	@JsonIgnore
-	Set<UserLists> userLists; /* = new HashSet<>(); */
+	private Set<UserLists> userLists; /* = new HashSet<>(); */
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+	@JsonManagedReference(value = "delegation")
+	private Set<ListItem> userItems;
 	
 	public User () {
 		
@@ -84,12 +90,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public String getUser_password() {
 		return user_password;
 	}
 
-	public void setPassword(String password) {
-		this.user_password = password;
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
 	}
 
 	public Date getRegistration_date() {
@@ -115,8 +121,16 @@ public class User {
 	public void setUserLists(Set<UserLists> userLists) {
 		this.userLists = userLists;
 	}
+	
+	public Set<ListItem> getUserItems() {
+		return userItems;
+	}
 
+	public void setUserItems(Set<ListItem> userItems) {
+		this.userItems = userItems;
+	}
+	
 	public String toString () {
-		return "User " + id + ", with email address " + email;
+		return "User " + first_name + " " + last_name + ", with email address " + email;
 	}	
 }

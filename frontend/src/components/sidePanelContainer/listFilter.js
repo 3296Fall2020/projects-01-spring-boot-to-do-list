@@ -5,7 +5,7 @@ import "./sidePanel.css";
 
 function ListFilter({filter}) {
 
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists] = useContext(Context);
+    const {filterLists} = useContext(Context);
 
     const handleOnChange = (e) => {
         console.log(e.target.value)
@@ -15,7 +15,7 @@ function ListFilter({filter}) {
     return(
         <Form className="filter-form">
             <Form.Group>
-                <Form.Control onChange={handleOnChange} className='filter_form_input' type="text" placeholder="search for list" />
+                <Form.Control onChange={handleOnChange} className='filter_form_input' type="text" placeholder=" Search for list..." />
             </Form.Group>
         </Form>
     );

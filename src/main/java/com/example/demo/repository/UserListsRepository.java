@@ -40,5 +40,4 @@ public interface UserListsRepository extends JpaRepository<UserLists, Long> {
 	@Transactional
 	@Query(value = "DELETE FROM sys.lists WHERE id IN (:id_list)", nativeQuery = true)
 	void deleteListSeries (@Param("id_list") List<Long> id_list);
-	
 }

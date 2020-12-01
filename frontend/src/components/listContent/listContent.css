@@ -1,26 +1,33 @@
 .list_content{
     position: relative;
-    flex-grow: 4;
+    flex: 4;
+    flex-grow: 0;   
+    flex-basis: 100em;
     text-align:center;
     margin: 0;
-    height: 100vh;
-    background-color: #EFEFEF
+    width: 100%;
+    background-color: #EFEFEF;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
 }
 
-.list_header{
+
+.header_name{
     position: absolute;
+    font-family: 'Franklin Gothic', sans-serif;
     top: 40px;
     width: 100%;
     font-size: 40px;
     font-weight: bold;
     color:black;
-    margin-left:1rem;
-    margin-right: 1rem;
+    margin-left:auto;
+    margin-right: auto;
+    display:block;
 }
 
 
 .update_list_button{
     position: absolute;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
     top: 40px;
     left: 5%;
     background-color: #CCCCCC;
@@ -31,6 +38,7 @@
  
  .delete_list_button{
     position: absolute;
+    font-family: 'Franklin Gothic', sans-serif;
     top: 40px;
     left: 90%;
     background-color: #CCCCCC;
@@ -43,13 +51,16 @@
     top: 100px;
     width: 100%;
     height: 40px;
+    overflow-y: auto;
     border-top:solid thin black;
     border-bottom: solid thin black;
     padding: 10px;
+    display:block;
 }
 
 .list_member{
-    margin: 1rem;
+    margin: 2rem;
+    top: 3px;
     padding:5px;
     background-color: #F1C9B1;
     border: thin solid black;
@@ -57,6 +68,7 @@
 
 .add_user_button{
     position: absolute;
+    font-family: 'Franklin Gothic', sans-serif;
     left: 85%;
     background-color: #CCCCCC;
     padding: 10px;
@@ -101,8 +113,10 @@
 
 .add_user_list_popup{
     position: absolute;
+    box-shadow: 5px 5px 5px grey;
     left: 10%;
     top: 150px;
+    z-index: 10;
     height: 150px;
     background-color: #fff;
     width:80%;
@@ -136,9 +150,11 @@
 
 .delete_list_popup{
     position: absolute;
+    box-shadow: 5px 5px 5px grey;
     left: 10%;
     top: 150px;
     height: 100px;
+    z-index: 10;
     background-color: #fff;
     width:80%;
     max-width:800px;

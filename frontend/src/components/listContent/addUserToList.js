@@ -3,11 +3,12 @@ import { Context } from '../context';
 import './listContent.css'
 
 export default function AddListUser({ show, close }) {
-    const [user, lists, list, listUsers, setList, setListUsers, filterResults, filterLists, fetchLists, fetchListUsers, fetchList] = useContext(Context);
+    const {list, fetchListUsers } = useContext(Context);
     const [email, setEmail] = useState("");
 
     const getUser = evt => {
         evt.preventDefault();
+        document.body.style.cursor='wait';
         console.log(email);
         fetch('http://localhost:8080/user/getUserEmail?email=' + email)
             .then(res => res.json())
@@ -16,6 +17,7 @@ export default function AddListUser({ show, close }) {
                 addUserToList(data.id);
                 setEmail("")
             }).catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     };
@@ -32,9 +34,11 @@ export default function AddListUser({ show, close }) {
         }).then((response) => {
             console.log(response);
             fetchListUsers(list);
+            document.body.style.cursor='default';
             close(false);
         })
             .catch((exception) => {
+                document.body.style.cursor='default';
                 console.log(exception);
             });
     }
