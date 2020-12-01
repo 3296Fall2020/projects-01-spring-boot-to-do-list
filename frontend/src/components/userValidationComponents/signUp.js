@@ -41,6 +41,7 @@ export default function SignUp() {
             }).catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("user could not be added, please try again");
             });
     }
 

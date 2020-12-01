@@ -25,6 +25,8 @@ export default function DeleteList({ show, close }) {
             .catch((exception) => {
                 document.body.style.cursor='default';
                 console.log(exception);
+                alert("could not delete list, please try again");
+                close(false);
             });
     }
 

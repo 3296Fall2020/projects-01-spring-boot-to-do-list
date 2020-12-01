@@ -34,8 +34,10 @@
     margin-top: 2rem;
     margin-bottom: 3rem;
     overflow-y: auto;
-    height: 60%;
+    height: 40%;
 }
+
+.list_conta
 
 .user_name{
     margin-bottom:10px;
