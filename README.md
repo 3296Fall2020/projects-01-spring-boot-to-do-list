@@ -38,9 +38,23 @@ the website manually tested to ensure the interface works properly, and to test 
 (insert Screenshots)
 
 ### Testing for the Server
-For testing the Spring Boot server, we utilized Postman, a Development platform used for testing APIs, to ensure that the endpoints are properly handled. The testing itself was manually conducted to ensure that the REST Controller delivers the proper format for the JSON Objects being tested, that the different edge cases are being accounted for with the different status codes returned, and whether the endpoints that are tested returns the expected results.
+For testing the Spring Boot server, we utilized Postman, a Development platform used for testing APIs, to ensure that the endpoints are properly handled. The testing itself was manually conducted to ensure that the REST Controller delivers the proper format for the JSON Objects being tested, that the different edge cases are being accounted for with the different status codes returned, and whether the endpoints that are tested returns the expected results. Following are *some* of the screenshots of using Postman to test the API that the server provided. The rest of them can be found in the *testing screenshots* directory in this repository.
 
 ![Add List Name Fail](testing_screenshots/addListNameFail.JPG)
+List Creation Failure
+
+![Add List Success](testing_screenshots/addListSuccess.JPG)
+List Creation Success
+
+![Add User Email Fail](testing_screenshots/addUserEmailFail.JPG)
+User Creation Email Failure
+
+![Add User Success](testing_screenshots/addUserSuccess.JPG)
+User Creation Success
+
+The following two screenshots are images detailing the issues with representing the JSON data when it references other objects. Note the potential infinite recursion that could take place with the JSON data returned. This chain reaction would be problematic in the data representation for the frontend because the server would end up returning too much information to the client.
+![Bad JSON 1](testing_screenshots/badJSONData1.JPG)
+![Bad JSON 2](testing_screenshots/badJSONData2.JPG)
 
 ## Personas
 
