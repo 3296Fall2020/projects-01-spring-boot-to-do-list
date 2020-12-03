@@ -10,7 +10,7 @@ export default function DeleteList({ show, close }) {
         evt.preventDefault();
         document.body.style.cursor='wait';
         console.log(list.id);
-        let url = 'http://localhost:8080/list/deleteList/' + list.id;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/list/deleteList/' + list.id;
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({

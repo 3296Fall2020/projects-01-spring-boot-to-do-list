@@ -23,7 +23,7 @@ export default function SignIn() {
         console.log(data);
         console.log('checking server');
     
-        fetch('http://localhost:8080/user/login?email=' + email + "&user_password=" + password)
+        fetch('http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/user/login?email=' + email + "&user_password=" + password)
             .then(res => res.json())
             .then(data => {
                 console.log(data);

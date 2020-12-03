@@ -25,7 +25,7 @@ const ContextProvider = (props) => {
 
     const fetchLists = () => {
         document.body.style.cursor='wait';
-        let url = 'http://localhost:8080/user/getUserLists?email=' + location.state.user.email;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/user/getUserLists?email=' + location.state.user.email;
         fetch(url)
             .then(response => {
                 return response.text()
@@ -45,7 +45,7 @@ const ContextProvider = (props) => {
     };
 
     const fetchList = (id) => {
-        fetch('http://localhost:8080/list/getListById/' + id)
+        fetch('http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/list/getListById/' + id)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -57,7 +57,7 @@ const ContextProvider = (props) => {
 
 
     const fetchListUsers = (list) => {
-        fetch('http://localhost:8080/list/getListUsers/' + list.id)
+        fetch('http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/list/getListUsers/' + list.id)
             .then(res => res.json())
             .then(data => {
                 console.log(data)

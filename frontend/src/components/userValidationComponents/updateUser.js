@@ -35,7 +35,7 @@ export default function UpdateUser() {
 
     const makeRequest = (user) => {
         document.body.style.cursor = 'wait';
-        let url = 'http://localhost:8080/user/update/' + user.id;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/user/update/' + user.id;
         fetch(url, {
             method: 'PUT',
             headers: new Headers({
@@ -64,7 +64,7 @@ export default function UpdateUser() {
         console.log("deleting user");
         console.log(user);
         document.body.style.cursor = 'wait';
-        let url = 'http://localhost:8080/user/delete/' + user.id;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/user/delete/' + user.id;
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({
