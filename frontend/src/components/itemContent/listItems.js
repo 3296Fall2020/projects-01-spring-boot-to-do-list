@@ -26,7 +26,7 @@ export default function ListItems() {
     }, [list]);
 
     const fetchListItems = () => {
-        fetch('http://localhost:8080/item/getListItems/' + list.id)
+        fetch('http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/item/getListItems/' + list.id)
             .then(res => res.json())
             .then(data => {
                 setListItems(data);
@@ -67,7 +67,7 @@ export default function ListItems() {
     }
 
     const getItemOwner = (clickedItem) => {
-        fetch('http://localhost:8080/item/getOwner/' + clickedItem.id)
+        fetch('http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/item/getOwner/' + clickedItem.id)
             .then(res => res.json())
             .then(data => {
                 setItemOwner(data.id);

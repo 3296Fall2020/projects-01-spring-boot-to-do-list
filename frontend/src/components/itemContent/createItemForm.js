@@ -14,7 +14,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
         document.body.style.cursor='wait';
         const data = { task_name: name, description: description, deadline: deadline };
         console.log(data);
-        let url = 'http://localhost:8080/item/addItem/' + list.id;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/item/addItem/' + list.id;
         fetch(url, {
             method: 'POST',
             headers: new Headers({
@@ -47,7 +47,7 @@ export default function CreateItemForm({ list, show, close, users, fetchList }) 
     }
 
     const addOwner = (id) => {
-        let url = 'http://localhost:8080/item/assign?item_id=' + id + '&owner_id=' + owner;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/item/assign?item_id=' + id + '&owner_id=' + owner;
         fetch(url, {
             method: 'PUT',
             headers: new Headers({

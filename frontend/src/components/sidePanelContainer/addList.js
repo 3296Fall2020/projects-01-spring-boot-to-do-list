@@ -12,7 +12,7 @@ export default function AddList({ show, close }) {
         document.body.style.cursor='wait';
         console.log("adding list: " + listName);
         console.log("adding user: " + user.email + " and list to user_list table");
-        let url = 'http://localhost:8080/list/add?email=' + user.email + '&name=' + listName;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/list/add?email=' + user.email + '&name=' + listName;
         fetch(url, {
             method: 'POST',
             headers: new Headers({

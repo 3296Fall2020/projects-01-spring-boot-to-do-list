@@ -10,7 +10,7 @@ export default function AddListUser({ show, close }) {
         evt.preventDefault();
         document.body.style.cursor='wait';
         console.log(email);
-        fetch('http://localhost:8080/user/getUserEmail?email=' + email)
+        fetch('http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/user/getUserEmail?email=' + email)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -28,7 +28,7 @@ export default function AddListUser({ show, close }) {
     const addUserToList = (id) => {
         console.log("list id: " + list.id);
         console.log("user id: " + id);
-        let url = 'http://localhost:8080/list/addUserToList?user_id=' + id + '&list_id=' + list.id;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/list/addUserToList?user_id=' + id + '&list_id=' + list.id;
         fetch(url, {
             method: 'POST',
             headers: new Headers({

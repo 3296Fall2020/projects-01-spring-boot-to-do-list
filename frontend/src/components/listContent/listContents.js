@@ -15,7 +15,7 @@ export default function ListContent() {
 
     const removeUser = (listUser) => {
         document.body.style.cursor='wait';
-        let url = 'http://localhost:8080/list/remove?user_id=' + listUser.id + '&list_id=' + list.id;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/list/remove?user_id=' + listUser.id + '&list_id=' + list.id;
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({
@@ -41,7 +41,7 @@ export default function ListContent() {
         e.preventDefault();
         console.log(updateName);
         let data = { "list_name": updateName };
-        let url = 'http://localhost:8080/list/update/' + list.id;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/list/update/' + list.id;
         fetch(url, {
             method: 'PUT',
             headers: new Headers({

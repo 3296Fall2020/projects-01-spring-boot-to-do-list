@@ -21,7 +21,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         e.preventDefault();
         document.body.style.cursor='wait';
         console.log(item.id);
-        let url = 'http://localhost:8080/item/removeItem/' + item.id;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/item/removeItem/' + item.id;
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({
@@ -46,7 +46,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
         document.body.style.cursor='wait';
         const data = { task_name: item.task_name, description: item.description, deadline: item.deadline };
         console.log(data);
-        let url = 'http://localhost:8080/item/update/' + item.id;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/item/update/' + item.id;
         fetch(url, {
             method: 'PUT',
             headers: new Headers({
@@ -67,9 +67,9 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
     const updateOwner = () => {
         let url = "";
         if (owner > -1) {
-            url = 'http://localhost:8080/item/assign?item_id=' + item.id + '&owner_id=' + owner;
+            url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/item/assign?item_id=' + item.id + '&owner_id=' + owner;
         } else {
-            url = 'http://localhost:8080/item/retract/' + item.id;
+            url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/item/retract/' + item.id;
         }
         fetch(url, {
             method: 'PUT',
@@ -89,7 +89,7 @@ export default function UpdateItemForm({ show, close, item, setItem, users, owne
     }
 
     const updateStatus = () => {
-        let url = 'http://localhost:8080/item/changeStatus?item_id=' + item.id + '&status=' + status;
+        let url = 'http://springboottodolist-env-1.eba-dmpcuc7f.us-east-2.elasticbeanstalk.com/item/changeStatus?item_id=' + item.id + '&status=' + status;
         fetch(url, {
             method: 'PUT',
             headers: new Headers({
