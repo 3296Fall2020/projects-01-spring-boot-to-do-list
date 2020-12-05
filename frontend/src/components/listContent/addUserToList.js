@@ -35,7 +35,7 @@ export default function AddListUser({ show, close }) {
                 'Content-Type': 'application/json'
             })
         }).then((response) => {
-            if(response.status == 404){
+            if(response.status === 404){
                 alert("invalid user, please try again");
             }
             console.log(response);
