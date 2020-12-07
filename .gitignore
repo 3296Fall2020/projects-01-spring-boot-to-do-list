@@ -5,3 +5,4 @@
 target/maven-archiver/
 target/maven-status/
 target/surefire-reports/
+*.properties
