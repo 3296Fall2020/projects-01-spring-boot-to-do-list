@@ -1,0 +1,8 @@
+/.project
+/.settings/org.springframework.ide.eclipse.prefs
+*.jar
+*.original
+target/maven-archiver/
+target/maven-status/
+target/surefire-reports/
+*.properties

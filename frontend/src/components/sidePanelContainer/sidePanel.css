@@ -1,0 +1,145 @@
+.side_panel{
+    flex: 1;
+    flex-grow: 0;   
+    flex-basis: 25em;
+    position: relative;
+    text-align:center;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    justify-content: flex-start;
+    border-right: solid thick black;
+    background-color: #F1C9B1;
+}
+
+.list_name {
+    border: black 2px solid;
+    border-bottom: black 1px solid;
+    cursor: pointer;
+    background-color: #FD8469;
+    margin-top: 0.5px;
+    right: 3%;
+    left: 3%;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.list_name :hover {
+    color: #D87B7C;
+}
+
+.list_container {
+    position: absolute;
+    top: 290px;
+    display: block;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    overflow-y: auto;
+    height: 40%;
+}
+
+.list_conta
+
+.user_name{
+    margin-bottom:10px;
+    text-decoration: underline;
+}
+
+.add_list_button{
+    position: absolute;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    top: 100px;
+    left: -8px;
+    width:98%;
+    height: 40px; 
+    margin-left: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: #CCCCCC;
+    font-size: medium;
+}
+
+.sign_out_button{
+    position: absolute;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    top:700px;
+    left: -8px;
+    width: 98%;
+    height: 40px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 5px;
+    background-color:#CCCCCC;
+    font-size: medium;
+}
+
+.update_user_button{
+    position: absolute;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    top:650px;
+    left: -8px;
+    width: 98%;
+    height: 40px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 5px;
+    background-color:#CCCCCC;
+    font-size: medium;
+}
+
+
+.filter-form {
+    position: absolute;
+    margin-top:180px;
+    right: 2%; 
+    left: 2%;
+}
+
+.filter_form_input{
+    height: 30px;
+    background-color: #EFEFEF;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    border: thin black solid;
+    font-size: 20px;
+    width: 98%;
+    margin-right: 12px;
+}
+
+.filter-form ::placeholder {
+    color: #5A6064;
+}
+
+
+.add_list_popup{
+    position: absolute;
+    display: block;
+    top: 140px;
+    left: 2%; 
+    right: 2%; 
+}
+
+.add_list_popup input{
+    background-color: #EFEFEF;
+    border-bottom: thin solid black;
+    height:20px;
+    font-size: 15px;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    width: 96%;
+}
+
+.add_list_popup  ::placeholder {
+    color: #5A6064;
+  }
+
+.add_list_popup button{
+    background-color: #CCCCCC;
+    color:black;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px;
+
+    
+}
